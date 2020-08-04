@@ -1,0 +1,156 @@
+INFO:labrad.node:Starting
+INFO:labrad.ami_430:STARTING
+INFO:labrad.ami_430:path: C:/Users/Feldman Lab/code/Setup_BF122019/LabRAD-Device-Electrical_Measurement-ONline_Software-pyqt5/DEMONS Servers
+INFO:labrad.ami_430:args: ['c:\\users\\feldman lab\\appdata\\local\\programs\\python\\python37-32\\python.exe', 'ami_430.py']
+INFO:labrad.dac_adc_24bits:STARTING
+INFO:labrad.dac_adc_24bits:path: C:/Users/Feldman Lab/code/Setup_BF122019/LabRAD-Device-Electrical_Measurement-ONline_Software-pyqt5/DEMONS Servers
+INFO:labrad.dac_adc_24bits:args: ['c:\\users\\feldman lab\\appdata\\local\\programs\\python\\python37-32\\python.exe', 'dac_adc_24bits.py']
+INFO:labrad.data_vault:STARTING
+INFO:labrad.data_vault:path: C:/Users/Feldman Lab/code/Setup_BF122019/LabRAD-Device-Electrical_Measurement-ONline_Software-pyqt5/DEMONS Servers
+INFO:labrad.data_vault:args: ['c:\\users\\feldman lab\\appdata\\local\\programs\\python\\python37-32\\python.exe', 'data_vault.py']
+INFO:labrad.he_3_cryostat_gpib_bus:STARTING
+INFO:labrad.he_3_cryostat_gpib_bus:path: C:/Users/Feldman Lab/code/Setup_BF122019/LabRAD-Device-Electrical_Measurement-ONline_Software-pyqt5/DEMONS Servers
+INFO:labrad.he_3_cryostat_gpib_bus:args: ['c:\\users\\feldman lab\\appdata\\local\\programs\\python\\python37-32\\python.exe', 'gpib_server.py']
+INFO:labrad.gpib_device_manager:STARTING
+INFO:labrad.gpib_device_manager:path: C:/Users/Feldman Lab/code/Setup_BF122019/LabRAD-Device-Electrical_Measurement-ONline_Software-pyqt5/DEMONS Servers
+INFO:labrad.gpib_device_manager:args: ['c:\\users\\feldman lab\\appdata\\local\\programs\\python\\python37-32\\python.exe', 'gpib_device_manager.py']
+INFO:labrad.helium_level_meter:STARTING
+INFO:labrad.helium_level_meter:path: C:/Users/Feldman Lab/code/Setup_BF122019/LabRAD-Device-Electrical_Measurement-ONline_Software-pyqt5/DEMONS Servers
+INFO:labrad.helium_level_meter:args: ['c:\\users\\feldman lab\\appdata\\local\\programs\\python\\python37-32\\python.exe', 'he_level_meter.py']
+INFO:labrad.keithley_2450:STARTING
+INFO:labrad.keithley_2450:path: C:/Users/Feldman Lab/code/Setup_BF122019/LabRAD-Device-Electrical_Measurement-ONline_Software-pyqt5/DEMONS Servers
+INFO:labrad.keithley_2450:args: ['c:\\users\\feldman lab\\appdata\\local\\programs\\python\\python37-32\\python.exe', 'Keithley2450.py']
+INFO:labrad.lsci_model350:STARTING
+INFO:labrad.lsci_model350:path: C:/Users/Feldman Lab/code/Setup_BF122019/LabRAD-Device-Electrical_Measurement-ONline_Software-pyqt5/DEMONS Servers
+INFO:labrad.lsci_model350:args: ['c:\\users\\feldman lab\\appdata\\local\\programs\\python\\python37-32\\python.exe', 'lakeshore_370.py']
+INFO:labrad.sr830:STARTING
+INFO:labrad.sr830:path: C:/Users/Feldman Lab/code/Setup_BF122019/LabRAD-Device-Electrical_Measurement-ONline_Software-pyqt5/DEMONS Servers
+INFO:labrad.sr830:args: ['c:\\users\\feldman lab\\appdata\\local\\programs\\python\\python37-32\\python.exe', 'SR830.py']
+INFO:labrad.he_3_cryostat_serial_server:STARTING
+INFO:labrad.he_3_cryostat_serial_server:path: C:/Users/Feldman Lab/code/Setup_BF122019/LabRAD-Device-Electrical_Measurement-ONline_Software-pyqt5/DEMONS Servers
+INFO:labrad.he_3_cryostat_serial_server:args: ['c:\\users\\feldman lab\\appdata\\local\\programs\\python\\python37-32\\python.exe', 'serial_server.py']
+INFO:labrad.dac_adc_24bits:b'2020-08-01 19:48:42-0700 [-] Log opened.'
+INFO:labrad.ami_430:b'2020-08-01 19:48:42-0700 [-] Log opened.'
+INFO:labrad.keithley_2450:b'2020-08-01 19:48:42-0700 [-] Log opened.'
+INFO:labrad.helium_level_meter:b'2020-08-01 19:48:42-0700 [-] Log opened.'
+INFO:labrad.gpib_device_manager:b'2020-08-01 19:48:42-0700 [-] Log opened.'
+INFO:labrad.lsci_model350:b'2020-08-01 19:48:42-0700 [-] Log opened.'
+INFO:labrad.dac_adc_24bits:b"2020-08-01 19:48:42-0700 [LabradProtocol,client] DAC-ADC_24Bits starting...\r\n2020-08-01 19:48:42-0700 [-] loading config info...\r\n2020-08-01 19:48:42-0700 [-]  created packet\r\n2020-08-01 19:48:42-0700 [-] printing all the keys ['wine']\r\n2020-08-01 19:48:42-0700 [-] k= wine\r\n2020-08-01 19:48:42-0700 [-] ans= <labrad.support.PacketResponse object at 0x118BB5B0>\r\n2020-08-01 19:48:42-0700 [-] done.\r\n2020-08-01 19:48:42-0700 [-] {'wine': ('he_3_cryostat_serial_server', 'COM4')}"
+INFO:labrad.dac_adc_24bits:b'2020-08-01 19:48:42-0700 [LabradProtocol,client] DAC-ADC_24Bits now serving'
+INFO:labrad.dac_adc_24bits:STARTED
+INFO:labrad.sr830:b'2020-08-01 19:48:42-0700 [-] Log opened.'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-01 19:48:42-0700 [-] Log opened.'
+INFO:labrad.helium_level_meter:b'2020-08-01 19:48:42-0700 [LabradProtocol,client] Helium_level_meter starting...\r\n2020-08-01 19:48:42-0700 [-] loading config info...'
+INFO:labrad.gpib_device_manager:b'2020-08-01 19:48:42-0700 [LabradProtocol,client] GPIB Device Manager starting...\r\n2020-08-01 19:48:42-0700 [-] Pinging servers: []\r\n2020-08-01 19:48:42-0700 [LabradProtocol,client] GPIB Device Manager now serving'
+INFO:labrad.helium_level_meter:b"2020-08-01 19:48:42-0700 [-]  created packet\r\n2020-08-01 19:48:42-0700 [-] printing all the keys ['ami_cryostat']\r\n2020-08-01 19:48:42-0700 [-] k= ami_cryostat"
+INFO:labrad.lsci_model350:b'2020-08-01 19:48:42-0700 [LabradProtocol,client] LSCI MODEL350 starting...'
+INFO:labrad.gpib_device_manager:STARTED
+INFO:labrad.helium_level_meter:b"2020-08-01 19:48:42-0700 [-] ans= <labrad.support.PacketResponse object at 0x12387570>\r\n2020-08-01 19:48:42-0700 [-] done.\r\n2020-08-01 19:48:42-0700 [-] {'ami_cryostat': ('he_3_cryostat_serial_server', 'COM5')}"
+INFO:labrad.lsci_model350:b'2020-08-01 19:48:42-0700 [LabradProtocol,client] LSCI MODEL350 now serving'
+INFO:labrad.ami_430:b'2020-08-01 19:48:42-0700 [LabradProtocol,client] AMI 430 starting...'
+INFO:labrad.keithley_2450:b'2020-08-01 19:48:42-0700 [LabradProtocol,client] Keithley_2450 starting...'
+INFO:labrad.lsci_model350:STARTED
+INFO:labrad.helium_level_meter:STARTED
+INFO:labrad.helium_level_meter:b'2020-08-01 19:48:42-0700 [LabradProtocol,client] Helium_level_meter now serving'
+INFO:labrad.keithley_2450:STARTED
+INFO:labrad.ami_430:b'2020-08-01 19:48:42-0700 [LabradProtocol,client] AMI 430 now serving'
+INFO:labrad.keithley_2450:b'2020-08-01 19:48:42-0700 [LabradProtocol,client] Keithley_2450 now serving'
+INFO:labrad.ami_430:STARTED
+INFO:labrad.sr830:b'2020-08-01 19:48:42-0700 [LabradProtocol,client] SR830 starting...'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-01 19:48:42-0700 [LabradProtocol,client] he-3-cryostat Serial Server starting...'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-01 19:48:42-0700 [-] Searching for COM ports:'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-01 19:48:42-0700 [-]    COM4'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-01 19:48:42-0700 [-]    COM5'
+INFO:labrad.helium_level_meter:b'2020-08-01 19:48:42-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x123879F0>\r\n2020-08-01 19:48:42-0700 [-] COM5'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-01 19:48:42-0700 [LabradProtocol,client] he-3-cryostat Serial Server now serving'
+INFO:labrad.he_3_cryostat_serial_server:STARTED
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-01 19:48:42-0700 [-] Searching for COM ports:\r\n2020-08-01 19:48:42-0700 [-]    COM4'
+INFO:labrad.he_3_cryostat_serial_server:b"2020-08-01 19:48:42-0700 [-]    COM5\r\n2020-08-01 19:48:42-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]"
+INFO:labrad.helium_level_meter:b"2020-08-01 19:48:42-0700 [-] ['COM4', 'COM5']\r\n2020-08-01 19:48:42-0700 [-] connecting to he-3-cryostat Serial Server on port COM5...\r\n2020-08-01 19:48:42-0700 [-]  CONNECTED"
+INFO:labrad.sr830:STARTED
+INFO:labrad.he_3_cryostat_serial_server:b"2020-08-01 19:48:43-0700 [-] Searching for COM ports:\r\n2020-08-01 19:48:43-0700 [-]    COM4\r\n2020-08-01 19:48:43-0700 [-]    COM5\r\n2020-08-01 19:48:43-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]"
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-01 19:48:43-0700 [-] Searching for COM ports:'
+INFO:labrad.he_3_cryostat_serial_server:b"2020-08-01 19:48:43-0700 [-]    COM4\r\n2020-08-01 19:48:43-0700 [-]    COM5\r\n2020-08-01 19:48:43-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]"
+INFO:labrad.dac_adc_24bits:b"2020-08-01 19:48:43-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x118BBE30>\r\n2020-08-01 19:48:43-0700 [-] COM4\r\n2020-08-01 19:48:43-0700 [-] ['COM4', 'COM5']\r\n2020-08-01 19:48:43-0700 [-] connecting to he-3-cryostat Serial Server on port COM4...\r\n2020-08-01 19:48:43-0700 [-]  CONNECTED"
+INFO:labrad.sr830:b'2020-08-01 19:48:43-0700 [LabradProtocol,client] SR830 now serving'
+INFO:labrad.helium_level_meter:b"2020-08-01 19:48:43-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x123879F0>\r\n2020-08-01 19:48:43-0700 [-] COM5\r\n2020-08-01 19:48:43-0700 [-] ['COM4', 'COM5']"
+INFO:labrad.data_vault:b'2020-08-01 19:48:43-0700 [LabradProtocol,client] Log opened.'
+INFO:labrad.he_3_cryostat_gpib_bus:STARTED
+INFO:labrad.he_3_cryostat_gpib_bus:b'2020-08-01 19:48:43-0700 [-] Log opened.\r\n2020-08-01 19:48:43-0700 [LabradProtocol,client] he-3-cryostat GPIB Bus starting...\r\n2020-08-01 19:48:43-0700 [LabradProtocol,client] he-3-cryostat GPIB Bus now serving'
+INFO:labrad.dac_adc_24bits:b'2020-08-01 19:48:43-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x118BBE30>\r\n2020-08-01 19:48:43-0700 [-] COM4'
+INFO:labrad.dac_adc_24bits:b"2020-08-01 19:48:43-0700 [-] ['COM4', 'COM5']"
+INFO:labrad.he_3_cryostat_serial_server:b"2020-08-01 19:48:43-0700 [-] Searching for COM ports:\r\n2020-08-01 19:48:43-0700 [-]    COM4\r\n2020-08-01 19:48:43-0700 [-]    COM5\r\n2020-08-01 19:48:43-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]\r\n2020-08-01 19:48:43-0700 [-] Searching for COM ports:\r\n2020-08-01 19:48:43-0700 [-]    COM4\r\n2020-08-01 19:48:43-0700 [-]    COM5\r\n2020-08-01 19:48:43-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]"
+INFO:labrad.helium_level_meter:b"2020-08-01 19:48:43-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x123879F0>\r\n2020-08-01 19:48:43-0700 [-] COM5\r\n2020-08-01 19:48:43-0700 [-] ['COM4', 'COM5']"
+INFO:labrad.data_vault:b'2020-08-01 19:48:43-0700 [LabradProtocol,client] Data Vault starting...\r\n2020-08-01 19:48:43-0700 [LabradProtocol,client] Data Vault now serving'
+INFO:labrad.data_vault:STARTED
+INFO:labrad.he_3_cryostat_serial_server:b"2020-08-01 19:48:43-0700 [-] Searching for COM ports:\r\n2020-08-01 19:48:43-0700 [-]    COM4\r\n2020-08-01 19:48:43-0700 [-]    COM5\r\n2020-08-01 19:48:43-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]"
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-01 19:48:43-0700 [-] Searching for COM ports:\r\n2020-08-01 19:48:43-0700 [-]    COM4\r\n2020-08-01 19:48:43-0700 [-]    COM5'
+INFO:labrad.he_3_cryostat_serial_server:b"2020-08-01 19:48:43-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]"
+INFO:labrad.helium_level_meter:b"2020-08-01 19:48:43-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x123879F0>\r\n2020-08-01 19:48:43-0700 [-] COM5\r\n2020-08-01 19:48:43-0700 [-] ['COM4', 'COM5']"
+INFO:labrad.dac_adc_24bits:b"2020-08-01 19:48:43-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x118BBE30>\r\n2020-08-01 19:48:43-0700 [-] COM4\r\n2020-08-01 19:48:43-0700 [-] ['COM4', 'COM5']"
+INFO:labrad.he_3_cryostat_gpib_bus:b'2020-08-01 19:48:43-0700 [-] GPIB Device Connect: GPIB0::21::INSTR\r\n2020-08-01 19:48:43-0700 [-] GPIB Device Connect: TCPIP0::169.254.193.6::7180::SOCKET\r\n2020-08-01 19:48:43-0700 [-] GPIB Device Connect: GPIB0::8::INSTR\r\n2020-08-01 19:48:43-0700 [-] GPIB Device Connect: TCPIP0::169.254.129.190::7180::SOCKET\r\n2020-08-01 19:48:43-0700 [-] GPIB Device Connect: TCPIP0::169.254.246.230::7180::SOCKET'
+INFO:labrad.gpib_device_manager:b'2020-08-01 19:48:43-0700 [-] Device Connect: he-3-cryostat GPIB Bus GPIB0::21::INSTR\r\n2020-08-01 19:48:43-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus GPIB0::21::INSTR\r\n2020-08-01 19:48:43-0700 [-] Device Connect: he-3-cryostat GPIB Bus TCPIP0::169.254.193.6::7180::SOCKET\r\n2020-08-01 19:48:43-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.193.6::7180::SOCKET\r\n2020-08-01 19:48:43-0700 [-] Device Connect: he-3-cryostat GPIB Bus GPIB0::8::INSTR\r\n2020-08-01 19:48:43-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus GPIB0::8::INSTR\r\n2020-08-01 19:48:43-0700 [-] Device Connect: he-3-cryostat GPIB Bus TCPIP0::169.254.129.190::7180::SOCKET\r\n2020-08-01 19:48:43-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.129.190::7180::SOCKET\r\n2020-08-01 19:48:43-0700 [-] Device Connect: he-3-cryostat GPIB Bus TCPIP0::169.254.246.230::7180::SOCKET\r\n2020-08-01 19:48:43-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.246.230::7180::SOCKET\r\n2020-08-01 19:48:43-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus GPIB0::21::INSTR'
+INFO:labrad.gpib_device_manager:b'2020-08-01 19:48:44-0700 [-] Error sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.193.6::7180::SOCKET: not enough values to unpack (expected 4, got 1)\r\n2020-08-01 19:48:44-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.193.6::7180::SOCKET\r\n2020-08-01 19:48:44-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus GPIB0::8::INSTR\r\n2020-08-01 19:48:44-0700 [-] Error sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.129.190::7180::SOCKET: not enough values to unpack (expected 4, got 1)\r\n2020-08-01 19:48:44-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.129.190::7180::SOCKET'
+INFO:labrad.gpib_device_manager:b'2020-08-01 19:48:44-0700 [-] Error sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.246.230::7180::SOCKET: not enough values to unpack (expected 4, got 1)\r\n2020-08-01 19:48:44-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.246.230::7180::SOCKET'
+INFO:labrad.gpib_device_manager:b"2020-08-01 19:48:44-0700 [-] Sending message: 12 (12, 0) [(21436587, ('Stanford_Research_Systems SR830', 'he-3-cryostat GPIB Bus', 'GPIB0::8::INSTR', True))]"
+INFO:labrad.sr830:b'2020-08-01 19:48:44-0700 [-] Device message: Stanford_Research_Systems SR830 he-3-cryostat GPIB Bus GPIB0::8::INSTR True'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-01 19:55:57-0700 [-] deferredRead timed out after 5.00224757194519 seconds'
+INFO:labrad.he_3_cryostat_gpib_bus:STOPPING
+INFO:labrad.he_3_cryostat_gpib_bus:b'2020-08-02 10:35:09-0700 [LabradProtocol,client] Disconnected cleanly.\r\n2020-08-02 10:35:09-0700 [-] Main loop terminated.'
+INFO:labrad.helium_level_meter:b'2020-08-02 10:35:09-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x123879F0>\r\n2020-08-02 10:35:09-0700 [-] COM5'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 10:35:09-0700 [-] Searching for COM ports:'
+INFO:labrad.he_3_cryostat_serial_server:b"2020-08-02 10:35:09-0700 [-]    COM4\r\n2020-08-02 10:35:09-0700 [-]    COM5\r\n2020-08-02 10:35:09-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]"
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 10:35:09-0700 [-] Searching for COM ports:\r\n2020-08-02 10:35:09-0700 [-]    COM4\r\n2020-08-02 10:35:09-0700 [-]    COM5'
+INFO:labrad.he_3_cryostat_serial_server:b"2020-08-02 10:35:09-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]"
+INFO:labrad.helium_level_meter:b"2020-08-02 10:35:09-0700 [-] ['COM4', 'COM5']"
+INFO:labrad.dac_adc_24bits:b"2020-08-02 10:35:09-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x118BBE30>\r\n2020-08-02 10:35:09-0700 [-] COM4\r\n2020-08-02 10:35:09-0700 [-] ['COM4', 'COM5']"
+INFO:labrad.sr830:b'2020-08-02 10:35:09-0700 [-] Device message: Stanford_Research_Systems SR830 he-3-cryostat GPIB Bus GPIB0::8::INSTR False'
+INFO:labrad.gpib_device_manager:b"2020-08-02 10:35:09-0700 [-] Device Disconnect: he-3-cryostat GPIB Bus GPIB0::21::INSTR\r\n2020-08-02 10:35:09-0700 [-] Device Disconnect: he-3-cryostat GPIB Bus TCPIP0::169.254.193.6::7180::SOCKET\r\n2020-08-02 10:35:09-0700 [-] Device Disconnect: he-3-cryostat GPIB Bus GPIB0::8::INSTR\r\n2020-08-02 10:35:09-0700 [-] Sending message: 12 (12, 0) [(21436587, ('Stanford_Research_Systems SR830', 'he-3-cryostat GPIB Bus', 'GPIB0::8::INSTR', False))]\r\n2020-08-02 10:35:09-0700 [-] Device Disconnect: he-3-cryostat GPIB Bus TCPIP0::169.254.129.190::7180::SOCKET\r\n2020-08-02 10:35:09-0700 [-] Device Disconnect: he-3-cryostat GPIB Bus TCPIP0::169.254.246.230::7180::SOCKET"
+INFO:labrad.he_3_cryostat_gpib_bus:process closed cleanly.
+INFO:labrad.he_3_cryostat_gpib_bus:STOPPED
+INFO:labrad.he_3_cryostat_gpib_bus:STARTING
+INFO:labrad.he_3_cryostat_gpib_bus:path: C:/Users/Feldman Lab/code/Setup_BF122019/LabRAD-Device-Electrical_Measurement-ONline_Software-pyqt5/DEMONS Servers
+INFO:labrad.he_3_cryostat_gpib_bus:args: ['c:\\users\\feldman lab\\appdata\\local\\programs\\python\\python37-32\\python.exe', 'gpib_server.py']
+INFO:labrad.he_3_cryostat_gpib_bus:STARTED
+INFO:labrad.dac_adc_24bits:b"2020-08-02 10:35:10-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x118BBE30>\r\n2020-08-02 10:35:10-0700 [-] COM4\r\n2020-08-02 10:35:10-0700 [-] ['COM4', 'COM5']"
+INFO:labrad.he_3_cryostat_gpib_bus:b'2020-08-02 10:35:10-0700 [-] Log opened.\r\n2020-08-02 10:35:10-0700 [LabradProtocol,client] he-3-cryostat GPIB Bus starting...\r\n2020-08-02 10:35:10-0700 [LabradProtocol,client] he-3-cryostat GPIB Bus now serving'
+INFO:labrad.he_3_cryostat_serial_server:b"2020-08-02 10:35:10-0700 [-] Searching for COM ports:\r\n2020-08-02 10:35:10-0700 [-]    COM4\r\n2020-08-02 10:35:10-0700 [-]    COM5\r\n2020-08-02 10:35:10-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]\r\n2020-08-02 10:35:10-0700 [-] Searching for COM ports:\r\n2020-08-02 10:35:10-0700 [-]    COM4\r\n2020-08-02 10:35:10-0700 [-]    COM5\r\n2020-08-02 10:35:10-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]"
+INFO:labrad.helium_level_meter:b"2020-08-02 10:35:10-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x123879F0>\r\n2020-08-02 10:35:10-0700 [-] COM5\r\n2020-08-02 10:35:10-0700 [-] ['COM4', 'COM5']"
+INFO:labrad.he_3_cryostat_gpib_bus:b'2020-08-02 10:35:11-0700 [-] GPIB Device Connect: TCPIP0::169.254.246.230::7180::SOCKET\r\n2020-08-02 10:35:11-0700 [-] GPIB Device Connect: GPIB0::8::INSTR\r\n2020-08-02 10:35:11-0700 [-] GPIB Device Connect: GPIB0::1::INSTR'
+INFO:labrad.he_3_cryostat_gpib_bus:b'2020-08-02 10:35:11-0700 [-] GPIB Device Connect: TCPIP0::169.254.129.190::7180::SOCKET\r\n2020-08-02 10:35:11-0700 [-] GPIB Device Connect: TCPIP0::169.254.193.6::7180::SOCKET'
+INFO:labrad.gpib_device_manager:b'2020-08-02 10:35:11-0700 [-] Device Connect: he-3-cryostat GPIB Bus TCPIP0::169.254.246.230::7180::SOCKET\r\n2020-08-02 10:35:11-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.246.230::7180::SOCKET\r\n2020-08-02 10:35:11-0700 [-] Device Connect: he-3-cryostat GPIB Bus GPIB0::8::INSTR\r\n2020-08-02 10:35:11-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus GPIB0::8::INSTR\r\n2020-08-02 10:35:11-0700 [-] Device Connect: he-3-cryostat GPIB Bus GPIB0::1::INSTR\r\n2020-08-02 10:35:11-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus GPIB0::1::INSTR\r\n2020-08-02 10:35:11-0700 [-] Device Connect: he-3-cryostat GPIB Bus TCPIP0::169.254.129.190::7180::SOCKET\r\n2020-08-02 10:35:11-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.129.190::7180::SOCKET\r\n2020-08-02 10:35:11-0700 [-] Device Connect: he-3-cryostat GPIB Bus TCPIP0::169.254.193.6::7180::SOCKET\r\n2020-08-02 10:35:11-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.193.6::7180::SOCKET'
+INFO:labrad.gpib_device_manager:b'2020-08-02 10:35:12-0700 [-] Error sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.246.230::7180::SOCKET: not enough values to unpack (expected 4, got 1)\r\n2020-08-02 10:35:12-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.246.230::7180::SOCKET\r\n2020-08-02 10:35:12-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus GPIB0::8::INSTR\r\n2020-08-02 10:35:12-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus GPIB0::1::INSTR\r\n2020-08-02 10:35:12-0700 [-] Error sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.129.190::7180::SOCKET: not enough values to unpack (expected 4, got 1)\r\n2020-08-02 10:35:12-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.129.190::7180::SOCKET'
+INFO:labrad.gpib_device_manager:b'2020-08-02 10:35:12-0700 [-] Error sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.193.6::7180::SOCKET: not enough values to unpack (expected 4, got 1)\r\n2020-08-02 10:35:12-0700 [-] Sending *IDN? to he-3-cryostat GPIB Bus TCPIP0::169.254.193.6::7180::SOCKET'
+INFO:labrad.gpib_device_manager:b"2020-08-02 10:35:12-0700 [-] Sending message: 12 (12, 0) [(21436587, ('Stanford_Research_Systems SR830', 'he-3-cryostat GPIB Bus', 'GPIB0::8::INSTR', True))]\r\n2020-08-02 10:35:12-0700 [-] Sending message: 12 (12, 0) [(21436587, ('Stanford_Research_Systems SR830', 'he-3-cryostat GPIB Bus', 'GPIB0::1::INSTR', True))]"
+INFO:labrad.sr830:b'2020-08-02 10:35:12-0700 [-] Device message: Stanford_Research_Systems SR830 he-3-cryostat GPIB Bus GPIB0::8::INSTR True\r\n2020-08-02 10:35:12-0700 [-] Device message: Stanford_Research_Systems SR830 he-3-cryostat GPIB Bus GPIB0::1::INSTR True'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 10:44:34-0700 [-] deferredRead timed out after 5.000590562820435 seconds'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 10:47:04-0700 [-] deferredRead timed out after 5.000681400299072 seconds'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 10:49:34-0700 [-] deferredRead timed out after 5.000664234161377 seconds'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 10:52:04-0700 [-] deferredRead timed out after 5.0006935596466064 seconds'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 10:54:35-0700 [-] deferredRead timed out after 5.0009167194366455 seconds'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 10:57:05-0700 [-] deferredRead timed out after 5.000635862350464 seconds'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 10:59:35-0700 [-] deferredRead timed out after 5.000813961029053 seconds'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 11:02:06-0700 [-] deferredRead timed out after 5.000834703445435 seconds'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 11:04:35-0700 [-] deferredRead timed out after 5.000670909881592 seconds'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 11:07:05-0700 [-] deferredRead timed out after 5.000863313674927 seconds'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 11:17:43-0700 [-] deferredRead timed out after 5.0010881423950195 seconds'
+INFO:labrad.he_3_cryostat_serial_server:b'2020-08-02 15:30:14-0700 [-] deferredRead timed out after 5.00045108795166 seconds'
+INFO:labrad.ami_430:STOPPING
+INFO:labrad.he_3_cryostat_serial_server:b"2020-08-02 16:40:29-0700 [-] Searching for COM ports:\r\n2020-08-02 16:40:29-0700 [-]    COM4\r\n2020-08-02 16:40:29-0700 [-]    COM5\r\n2020-08-02 16:40:29-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]\r\n2020-08-02 16:40:29-0700 [-] Searching for COM ports:\r\n2020-08-02 16:40:29-0700 [-]    COM4\r\n2020-08-02 16:40:29-0700 [-]    COM5\r\n2020-08-02 16:40:29-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]"
+INFO:labrad.ami_430:b'2020-08-02 16:40:29-0700 [LabradProtocol,client] Disconnected cleanly.\r\n2020-08-02 16:40:29-0700 [-] Main loop terminated.'
+INFO:labrad.dac_adc_24bits:b"2020-08-02 16:40:29-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x118BBE30>\r\n2020-08-02 16:40:29-0700 [-] COM4\r\n2020-08-02 16:40:29-0700 [-] ['COM4', 'COM5']"
+INFO:labrad.ami_430:process closed cleanly.
+INFO:labrad.ami_430:STOPPED
+INFO:labrad.helium_level_meter:b"2020-08-02 16:40:29-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x123879F0>\r\n2020-08-02 16:40:29-0700 [-] COM5\r\n2020-08-02 16:40:29-0700 [-] ['COM4', 'COM5']"
+INFO:labrad.ami_430:STARTING
+INFO:labrad.ami_430:path: C:/Users/Feldman Lab/code/Setup_BF122019/LabRAD-Device-Electrical_Measurement-ONline_Software-pyqt5/DEMONS Servers
+INFO:labrad.ami_430:args: ['c:\\users\\feldman lab\\appdata\\local\\programs\\python\\python37-32\\python.exe', 'ami_430.py']
+INFO:labrad.ami_430:b'2020-08-02 16:40:30-0700 [-] Log opened.'
+INFO:labrad.ami_430:b'2020-08-02 16:40:31-0700 [LabradProtocol,client] AMI 430 starting...'
+INFO:labrad.ami_430:b'2020-08-02 16:40:31-0700 [-] Device message: AMERICAN MAGNETICS INC. MODEL 430 he-3-cryostat GPIB Bus TCPIP0::169.254.246.230::7180::SOCKET True\r\n2020-08-02 16:40:31-0700 [-] Device message: AMERICAN MAGNETICS INC. MODEL 430 he-3-cryostat GPIB Bus TCPIP0::169.254.129.190::7180::SOCKET True\r\n2020-08-02 16:40:31-0700 [-] Device message: AMERICAN MAGNETICS INC. MODEL 430 he-3-cryostat GPIB Bus TCPIP0::169.254.193.6::7180::SOCKET True'
+INFO:labrad.he_3_cryostat_serial_server:b"2020-08-02 16:40:31-0700 [-] Searching for COM ports:\r\n2020-08-02 16:40:31-0700 [-]    COM4\r\n2020-08-02 16:40:31-0700 [-]    COM5\r\n2020-08-02 16:40:31-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]"
+INFO:labrad.ami_430:STARTED
+INFO:labrad.he_3_cryostat_serial_server:b"2020-08-02 16:40:31-0700 [-] Searching for COM ports:\r\n2020-08-02 16:40:31-0700 [-]    COM4\r\n2020-08-02 16:40:31-0700 [-]    COM5\r\n2020-08-02 16:40:31-0700 [-] [SerialDevice(name='COM4', devicepath='\\\\\\\\.\\\\COM4'), SerialDevice(name='COM5', devicepath='\\\\\\\\.\\\\COM5')]"
+INFO:labrad.ami_430:b'2020-08-02 16:40:31-0700 [LabradProtocol,client] AMI 430 now serving'
+INFO:labrad.dac_adc_24bits:b"2020-08-02 16:40:31-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x118BBE30>\r\n2020-08-02 16:40:31-0700 [-] COM4\r\n2020-08-02 16:40:31-0700 [-] ['COM4', 'COM5']"
+INFO:labrad.helium_level_meter:b"2020-08-02 16:40:31-0700 [-] <labrad.wrappers.AsyncServerWrapper object at 0x123879F0>\r\n2020-08-02 16:40:31-0700 [-] COM5\r\n2020-08-02 16:40:31-0700 [-] ['COM4', 'COM5']"

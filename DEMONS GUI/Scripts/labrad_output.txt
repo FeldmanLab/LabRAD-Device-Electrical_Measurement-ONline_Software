@@ -1,0 +1,334 @@
+
+C:\Users\Feldman Lab\code\Setup_BF122019>if "" == "" (set HOME=C:\Users\Feldman Lab ) 
+
+C:\Users\Feldman Lab\code\Setup_BF122019>set ERROR_CODE=0 
+
+C:\Users\Feldman Lab\code\Setup_BF122019>if "Windows_NT" == "Windows_NT" 
+
+C:\Users\Feldman Lab\code\Setup_BF122019>if not "C:\Program Files\Java\jdk1.8.0_211" == "" goto OkJHome 
+
+C:\Users\Feldman Lab\code\Setup_BF122019>if exist "C:\Program Files\Java\jdk1.8.0_211\bin\java.exe" (
+SET JAVA_EXE="C:\Program Files\Java\jdk1.8.0_211\bin\java.exe"  
+ goto init 
+) 
+
+C:\Users\Feldman Lab\code\Setup_BF122019>if NOT "Windows_NT" == "Windows_NT" goto Win9xArg 
+
+C:\Users\Feldman Lab\code\Setup_BF122019>if "@eval[2+2]" == "4" goto 4NTArgs 
+
+C:\Users\Feldman Lab\code\Setup_BF122019>set CMD_LINE_ARGS= 
+
+C:\Users\Feldman Lab\code\Setup_BF122019>goto endInit 
+
+C:\Users\Feldman Lab\code\Setup_BF122019>SET PROG_HOME=C:\Users\Feldman Lab\code\Setup_BF122019\scalabrad\scalabrad-0.8.3\bin\.. 
+
+C:\Users\Feldman Lab\code\Setup_BF122019>SET PSEP=; 
+
+C:\Users\Feldman Lab\code\Setup_BF122019>SET CMDLINE="C:\Program Files\Java\jdk1.8.0_211\bin\java.exe"   -cp "C:\Users\Feldman Lab\code\Setup_BF122019\scalabrad\scalabrad-0.8.3\bin\..\lib\*;" -Dprog.home="C:\Users\Feldman Lab\code\Setup_BF122019\scalabrad\scalabrad-0.8.3\bin\.." -Dprog.version="0.8.3" org.labrad.manager.Manager  
+
+C:\Users\Feldman Lab\code\Setup_BF122019>"C:\Program Files\Java\jdk1.8.0_211\bin\java.exe"   -cp "C:\Users\Feldman Lab\code\Setup_BF122019\scalabrad\scalabrad-0.8.3\bin\..\lib\*;" -Dprog.home="C:\Users\Feldman Lab\code\Setup_BF122019\scalabrad\scalabrad-0.8.3\bin\.." -Dprog.version="0.8.3" org.labrad.manager.Manager  
+19:48:37.181 [main] INFO  org.labrad.manager.Manager$ - registry location: C:\Users\Feldman Lab\.labrad\registry.sqlite, format=sqlite
+19:48:37.321 [main] INFO  org.labrad.crypto.Certs$ - Using saved certificate for host 'HE-3-Cryostat'. certFile=C:\Users\Feldman Lab\.labrad\manager\certs\HE-3-Cryostat.cert, keyFile=C:\Users\Feldman Lab\.labrad\manager\keys\HE-3-Cryostat.key
+19:48:37.629 [main] INFO  org.labrad.crypto.Certs$ - Using saved certificate for host 'localhost'. certFile=C:\Users\Feldman Lab\.labrad\manager\certs\localhost.cert, keyFile=C:\Users\Feldman Lab\.labrad\manager\keys\localhost.key
+19:48:37.681 [main] INFO  org.labrad.manager.Manager$ - localhost: sha1=B4:1A:9C:92:98:7F:44:3F:1C:86:54:82:B5:0C:49:44:16:78:D5:1A
+19:48:37.685 [main] INFO  org.labrad.manager.Manager$ - HE-3-Cryostat: sha1=07:03:D3:5E:49:B6:A8:18:01:63:B9:C8:0A:3E:EC:49:CF:AC:9E:95
+19:48:38.477 [main] INFO  org.labrad.manager.MultiheadServer - managers in registry: 
+19:48:38.557 [main] INFO  org.labrad.manager.MultiheadServer - managers in registry: 
+19:48:38.798 [main] INFO  org.labrad.manager.Listener - now accepting labrad connections: port=7682, tlsPolicy=STARTTLS
+19:48:38.798 [main] INFO  org.labrad.manager.Listener - now accepting labrad connections: port=7643, tlsPolicy=ON
+19:48:40.933 [LabradManagerLogin-0-0] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50281, local=/127.0.0.1:7682, isLocalConnection=true
+19:48:42.435 [LabradManagerLogin-0-1] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50325, local=/127.0.0.1:7682, isLocalConnection=true
+19:48:42.535 [LabradManagerLogin-0-2] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50328, local=/127.0.0.1:7682, isLocalConnection=true
+19:48:42.536 [LabradManagerLogin-0-3] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50329, local=/127.0.0.1:7682, isLocalConnection=true
+19:48:42.585 [LabradManagerLogin-0-4] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50332, local=/127.0.0.1:7682, isLocalConnection=true
+19:48:42.588 [LabradManagerLogin-0-5] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50331, local=/127.0.0.1:7682, isLocalConnection=true
+19:48:42.602 [LabradManagerLogin-0-6] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50333, local=/127.0.0.1:7682, isLocalConnection=true
+19:48:42.640 [LabradManagerLogin-0-7] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50334, local=/127.0.0.1:7682, isLocalConnection=true
+19:48:42.651 [LabradManagerLogin-0-8] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50336, local=/127.0.0.1:7682, isLocalConnection=true
+19:48:43.144 [LabradManagerLogin-0-9] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50338, local=/127.0.0.1:7682, isLocalConnection=true
+19:48:43.156 [LabradManagerLogin-0-10] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50339, local=/127.0.0.1:7682, isLocalConnection=true
+19:48:43.230 [LabradManagerLogin-0-11] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50340, local=/127.0.0.1:7682, isLocalConnection=true
+19:48:44.282 [LabradManagerLogin-0-12] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50406, local=/127.0.0.1:7682, isLocalConnection=true
+19:48:50.101 [LabradManagerLogin-0-13] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50417, local=/127.0.0.1:7682, isLocalConnection=true
+19:49:25.810 [LabradManagerLogin-0-14] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50466, local=/127.0.0.1:7682, isLocalConnection=true
+19:50:18.186 [LabradManagerLogin-0-15] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50472, local=/127.0.0.1:7682, isLocalConnection=true
+19:50:31.979 [LabradManagerLogin-0-16] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50476, local=/127.0.0.1:7682, isLocalConnection=true
+19:52:20.649 [LabradManagerLogin-0-17] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50486, local=/127.0.0.1:7682, isLocalConnection=true
+19:52:20.730 [LabradManagerLogin-0-18] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50487, local=/127.0.0.1:7682, isLocalConnection=true
+19:52:20.830 [LabradManagerLogin-0-19] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50488, local=/127.0.0.1:7682, isLocalConnection=true
+19:52:28.631 [LabradManagerLogin-0-20] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50493, local=/127.0.0.1:7682, isLocalConnection=true
+19:52:31.177 [LabradManagerLogin-0-21] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50497, local=/127.0.0.1:7682, isLocalConnection=true
+19:52:35.822 [LabradManagerLogin-0-22] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50498, local=/127.0.0.1:7682, isLocalConnection=true
+19:52:45.903 [LabradManagerLogin-0-23] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50499, local=/127.0.0.1:7682, isLocalConnection=true
+19:55:52.836 [LabradManagerLogin-0-0] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50504, local=/127.0.0.1:7682, isLocalConnection=true
+20:00:04.978 [LabradManagerLogin-0-1] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50530, local=/127.0.0.1:7682, isLocalConnection=true
+20:00:06.912 [LabradManagerLogin-0-2] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50531, local=/127.0.0.1:7682, isLocalConnection=true
+20:00:12.112 [LabradManagerLogin-0-3] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50532, local=/127.0.0.1:7682, isLocalConnection=true
+20:00:19.799 [LabradManagerLogin-0-4] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50533, local=/127.0.0.1:7682, isLocalConnection=true
+20:20:32.007 [LabradManagerLogin-0-5] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50556, local=/127.0.0.1:7682, isLocalConnection=true
+20:50:32.005 [LabradManagerLogin-0-6] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50595, local=/127.0.0.1:7682, isLocalConnection=true
+21:20:32.005 [LabradManagerLogin-0-7] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50624, local=/127.0.0.1:7682, isLocalConnection=true
+21:21:14.777 [LabradManagerLogin-0-8] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50629, local=/127.0.0.1:7682, isLocalConnection=true
+21:21:26.868 [LabradManagerLogin-0-9] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50630, local=/127.0.0.1:7682, isLocalConnection=true
+21:50:32.025 [LabradManagerLogin-0-10] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50670, local=/127.0.0.1:7682, isLocalConnection=true
+22:20:32.004 [LabradManagerLogin-0-11] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50710, local=/127.0.0.1:7682, isLocalConnection=true
+22:50:31.975 [LabradManagerLogin-0-12] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50735, local=/127.0.0.1:7682, isLocalConnection=true
+23:14:09.624 [LabradManagerLogin-0-13] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50766, local=/127.0.0.1:7682, isLocalConnection=true
+23:14:25.401 [LabradManagerLogin-0-14] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50767, local=/127.0.0.1:7682, isLocalConnection=true
+23:20:31.990 [LabradManagerLogin-0-15] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50783, local=/127.0.0.1:7682, isLocalConnection=true
+23:50:32.000 [LabradManagerLogin-0-16] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50810, local=/127.0.0.1:7682, isLocalConnection=true
+00:20:32.025 [LabradManagerLogin-0-17] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50844, local=/127.0.0.1:7682, isLocalConnection=true
+00:50:32.041 [LabradManagerLogin-0-18] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50879, local=/127.0.0.1:7682, isLocalConnection=true
+01:20:31.941 [LabradManagerLogin-0-19] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50919, local=/127.0.0.1:7682, isLocalConnection=true
+01:50:32.300 [LabradManagerLogin-0-20] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50951, local=/127.0.0.1:7682, isLocalConnection=true
+02:20:32.007 [LabradManagerLogin-0-21] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:50992, local=/127.0.0.1:7682, isLocalConnection=true
+02:50:31.952 [LabradManagerLogin-0-22] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51018, local=/127.0.0.1:7682, isLocalConnection=true
+03:20:31.957 [LabradManagerLogin-0-23] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51137, local=/127.0.0.1:7682, isLocalConnection=true
+03:50:32.298 [LabradManagerLogin-0-0] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51179, local=/127.0.0.1:7682, isLocalConnection=true
+04:20:31.999 [LabradManagerLogin-0-1] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51219, local=/127.0.0.1:7682, isLocalConnection=true
+04:50:31.976 [LabradManagerLogin-0-2] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51255, local=/127.0.0.1:7682, isLocalConnection=true
+05:20:31.992 [LabradManagerLogin-0-3] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51285, local=/127.0.0.1:7682, isLocalConnection=true
+05:50:31.998 [LabradManagerLogin-0-4] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51319, local=/127.0.0.1:7682, isLocalConnection=true
+06:20:32.011 [LabradManagerLogin-0-5] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51350, local=/127.0.0.1:7682, isLocalConnection=true
+06:50:31.985 [LabradManagerLogin-0-6] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51384, local=/127.0.0.1:7682, isLocalConnection=true
+07:20:31.983 [LabradManagerLogin-0-7] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51417, local=/127.0.0.1:7682, isLocalConnection=true
+07:50:32.005 [LabradManagerLogin-0-8] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51449, local=/127.0.0.1:7682, isLocalConnection=true
+08:20:31.972 [LabradManagerLogin-0-9] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51493, local=/127.0.0.1:7682, isLocalConnection=true
+08:50:31.958 [LabradManagerLogin-0-10] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51526, local=/127.0.0.1:7682, isLocalConnection=true
+09:20:32.031 [LabradManagerLogin-0-11] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51563, local=/127.0.0.1:7682, isLocalConnection=true
+09:50:31.969 [LabradManagerLogin-0-12] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51605, local=/127.0.0.1:7682, isLocalConnection=true
+09:52:10.617 [LabradManagerLogin-0-13] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51611, local=/127.0.0.1:7682, isLocalConnection=true
+10:20:32.023 [LabradManagerLogin-0-14] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51638, local=/127.0.0.1:7682, isLocalConnection=true
+10:29:15.813 [LabradManagerLogin-0-15] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51656, local=/127.0.0.1:7682, isLocalConnection=true
+10:29:15.873 [LabradManagerLogin-0-16] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51657, local=/127.0.0.1:7682, isLocalConnection=true
+10:29:15.963 [LabradManagerLogin-0-17] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51658, local=/127.0.0.1:7682, isLocalConnection=true
+10:30:25.635 [LabradManagerLogin-0-18] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51662, local=/127.0.0.1:7682, isLocalConnection=true
+10:30:29.266 [LabradManagerLogin-0-19] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51663, local=/127.0.0.1:7682, isLocalConnection=true
+10:30:31.121 [LabradManagerLogin-0-20] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51664, local=/127.0.0.1:7682, isLocalConnection=true
+10:30:40.763 [LabradManagerLogin-0-21] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51665, local=/127.0.0.1:7682, isLocalConnection=true
+10:34:13.889 [LabradManagerLogin-0-22] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51673, local=/127.0.0.1:7682, isLocalConnection=true
+10:34:13.959 [LabradManagerLogin-0-23] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51674, local=/127.0.0.1:7682, isLocalConnection=true
+10:34:14.039 [LabradManagerLogin-0-0] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51675, local=/127.0.0.1:7682, isLocalConnection=true
+10:34:37.969 [LabradManagerLogin-0-1] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51679, local=/127.0.0.1:7682, isLocalConnection=true
+10:34:38.039 [LabradManagerLogin-0-2] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51680, local=/127.0.0.1:7682, isLocalConnection=true
+10:34:38.119 [LabradManagerLogin-0-3] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51681, local=/127.0.0.1:7682, isLocalConnection=true
+10:35:10.917 [LabradManagerLogin-0-4] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51686, local=/127.0.0.1:7682, isLocalConnection=true
+10:41:08.657 [LabradManagerLogin-0-5] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51728, local=/127.0.0.1:7682, isLocalConnection=true
+10:41:10.058 [LabradManagerLogin-0-6] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51729, local=/127.0.0.1:7682, isLocalConnection=true
+10:42:00.030 [LabradManagerLogin-0-7] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51733, local=/127.0.0.1:7682, isLocalConnection=true
+10:50:32.020 [LabradManagerLogin-0-8] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51742, local=/127.0.0.1:7682, isLocalConnection=true
+11:03:18.846 [LabradManagerLogin-0-9] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51756, local=/127.0.0.1:7682, isLocalConnection=true
+11:03:28.329 [LabradManagerLogin-0-10] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51757, local=/127.0.0.1:7682, isLocalConnection=true
+11:07:47.979 [LabradManagerLogin-0-11] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51761, local=/127.0.0.1:7682, isLocalConnection=true
+11:08:00.050 [LabradManagerLogin-0-12] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51762, local=/127.0.0.1:7682, isLocalConnection=true
+11:13:07.353 [LabradManagerLogin-0-13] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51773, local=/127.0.0.1:7682, isLocalConnection=true
+11:13:07.413 [LabradManagerLogin-0-14] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51774, local=/127.0.0.1:7682, isLocalConnection=true
+11:13:07.503 [LabradManagerLogin-0-15] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51775, local=/127.0.0.1:7682, isLocalConnection=true
+11:17:23.772 [LabradManagerLogin-0-16] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51873, local=/127.0.0.1:7682, isLocalConnection=true
+11:17:24.642 [LabradManagerLogin-0-17] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51874, local=/127.0.0.1:7682, isLocalConnection=true
+11:17:39.059 [LabradManagerLogin-0-18] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51875, local=/127.0.0.1:7682, isLocalConnection=true
+11:20:31.973 [LabradManagerLogin-0-19] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51882, local=/127.0.0.1:7682, isLocalConnection=true
+11:22:32.365 [LabradManagerLogin-0-20] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51887, local=/127.0.0.1:7682, isLocalConnection=true
+11:22:40.700 [LabradManagerLogin-0-21] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51888, local=/127.0.0.1:7682, isLocalConnection=true
+11:28:49.932 [LabradManagerLogin-0-22] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51893, local=/127.0.0.1:7682, isLocalConnection=true
+11:28:59.193 [LabradManagerLogin-0-23] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51894, local=/127.0.0.1:7682, isLocalConnection=true
+11:50:32.037 [LabradManagerLogin-0-0] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51922, local=/127.0.0.1:7682, isLocalConnection=true
+12:20:32.022 [LabradManagerLogin-0-1] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51958, local=/127.0.0.1:7682, isLocalConnection=true
+12:50:32.002 [LabradManagerLogin-0-2] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:51986, local=/127.0.0.1:7682, isLocalConnection=true
+13:15:07.612 [LabradManagerLogin-0-3] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52013, local=/127.0.0.1:7682, isLocalConnection=true
+13:15:31.979 [LabradManagerLogin-0-4] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52014, local=/127.0.0.1:7682, isLocalConnection=true
+13:20:32.045 [LabradManagerLogin-0-5] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52024, local=/127.0.0.1:7682, isLocalConnection=true
+13:30:23.485 [LabradManagerLogin-0-6] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52036, local=/127.0.0.1:7682, isLocalConnection=true
+13:30:46.783 [LabradManagerLogin-0-7] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52037, local=/127.0.0.1:7682, isLocalConnection=true
+13:40:21.001 [LabradManagerLogin-0-8] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52048, local=/127.0.0.1:7682, isLocalConnection=true
+13:40:32.397 [LabradManagerLogin-0-9] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52049, local=/127.0.0.1:7682, isLocalConnection=true
+13:50:31.995 [LabradManagerLogin-0-10] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52065, local=/127.0.0.1:7682, isLocalConnection=true
+14:16:08.174 [LabradManagerLogin-0-11] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52100, local=/127.0.0.1:7682, isLocalConnection=true
+14:16:21.048 [LabradManagerLogin-0-12] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52104, local=/127.0.0.1:7682, isLocalConnection=true
+14:20:32.005 [LabradManagerLogin-0-13] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52113, local=/127.0.0.1:7682, isLocalConnection=true
+14:31:04.029 [LabradManagerLogin-0-14] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52121, local=/127.0.0.1:7682, isLocalConnection=true
+14:31:15.071 [LabradManagerLogin-0-15] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52124, local=/127.0.0.1:7682, isLocalConnection=true
+14:39:26.266 [LabradManagerLogin-0-16] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52130, local=/127.0.0.1:7682, isLocalConnection=true
+14:39:44.919 [LabradManagerLogin-0-17] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52131, local=/127.0.0.1:7682, isLocalConnection=true
+14:50:32.054 [LabradManagerLogin-0-18] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52145, local=/127.0.0.1:7682, isLocalConnection=true
+15:20:31.992 [LabradManagerLogin-0-19] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52173, local=/127.0.0.1:7682, isLocalConnection=true
+15:21:55.298 [LabradManagerLogin-0-20] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52181, local=/127.0.0.1:7682, isLocalConnection=true
+15:22:09.936 [LabradManagerLogin-0-21] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52182, local=/127.0.0.1:7682, isLocalConnection=true
+15:30:09.998 [LabradManagerLogin-0-22] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52201, local=/127.0.0.1:7682, isLocalConnection=true
+15:37:38.493 [LabradManagerLogin-0-23] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52222, local=/127.0.0.1:7682, isLocalConnection=true
+15:37:47.513 [LabradManagerLogin-0-0] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52223, local=/127.0.0.1:7682, isLocalConnection=true
+15:38:54.333 [LabradManagerLogin-0-1] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52224, local=/127.0.0.1:7682, isLocalConnection=true
+15:39:01.730 [LabradManagerLogin-0-2] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52226, local=/127.0.0.1:7682, isLocalConnection=true
+15:42:44.831 [LabradManagerLogin-0-3] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52262, local=/127.0.0.1:7682, isLocalConnection=true
+15:42:59.642 [LabradManagerLogin-0-4] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52263, local=/127.0.0.1:7682, isLocalConnection=true
+15:44:12.940 [LabradManagerLogin-0-5] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52264, local=/127.0.0.1:7682, isLocalConnection=true
+15:44:20.880 [LabradManagerLogin-0-6] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52265, local=/127.0.0.1:7682, isLocalConnection=true
+15:49:39.758 [LabradManagerLogin-0-7] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52271, local=/127.0.0.1:7682, isLocalConnection=true
+15:50:25.609 [LabradManagerLogin-0-8] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52273, local=/127.0.0.1:7682, isLocalConnection=true
+15:50:32.048 [LabradManagerLogin-0-9] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52277, local=/127.0.0.1:7682, isLocalConnection=true
+15:53:05.670 [LabradManagerLogin-0-10] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52281, local=/127.0.0.1:7682, isLocalConnection=true
+15:55:42.041 [LabradManagerLogin-0-11] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52288, local=/127.0.0.1:7682, isLocalConnection=true
+16:20:32.017 [LabradManagerLogin-0-12] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52325, local=/127.0.0.1:7682, isLocalConnection=true
+16:36:14.129 [LabradManagerLogin-0-13] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52343, local=/127.0.0.1:7682, isLocalConnection=true
+16:37:14.935 [LabradManagerLogin-0-14] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52344, local=/127.0.0.1:7682, isLocalConnection=true
+16:37:25.700 [LabradManagerLogin-0-15] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52345, local=/127.0.0.1:7682, isLocalConnection=true
+16:37:28.730 [LabradManagerLogin-0-16] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52346, local=/127.0.0.1:7682, isLocalConnection=true
+16:37:39.160 [LabradManagerLogin-0-17] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52347, local=/127.0.0.1:7682, isLocalConnection=true
+16:40:31.006 [LabradManagerLogin-0-18] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52352, local=/127.0.0.1:7682, isLocalConnection=true
+16:49:28.700 [LabradManagerLogin-0-19] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52369, local=/127.0.0.1:7682, isLocalConnection=true
+16:50:31.990 [LabradManagerLogin-0-20] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52374, local=/127.0.0.1:7682, isLocalConnection=true
+16:59:44.627 [LabradManagerLogin-0-21] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52387, local=/127.0.0.1:7682, isLocalConnection=true
+16:59:44.687 [LabradManagerLogin-0-22] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52388, local=/127.0.0.1:7682, isLocalConnection=true
+16:59:44.767 [LabradManagerLogin-0-23] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52389, local=/127.0.0.1:7682, isLocalConnection=true
+17:05:13.898 [LabradManagerLogin-0-0] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52396, local=/127.0.0.1:7682, isLocalConnection=true
+17:05:15.307 [LabradManagerLogin-0-1] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52397, local=/127.0.0.1:7682, isLocalConnection=true
+17:05:18.218 [LabradManagerLogin-0-2] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52398, local=/127.0.0.1:7682, isLocalConnection=true
+17:05:48.315 [LabradManagerLogin-0-3] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52400, local=/127.0.0.1:7682, isLocalConnection=true
+17:06:42.804 [LabradManagerLogin-0-4] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52404, local=/127.0.0.1:7682, isLocalConnection=true
+17:06:59.496 [LabradManagerLogin-0-5] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52405, local=/127.0.0.1:7682, isLocalConnection=true
+17:07:06.806 [LabradManagerLogin-0-6] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52406, local=/127.0.0.1:7682, isLocalConnection=true
+17:07:17.558 [LabradManagerLogin-0-7] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52407, local=/127.0.0.1:7682, isLocalConnection=true
+17:11:29.439 [LabradManagerLogin-0-8] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52453, local=/127.0.0.1:7682, isLocalConnection=true
+17:11:45.883 [LabradManagerLogin-0-9] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52454, local=/127.0.0.1:7682, isLocalConnection=true
+17:16:39.328 [LabradManagerLogin-0-10] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52482, local=/127.0.0.1:7682, isLocalConnection=true
+17:16:52.383 [LabradManagerLogin-0-11] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52483, local=/127.0.0.1:7682, isLocalConnection=true
+17:17:17.691 [LabradManagerLogin-0-12] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52484, local=/127.0.0.1:7682, isLocalConnection=true
+17:17:41.029 [LabradManagerLogin-0-13] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52485, local=/127.0.0.1:7682, isLocalConnection=true
+17:20:25.632 [LabradManagerLogin-0-14] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52489, local=/127.0.0.1:7682, isLocalConnection=true
+17:20:32.032 [LabradManagerLogin-0-15] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52493, local=/127.0.0.1:7682, isLocalConnection=true
+17:20:44.346 [LabradManagerLogin-0-16] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52494, local=/127.0.0.1:7682, isLocalConnection=true
+17:20:49.668 [LabradManagerLogin-0-17] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52495, local=/127.0.0.1:7682, isLocalConnection=true
+17:20:58.757 [LabradManagerLogin-0-18] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52496, local=/127.0.0.1:7682, isLocalConnection=true
+17:24:21.421 [LabradManagerLogin-0-19] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52501, local=/127.0.0.1:7682, isLocalConnection=true
+17:28:59.273 [LabradManagerLogin-0-20] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52512, local=/127.0.0.1:7682, isLocalConnection=true
+17:29:06.854 [LabradManagerLogin-0-21] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52513, local=/127.0.0.1:7682, isLocalConnection=true
+17:29:16.080 [LabradManagerLogin-0-22] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52514, local=/127.0.0.1:7682, isLocalConnection=true
+17:34:54.264 [LabradManagerLogin-0-23] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52519, local=/127.0.0.1:7682, isLocalConnection=true
+17:34:58.854 [LabradManagerLogin-0-0] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52520, local=/127.0.0.1:7682, isLocalConnection=true
+17:35:24.109 [LabradManagerLogin-0-1] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52521, local=/127.0.0.1:7682, isLocalConnection=true
+17:41:41.201 [LabradManagerLogin-0-2] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52526, local=/127.0.0.1:7682, isLocalConnection=true
+17:42:33.266 [LabradManagerLogin-0-3] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52527, local=/127.0.0.1:7682, isLocalConnection=true
+17:42:41.023 [LabradManagerLogin-0-4] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52528, local=/127.0.0.1:7682, isLocalConnection=true
+17:42:51.060 [LabradManagerLogin-0-5] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52529, local=/127.0.0.1:7682, isLocalConnection=true
+17:43:00.546 [LabradManagerLogin-0-6] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52531, local=/127.0.0.1:7682, isLocalConnection=true
+17:43:03.991 [LabradManagerLogin-0-7] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52532, local=/127.0.0.1:7682, isLocalConnection=true
+17:43:12.210 [LabradManagerLogin-0-8] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52533, local=/127.0.0.1:7682, isLocalConnection=true
+17:43:15.034 [LabradManagerLogin-0-9] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52534, local=/127.0.0.1:7682, isLocalConnection=true
+17:43:26.357 [LabradManagerLogin-0-10] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52535, local=/127.0.0.1:7682, isLocalConnection=true
+17:43:50.373 [LabradManagerLogin-0-11] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52536, local=/127.0.0.1:7682, isLocalConnection=true
+17:43:58.166 [LabradManagerLogin-0-12] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52537, local=/127.0.0.1:7682, isLocalConnection=true
+17:44:07.186 [LabradManagerLogin-0-13] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52538, local=/127.0.0.1:7682, isLocalConnection=true
+17:44:17.167 [LabradManagerLogin-0-14] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52539, local=/127.0.0.1:7682, isLocalConnection=true
+17:44:28.028 [LabradManagerLogin-0-15] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52540, local=/127.0.0.1:7682, isLocalConnection=true
+17:44:31.242 [LabradManagerLogin-0-16] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52541, local=/127.0.0.1:7682, isLocalConnection=true
+17:44:42.978 [LabradManagerLogin-0-17] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52542, local=/127.0.0.1:7682, isLocalConnection=true
+17:44:52.177 [LabradManagerLogin-0-18] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52543, local=/127.0.0.1:7682, isLocalConnection=true
+17:45:44.142 [LabradManagerLogin-0-19] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52544, local=/127.0.0.1:7682, isLocalConnection=true
+17:45:55.540 [LabradManagerLogin-0-20] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52545, local=/127.0.0.1:7682, isLocalConnection=true
+17:50:32.041 [LabradManagerLogin-0-21] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52574, local=/127.0.0.1:7682, isLocalConnection=true
+17:54:21.969 [LabradManagerLogin-0-22] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52583, local=/127.0.0.1:7682, isLocalConnection=true
+17:54:28.277 [LabradManagerLogin-0-23] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52584, local=/127.0.0.1:7682, isLocalConnection=true
+17:57:17.891 [LabradManagerLogin-0-0] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52589, local=/127.0.0.1:7682, isLocalConnection=true
+17:57:54.622 [LabradManagerLogin-0-1] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52590, local=/127.0.0.1:7682, isLocalConnection=true
+17:58:08.152 [LabradManagerLogin-0-2] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52591, local=/127.0.0.1:7682, isLocalConnection=true
+17:59:23.219 [LabradManagerLogin-0-3] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52592, local=/127.0.0.1:7682, isLocalConnection=true
+17:59:49.939 [LabradManagerLogin-0-4] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52593, local=/127.0.0.1:7682, isLocalConnection=true
+18:20:32.036 [LabradManagerLogin-0-5] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52744, local=/127.0.0.1:7682, isLocalConnection=true
+18:50:32.018 [LabradManagerLogin-0-6] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52781, local=/127.0.0.1:7682, isLocalConnection=true
+19:20:32.053 [LabradManagerLogin-0-7] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52892, local=/127.0.0.1:7682, isLocalConnection=true
+19:46:50.529 [LabradManagerLogin-0-8] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52931, local=/127.0.0.1:7682, isLocalConnection=true
+19:46:52.333 [LabradManagerLogin-0-9] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52932, local=/127.0.0.1:7682, isLocalConnection=true
+19:47:03.104 [LabradManagerLogin-0-10] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52934, local=/127.0.0.1:7682, isLocalConnection=true
+19:47:17.834 [LabradManagerLogin-0-11] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52935, local=/127.0.0.1:7682, isLocalConnection=true
+19:50:32.033 [LabradManagerLogin-0-12] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:52945, local=/127.0.0.1:7682, isLocalConnection=true
+20:20:32.313 [LabradManagerLogin-0-13] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53000, local=/127.0.0.1:7682, isLocalConnection=true
+20:50:32.032 [LabradManagerLogin-0-14] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53030, local=/127.0.0.1:7682, isLocalConnection=true
+21:20:32.014 [LabradManagerLogin-0-15] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53063, local=/127.0.0.1:7682, isLocalConnection=true
+21:50:32.052 [LabradManagerLogin-0-16] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53090, local=/127.0.0.1:7682, isLocalConnection=true
+22:20:32.060 [LabradManagerLogin-0-17] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53132, local=/127.0.0.1:7682, isLocalConnection=true
+22:50:32.261 [LabradManagerLogin-0-18] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53161, local=/127.0.0.1:7682, isLocalConnection=true
+23:20:32.042 [LabradManagerLogin-0-19] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53189, local=/127.0.0.1:7682, isLocalConnection=true
+23:50:32.047 [LabradManagerLogin-0-20] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53220, local=/127.0.0.1:7682, isLocalConnection=true
+00:20:32.033 [LabradManagerLogin-0-21] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53252, local=/127.0.0.1:7682, isLocalConnection=true
+00:50:32.074 [LabradManagerLogin-0-22] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53281, local=/127.0.0.1:7682, isLocalConnection=true
+01:20:31.985 [LabradManagerLogin-0-23] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53308, local=/127.0.0.1:7682, isLocalConnection=true
+01:50:32.034 [LabradManagerLogin-0-0] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53343, local=/127.0.0.1:7682, isLocalConnection=true
+02:20:32.030 [LabradManagerLogin-0-1] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53380, local=/127.0.0.1:7682, isLocalConnection=true
+02:50:32.034 [LabradManagerLogin-0-2] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53407, local=/127.0.0.1:7682, isLocalConnection=true
+03:20:32.046 [LabradManagerLogin-0-3] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53520, local=/127.0.0.1:7682, isLocalConnection=true
+03:50:32.007 [LabradManagerLogin-0-4] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53560, local=/127.0.0.1:7682, isLocalConnection=true
+04:20:32.042 [LabradManagerLogin-0-5] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53605, local=/127.0.0.1:7682, isLocalConnection=true
+04:50:32.021 [LabradManagerLogin-0-6] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53633, local=/127.0.0.1:7682, isLocalConnection=true
+05:20:32.027 [LabradManagerLogin-0-7] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53663, local=/127.0.0.1:7682, isLocalConnection=true
+05:50:32.142 [LabradManagerLogin-0-8] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53695, local=/127.0.0.1:7682, isLocalConnection=true
+06:20:32.041 [LabradManagerLogin-0-9] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53727, local=/127.0.0.1:7682, isLocalConnection=true
+06:50:32.016 [LabradManagerLogin-0-10] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53756, local=/127.0.0.1:7682, isLocalConnection=true
+07:20:32.052 [LabradManagerLogin-0-11] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53791, local=/127.0.0.1:7682, isLocalConnection=true
+07:50:32.044 [LabradManagerLogin-0-12] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53821, local=/127.0.0.1:7682, isLocalConnection=true
+08:20:32.425 [LabradManagerLogin-0-13] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53875, local=/127.0.0.1:7682, isLocalConnection=true
+08:50:32.002 [LabradManagerLogin-0-14] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53907, local=/127.0.0.1:7682, isLocalConnection=true
+09:20:32.029 [LabradManagerLogin-0-15] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53936, local=/127.0.0.1:7682, isLocalConnection=true
+09:50:32.048 [LabradManagerLogin-0-16] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:53972, local=/127.0.0.1:7682, isLocalConnection=true
+10:20:32.003 [LabradManagerLogin-0-17] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54007, local=/127.0.0.1:7682, isLocalConnection=true
+10:50:32.018 [LabradManagerLogin-0-18] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54040, local=/127.0.0.1:7682, isLocalConnection=true
+11:20:32.042 [LabradManagerLogin-0-19] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54157, local=/127.0.0.1:7682, isLocalConnection=true
+11:50:31.024 [LabradManagerLogin-0-20] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54202, local=/127.0.0.1:7682, isLocalConnection=true
+12:20:31.989 [LabradManagerLogin-0-21] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54238, local=/127.0.0.1:7682, isLocalConnection=true
+12:50:32.006 [LabradManagerLogin-0-22] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54268, local=/127.0.0.1:7682, isLocalConnection=true
+13:20:32.024 [LabradManagerLogin-0-23] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54310, local=/127.0.0.1:7682, isLocalConnection=true
+13:50:32.022 [LabradManagerLogin-0-0] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54342, local=/127.0.0.1:7682, isLocalConnection=true
+14:20:32.038 [LabradManagerLogin-0-1] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54376, local=/127.0.0.1:7682, isLocalConnection=true
+14:50:32.041 [LabradManagerLogin-0-2] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54403, local=/127.0.0.1:7682, isLocalConnection=true
+15:20:32.051 [LabradManagerLogin-0-3] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54438, local=/127.0.0.1:7682, isLocalConnection=true
+15:50:31.992 [LabradManagerLogin-0-4] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54474, local=/127.0.0.1:7682, isLocalConnection=true
+16:20:32.023 [LabradManagerLogin-0-5] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54524, local=/127.0.0.1:7682, isLocalConnection=true
+16:31:36.201 [LabradManagerLogin-0-6] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54549, local=/127.0.0.1:7682, isLocalConnection=true
+16:31:36.266 [LabradManagerLogin-0-7] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54550, local=/127.0.0.1:7682, isLocalConnection=true
+16:31:36.350 [LabradManagerLogin-0-8] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54551, local=/127.0.0.1:7682, isLocalConnection=true
+16:34:03.120 [LabradManagerLogin-0-9] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54557, local=/127.0.0.1:7682, isLocalConnection=true
+16:34:03.183 [LabradManagerLogin-0-10] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54558, local=/127.0.0.1:7682, isLocalConnection=true
+16:34:03.268 [LabradManagerLogin-0-11] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54559, local=/127.0.0.1:7682, isLocalConnection=true
+16:37:07.953 [LabradManagerLogin-0-12] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54568, local=/127.0.0.1:7682, isLocalConnection=true
+16:37:08.021 [LabradManagerLogin-0-13] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54569, local=/127.0.0.1:7682, isLocalConnection=true
+16:37:08.108 [LabradManagerLogin-0-14] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54570, local=/127.0.0.1:7682, isLocalConnection=true
+16:38:45.944 [LabradManagerLogin-0-15] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54574, local=/127.0.0.1:7682, isLocalConnection=true
+16:38:46.008 [LabradManagerLogin-0-16] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54575, local=/127.0.0.1:7682, isLocalConnection=true
+16:38:46.093 [LabradManagerLogin-0-17] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54576, local=/127.0.0.1:7682, isLocalConnection=true
+16:38:49.316 [LabradManagerLogin-0-18] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54580, local=/127.0.0.1:7682, isLocalConnection=true
+16:45:04.209 [LabradManagerLogin-0-19] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54589, local=/127.0.0.1:7682, isLocalConnection=true
+16:45:04.272 [LabradManagerLogin-0-20] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54590, local=/127.0.0.1:7682, isLocalConnection=true
+16:45:04.356 [LabradManagerLogin-0-21] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54591, local=/127.0.0.1:7682, isLocalConnection=true
+16:51:13.745 [LabradManagerLogin-0-22] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54610, local=/127.0.0.1:7682, isLocalConnection=true
+16:51:13.807 [LabradManagerLogin-0-23] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54611, local=/127.0.0.1:7682, isLocalConnection=true
+16:51:13.891 [LabradManagerLogin-0-0] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54612, local=/127.0.0.1:7682, isLocalConnection=true
+16:53:48.922 [LabradManagerLogin-0-1] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54618, local=/127.0.0.1:7682, isLocalConnection=true
+16:53:48.988 [LabradManagerLogin-0-2] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54619, local=/127.0.0.1:7682, isLocalConnection=true
+16:53:49.074 [LabradManagerLogin-0-3] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54620, local=/127.0.0.1:7682, isLocalConnection=true
+16:55:43.931 [LabradManagerLogin-0-4] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54626, local=/127.0.0.1:7682, isLocalConnection=true
+16:55:43.994 [LabradManagerLogin-0-5] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54627, local=/127.0.0.1:7682, isLocalConnection=true
+16:55:44.077 [LabradManagerLogin-0-6] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54628, local=/127.0.0.1:7682, isLocalConnection=true
+17:14:03.807 [LabradManagerLogin-0-7] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54778, local=/127.0.0.1:7682, isLocalConnection=true
+17:14:09.851 [LabradManagerLogin-0-8] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54779, local=/127.0.0.1:7682, isLocalConnection=true
+17:14:21.726 [LabradManagerLogin-0-9] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54781, local=/127.0.0.1:7682, isLocalConnection=true
+17:54:53.363 [LabradManagerLogin-0-10] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54941, local=/127.0.0.1:7682, isLocalConnection=true
+17:54:53.434 [LabradManagerLogin-0-11] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54942, local=/127.0.0.1:7682, isLocalConnection=true
+17:54:53.519 [LabradManagerLogin-0-12] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54943, local=/127.0.0.1:7682, isLocalConnection=true
+17:57:17.011 [LabradManagerLogin-0-13] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54953, local=/127.0.0.1:7682, isLocalConnection=true
+17:57:17.076 [LabradManagerLogin-0-14] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54954, local=/127.0.0.1:7682, isLocalConnection=true
+17:57:17.159 [LabradManagerLogin-0-15] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54955, local=/127.0.0.1:7682, isLocalConnection=true
+17:59:23.606 [LabradManagerLogin-0-16] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54964, local=/127.0.0.1:7682, isLocalConnection=true
+17:59:23.688 [LabradManagerLogin-0-17] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54965, local=/127.0.0.1:7682, isLocalConnection=true
+17:59:23.771 [LabradManagerLogin-0-18] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54966, local=/127.0.0.1:7682, isLocalConnection=true
+18:01:10.819 [LabradManagerLogin-0-19] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54971, local=/127.0.0.1:7682, isLocalConnection=true
+18:01:10.885 [LabradManagerLogin-0-20] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54973, local=/127.0.0.1:7682, isLocalConnection=true
+18:01:10.972 [LabradManagerLogin-0-21] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54975, local=/127.0.0.1:7682, isLocalConnection=true
+18:01:16.824 [LabradManagerLogin-0-22] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54976, local=/127.0.0.1:7682, isLocalConnection=true
+18:02:17.304 [LabradManagerLogin-0-23] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54981, local=/127.0.0.1:7682, isLocalConnection=true
+18:02:17.367 [LabradManagerLogin-0-0] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54982, local=/127.0.0.1:7682, isLocalConnection=true
+18:02:17.452 [LabradManagerLogin-0-1] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54983, local=/127.0.0.1:7682, isLocalConnection=true
+18:02:23.463 [LabradManagerLogin-0-2] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54984, local=/127.0.0.1:7682, isLocalConnection=true
+18:03:21.134 [LabradManagerLogin-0-3] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54988, local=/127.0.0.1:7682, isLocalConnection=true
+18:03:21.200 [LabradManagerLogin-0-4] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54989, local=/127.0.0.1:7682, isLocalConnection=true
+18:03:21.282 [LabradManagerLogin-0-5] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54990, local=/127.0.0.1:7682, isLocalConnection=true
+18:03:29.680 [LabradManagerLogin-0-6] INFO  org.labrad.manager.LoginHandler - remote=/127.0.0.1:54991, local=/127.0.0.1:7682, isLocalConnection=true
+Terminate batch job (Y/N)? 
