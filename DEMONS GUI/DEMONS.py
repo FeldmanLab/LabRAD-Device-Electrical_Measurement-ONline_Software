@@ -16,7 +16,6 @@ sys.path.append(os.path.join(path, 'Resources'))
 sys.path.append(os.path.join(path, 'Labrad Connect'))
 sys.path.append(os.path.join(path, 'DataVaultBrowser'))
 sys.path.append(os.path.join(path, 'Transport Gate Sweep'))
-sys.path.append(os.path.join(path, 'Four Terminal Gate Sweep SQUID'))
 sys.path.append(os.path.join(path, 'DAC Controler'))
 sys.path.append(os.path.join(path, 'Fridge Status'))
 sys.path.append(os.path.join(path, 'DV Plotter'))
@@ -28,7 +27,6 @@ MainWindowUI, QtBaseClass = uic.loadUiType(UI_path)
 #import all windows for gui
 import LabRADConnect
 import TransportGateSweep
-import FourTerminalGateSweepSQUID
 import DACControler
 import FridgeStatus
 import DVPlotter
@@ -55,9 +53,7 @@ class MainWindow(QtGui.QMainWindow, MainWindowUI):
         self.MeasurementWindows = {
             'LabRAD': LabRADConnect.Window(self.reactor, None),
             'TransportGateSweep': MultiSweeper.Window(self.reactor, self, None),
-            #'TwoTerminalGateSweepProbeStationWindow': TwoTerminalGateSweepProbeStation.Window(self.reactor, self, None),
             'DACTrackerWindow': DACControler.Window(self.reactor, None),
-            #'FourTerminalGateSweepSQUIDWindow': FourTerminalGateSweepSQUID.Window(self.reactor, self, None),
             'FridgeStatus': FridgeStatus.Window(self.reactor, None),
             'DVPlotterWindow': DVPlotter.Window(self.reactor, None),
         }
@@ -65,8 +61,6 @@ class MainWindow(QtGui.QMainWindow, MainWindowUI):
         self.pushButton_LabRADConnect.clicked.connect(lambda: openWindow(self.MeasurementWindows['LabRAD']))
         self.pushButton_TransportGateSweep.clicked.connect(lambda: openWindow(self.MeasurementWindows['TransportGateSweep']))
         self.pushButton_DACADC_Tracker.clicked.connect(lambda: openWindow(self.MeasurementWindows['DACTrackerWindow']))
-        #self.pushButton_FourTerminalGateSweepSQUID.clicked.connect(lambda: openWindow(self.MeasurementWindows['FourTerminalGateSweepSQUIDWindow']))
-        #self.pushButton_TwoTerminalGateSweepProbeStation.clicked.connect(lambda: openWindow(self.MeasurementWindows['TwoTerminalGateSweepProbeStationWindow']))
         self.pushButton_FridgeStatus.clicked.connect(lambda: openWindow(self.MeasurementWindows['FridgeStatus']))
         # for homemade data plotter
         #self.pushButton_DataPlotter.clicked.connect(lambda: openWindow(self.MeasurementWindows['DVPlotterWindow']))

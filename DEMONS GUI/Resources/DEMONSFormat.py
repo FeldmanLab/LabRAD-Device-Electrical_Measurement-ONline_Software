@@ -12,6 +12,11 @@ from PyQt5 import QtCore, QtGui
 from scipy.interpolate import griddata
 import subprocess
 from datetime import datetime, date
+import os
+
+#path = os.path.dirname(os.path.realpath(__file__))
+#sys.path.append(os.path.join(path, '../Scripts'))
+#import he_level_plotter
 
 '''
 Open Window function that receive the window object and open it
@@ -993,6 +998,7 @@ def Read_AMI_Status_SetLabel(Magnet_Device,labels):
 @inlineCallbacks
 def Read_AMI_Status(Magnet_Device):
     data = [0,0,0,0,0,0]
+    yield Magnet_Device.clear()
     data[0] = yield Magnet_Device.get_field_mag()#field
     data[1] = yield Magnet_Device.get_ramp_rate_field(1)#rate
     data[2] = yield Magnet_Device.get_field_targ()#target
@@ -1773,25 +1779,34 @@ def runDVPlotter():
         print('Error:', inst, ' on line: ', sys.exc_info()[2].tb_lineno)
 
 @inlineCallbacks
-def PingLM(LMDeviceObject,labelslist,reactor,dv = None):
+def PingLM(LMDeviceObject,labelslist,reactor,dv = None,dvNumber = None):
     yield LMDeviceObject.turn_on()
     yield SleepAsync(reactor, 10)
     he_level = yield LMDeviceObject.get_percent()
     timestamp = time.asctime()
+    timestamp_secs = time.time()
     yield LMDeviceObject.turn_off()
-    labelslist[0].setText(str(he_level))
+    labelslist[0].setText(str(he_level) + ' %')
     labelslist[1].setText(str(timestamp))
+    if dv is not None:
+        os.system('taskkill /IM "gnuplot.exe" /F 1>nul 2>&1')
+        yield dv.add_ex([(timestamp_secs, he_level)])
+        os.chdir(os.path.join(os.path.join(os.path.dirname(__file__), '..'),'Scripts'))
+        #os.chdir("C:\\Users\\Feldman Lab\\code\\github\\feldmanlab\\LabRAD-Device-Electrical_Measurement-ONline_Software\\DEMONS GUI\\Scripts")
+        #print('d')
+        print('LM Datavault: '+ str(dvNumber))
+        os.system('python he_level_plotter.py' + ' ' + str(dvNumber))
 
-
+@inlineCallbacks
 def create_file_LM(dv, data_dir, **kwargs): # try kwarging the vfixed
     try:
-        dv.cd('')
-        dv.cd(['',data_dir])
+        yield dv.cd('')
+        yield dv.cd(['',data_dir])
     except Exception:
-        dv.cd([''])
-        dv.mkdir(['',data_dir])
+        yield dv.cd([''])
+        yield dv.mkdir(['',data_dir])
         print("Folder {} was created".format(data_dir))
-        dv.cd(['',data_dir])
+        yield dv.cd(['',data_dir])
 
-    ptr = dv.new_ex(str(date.today()), [('Time',[1],'t',''),('Percent',[1],'v','')],'')
-    return int(ptr[1][0:5])
+    ptr = yield dv.new_ex(str(date.today()), [('Time',[1],'t',''),('Percent',[1],'v','')],'')
+    returnValue(int(ptr[1][0:5]))

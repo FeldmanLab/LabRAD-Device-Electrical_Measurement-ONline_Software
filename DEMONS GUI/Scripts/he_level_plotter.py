@@ -4,10 +4,12 @@ import sys
 import PyGnuplot as gp
 import time
 
-def main(*args):
+def level_plotter(*args):
     try:
-
-        dv_file = int(sys.argv[1])
+        if len(args) > 0:
+            dv_file = args[0]
+        else:
+            dv_file = int(sys.argv[1])
         cxn = labrad.connect()
         dv = cxn.data_vault
         dv.cd(['','he_level'])
@@ -33,4 +35,4 @@ def main(*args):
         print(e)
 
 if __name__ == '__main__':
-    main()
+    level_plotter()

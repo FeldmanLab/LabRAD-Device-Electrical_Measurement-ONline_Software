@@ -217,6 +217,17 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
             self.label_LMTimestamp,
         ]
 
+        self.LMtargetnumber = {
+            'WaitTime': 1800,
+        }
+
+
+        self.LMoutputparams = {
+            'WaitTime':self.lineEdit_LMWaitTime,
+        }
+
+
+
         self.DetermineEnableConditions()
 
         self.comboBox_Lakeshore_SelectServer.currentIndexChanged.connect(lambda: SelectServer(self.DeviceList, 'Lakeshore_Device', self.serversList, str(self.DeviceList['Lakeshore_Device']['ComboBoxServer'].currentText())))
@@ -298,6 +309,7 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
 
         self.pushButton_LMPing.clicked.connect(lambda: PingLM(self.DeviceList['Levelmeter']['DeviceObject'],self.LMLabels,self.reactor))
         self.pushButton_LMReadConts.clicked.connect(lambda: self.ContsLM())
+        self.lineEdit_LMWaitTime.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.LMtargetnumber, 'WaitTime', self.LMoutputparams, [30, 3600]))
 
         self.Refreshinterface()
 
@@ -470,14 +482,18 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
                 cxn_lm = yield connectAsync(host = '127.0.0.1', password='sSET2018')
                 self.dv_lm = cxn_lm.data_vault()
             try:
-                wait_time = float(self.LMWaitTime.currentText())
+                wait_time = self.LMtargetnumber['WaitTime']
             except:
                 wait_time = 1800
-            dv_number = create_file_LM(self.dv_lm,data_dir)
+            dv_number = yield create_file_LM(self.dv_lm,data_dir)
             while self.ContsLMflag:
-                yield PingLM(self.DeviceList['Levelmeter']['DeviceObject'],self.LMLabels,self.reactor) 
+                current_datetime = datetime.now()
+                if current_datetime.hour == 0:
+                    dv_number = yield create_file_LM(self.dv_lm,data_dir)
+                yield PingLM(self.DeviceList['Levelmeter']['DeviceObject'],self.LMLabels,self.reactor,dv = self.dv_lm, dvNumber = dv_number) 
                 yield SleepAsync(self.reactor, wait_time)        
         elif self.ContsLMflag == True:
+            print('STOPPED')
             self.ContsLMflag = False
             setIndicator(self.pushButton_LMReadConts,'rgb(161,0,0)')
 
