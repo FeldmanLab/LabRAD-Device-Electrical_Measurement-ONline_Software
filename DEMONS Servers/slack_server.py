@@ -17,8 +17,8 @@
 ### BEGIN NODE INFO
 [info]
 name = Slack Server
-version = 0.0
-description = Send message/figures to Slack  
+version = 1.0
+description = Send message
 
 [startup]
 cmdline = %PYTHON% %FILE%
