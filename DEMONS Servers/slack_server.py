@@ -17,8 +17,8 @@
 ### BEGIN NODE INFO
 [info]
 name = Slack Server
-version = 1.0
-description = Send message
+version = 0.0
+description = Send message/figures to Slack  
 
 [startup]
 cmdline = %PYTHON% %FILE%
@@ -36,56 +36,37 @@ from twisted.internet.defer import inlineCallbacks, returnValue
 from twisted.internet import reactor, defer
 import labrad.units as units
 from labrad.types import Value
-import time
+from labrad.errors import Error
 import sys
-import slackweb
 import requests
+from slack import WebClient
 
-class SlackServer(LabradServer):
+
+class SlackClient(LabradServer):
     name = "Slack Server"    # Will be labrad name of server
- 
-#------------------------------------------------------------------------------------------------------------------------------------------#
-    """
-    To initialize this server, slackweb needed to be installed, add incoming webhook to the target channel, add result_send app to channel.
-    """
 
-# incoming_webhook_url is the url for the incoming webhook app, input_channel is the last part of the url string
-    @setting(104,incoming_webhook_url = 's: incoming webhook url', input_channel = 's: input channel identifier', bot_token = 's: token of the bot', returns = '')
-    def initializeServer(self, c, incoming_webhook_url, input_channel, bot_token):  # Do initialization here
-        try: 
-            self.slack = yield slackweb.Slack(url = incoming_webhook_url) 
-            self.token = bot_token # Bot token
-            self.channel = input_channel
-            print "Server initialization complete"
-        except Exception as inst:
-            print 'Error Initializing Server: ', inst
-            
-    @setting(101,line = 's: message', returns = '')        
-    def message(self, c, line):
-        try:
-            self.slack.notify(text = line)
-        except Exception:
-            print 'Error when sending message to slack'
-    
-    @setting(102,filelocale = 's: location of the file to upload', comment = 's: comment', title = 's: title', returns = '')    
-    def image(self, c, filelocale, comment='', title=''):
-        try:
-            files = {'file': open(filelocale, 'rb')}
-            param = {
-                    'token':self.token,
-                    'channels':self.channel,
-                    'initial_comment': comment,
-                    'title': title
-                    }
-            requests.post(url="https://slack.com/api/files.upload", params=param, files=files)
-        except Exception as inst:
-            print 'Error Uploading Pictures to Slack: ', inst
-        
- 
-#------------------------------------------------------------------------------------------------------------------------------------------#
-    """
-    Additional functions that may be useful for programming the server. 
-    """
+
+    def getBot(self, c):
+    	return c['SlackBot']
+
+    @setting(10, 'Connect Bot',
+    		 token=['s: Token of bot'],
+    		 returns=['s: Connected bot info'])
+    def connect_bot(self, c, token=''):
+    	if 'SlackBot' in c:
+    		del c['SlackBot']
+
+    	bot_client = WebClient(token=token)
+    	c['SlackBot'] = bot_client
+    	return bot_client.auth_test().data['user']
+
+
+    @setting(11, 'Send message',
+    		 channel=['s: Channel destination'],
+    		 message=['s: Message to send'])
+    def send_message(self, c, channel, message):
+    	bot = self.getBot(c)
+    	response = bot.chat_postMessage(channel=channel, text=message)
 
     def sleep(self,secs):
         """Asynchronous compatible sleep command. Sleeps for given time in seconds, but allows
