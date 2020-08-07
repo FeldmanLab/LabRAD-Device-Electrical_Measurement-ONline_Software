@@ -50,11 +50,8 @@ def map2(x, in_min, in_max, out_min, out_max):
 
 
 class AMI110Wrapper(DeviceWrapper):
-    slackBotToken = "xoxb-542804265300-1280091538838-5N80wzrPUXMe51i7nI25QRvD"
-    slackChannel = "G0194LL6AN4"
-
     @inlineCallbacks
-    def connect(self, server, port, slack_server=None):
+    def connect(self, server, port, slackServer=None, slackBotToken=None):
         """Connect to a device."""
         print("connecting to %s on port %s..." % (server.name, port))
         self.server = server
@@ -69,8 +66,9 @@ class AMI110Wrapper(DeviceWrapper):
         print(" CONNECTED ")
         yield p.send()
 
-        self.slack_server = slack_server
-        self.slack_ctx = slack_server.context()
+        self.slackChannel = "ami_cryostat_notifications"
+        self.slackServer = slackServer
+        self.slack_ctx = slackServer.context()
         slack_p = self.slack_packet()
         slack_p.connect_bot(slackBotToken)
         print(" SLACK BOT CONNECTED ")
@@ -82,7 +80,7 @@ class AMI110Wrapper(DeviceWrapper):
         return self.server.packet(context=self.ctx)
 
     def slack_packet(self):
-        return self.slack_server.packet(context=self.slack_ctx)
+        return self.slackServer.packet(context=self.slack_ctx)
 
     def shutdown(self):
         """Disconnect from the serial port when we shut down."""
@@ -137,7 +135,7 @@ class AMI110Wrapper(DeviceWrapper):
     @inlineCallbacks
     def send_slack_message(self, message):
         p = self.slack_packet()
-        p.send_message(slackChannel, message)
+        p.send_message(self.slackChannel, message)
         yield p.send()
 
 
@@ -146,11 +144,11 @@ class HeLevelMeterServer(DeviceServer):
     name = 'Helium_level_meter'
     deviceName = 'Arduino_He_level'
     deviceWrapper = AMI110Wrapper
-    slackServerName = 'slack_server'
 
     @inlineCallbacks
     def initServer(self):
-        self.slack_server = self.client[slackServerName]
+        self.slackServerName = 'slack_server'
+        self.slack_server = self.client[self.slackServerName]
         print("loading config info...")
         self.reg = self.client.registry()
         yield self.loadConfigInfo()
@@ -178,7 +176,7 @@ class HeLevelMeterServer(DeviceServer):
     def findDevices(self):
         """Find available devices from list stored in the registry."""
         devs = []
-        for name, (serServer, port) in self.serialLinks.items():
+        for name, (serServer, port, slackBotToken) in self.serialLinks.items():
             if serServer not in self.client.servers:
                 continue
             server = self.client[serServer]
@@ -189,7 +187,7 @@ class HeLevelMeterServer(DeviceServer):
             if port not in ports:
                 continue
             devName = '%s (%s)' % (serServer, port)
-            devs += [(devName, (server, port, self.slack_server))]
+            devs += [(devName, (server, port, self.slack_server, slackBotToken))]
 
        # devs += [(0,(3,4))]
         returnValue(devs)
@@ -250,14 +248,14 @@ class HeLevelMeterServer(DeviceServer):
         ans = yield dev.read()
         returnValue(int(ans))
 
-    @setting(109,returns='s')
+    @setting(200,returns='s')
     def ID(self,c):
         dev=self.selectedDevice(c)
-        yield dev.write("*IDN?\n")
+        yield dev.write("*IDN?\r")
         ans = yield dev.read()
         returnValue(ans)
 
-    @setting(110, message='s')
+    @setting(200, message='s')
     def send_slack_message(self, c, message):
         dev=self.selectedDevice(c)
         yield dev.send_slack_message(message)

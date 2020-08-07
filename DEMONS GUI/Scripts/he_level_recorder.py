@@ -34,6 +34,7 @@ def create_file(dv, data_dir, **kwargs): # try kwarging the vfixed
     return int(ptr[1][0:5])
 
 def main(*args):
+    slack_notifications_sent = False
     data_dir = 'he_level'
     cxn = labrad.connect()
     dv = cxn.data_vault()
@@ -64,6 +65,12 @@ def main(*args):
         print("{}: Helium level at {}%.".format(current_datetime, he_level))
         if (he_level<=50):
             print(f"{bcolors.WARNING}Warning: Helium level bellow 50%.{bcolors.ENDC}")
+            if(not slack_notifications_sent):
+                he.send_slack_message('Hey guys. I need some Helium. Helium level at {}%.'.format(he_level))
+                slack_notifications_sent = True
+
+        if (slack_notifications_sent and he_level>50):
+            slack_notifications_sent = False
 
         dv.add_ex([(time.time(), he_level)])
         os.system(kill_gnu_cmd)
