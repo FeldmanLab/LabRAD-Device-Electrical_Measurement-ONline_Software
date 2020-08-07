@@ -50,9 +50,11 @@ def map2(x, in_min, in_max, out_min, out_max):
 
 
 class AMI110Wrapper(DeviceWrapper):
+    slackBotToken = "xoxb-542804265300-1280091538838-5N80wzrPUXMe51i7nI25QRvD"
+    slackChannel = "G0194LL6AN4"
 
     @inlineCallbacks
-    def connect(self, server, port):
+    def connect(self, server, port, slack_server=None):
         """Connect to a device."""
         print("connecting to %s on port %s..." % (server.name, port))
         self.server = server
@@ -66,10 +68,21 @@ class AMI110Wrapper(DeviceWrapper):
         p.timeout(TIMEOUT)
         print(" CONNECTED ")
         yield p.send()
+
+        self.slack_server = slack_server
+        self.slack_ctx = slack_server.context()
+        slack_p = self.slack_packet()
+        slack_p.connect_bot(slackBotToken)
+        print(" SLACK BOT CONNECTED ")
+        yield slack_p.send()
+
         
     def packet(self):
         """Create a packet in our private context."""
         return self.server.packet(context=self.ctx)
+
+    def slack_packet(self):
+        return self.slack_server.packet(context=self.slack_ctx)
 
     def shutdown(self):
         """Disconnect from the serial port when we shut down."""
@@ -120,16 +133,24 @@ class AMI110Wrapper(DeviceWrapper):
         p.read_line()
         ans = yield p.send()
         returnValue(ans.read_line)
-        
+
+    @inlineCallbacks
+    def send_slack_message(self, message):
+        p = self.slack_packet()
+        p.send_message(slackChannel, message)
+        yield p.send()
+
 
 
 class HeLevelMeterServer(DeviceServer):
     name = 'Helium_level_meter'
     deviceName = 'Arduino_He_level'
     deviceWrapper = AMI110Wrapper
+    slackServerName = 'slack_server'
 
     @inlineCallbacks
     def initServer(self):
+        self.slack_server = self.client[slackServerName]
         print("loading config info...")
         self.reg = self.client.registry()
         yield self.loadConfigInfo()
@@ -168,7 +189,7 @@ class HeLevelMeterServer(DeviceServer):
             if port not in ports:
                 continue
             devName = '%s (%s)' % (serServer, port)
-            devs += [(devName, (server, port))]
+            devs += [(devName, (server, port, self.slack_server))]
 
        # devs += [(0,(3,4))]
         returnValue(devs)
@@ -235,6 +256,12 @@ class HeLevelMeterServer(DeviceServer):
         yield dev.write("*IDN?\n")
         ans = yield dev.read()
         returnValue(ans)
+
+    @setting(110, message='s')
+    def send_slack_message(self, c, message):
+        dev=self.selectedDevice(c)
+        yield dev.send_slack_message(message)
+
 
     @setting(9002)
     def read(self,c):
