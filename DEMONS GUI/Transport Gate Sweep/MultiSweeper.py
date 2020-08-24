@@ -127,6 +127,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
         self.custom_vars = []
         self.Queue = []
         self.flag = True
+        self.sweepcounter = 0
         self.livePlot = False
         self.currentpoints = 0
 
@@ -420,51 +421,53 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
         print('Queue Started')
         for Current_Loop in self.Queue:
             #[ImageNumber,ImageDir] = CreateDataVaultFile(datavault,self.Parameter['DeviceName'],self.indep_vars,self.dep_vars+self.custom_vars)
-            file = yield datavault.new(self.Parameter['DeviceName'],self.indep_vars,self.dep_vars+self.custom_vars) 
-            ImageNumber = file[1][0:5]
-            print('Loop Started')
+            if self.flag:
+                file = yield datavault.new(self.Parameter['DeviceName'],self.indep_vars,self.dep_vars+self.custom_vars) 
+                ImageNumber = file[1][0:5]
+                print('Loop Started')
 
-            saveDataToSessionFolder(self.winId(), self.sessionFolder, str(ImageNumber)+ ' - ' + self.Parameter['DeviceName'])
+                saveDataToSessionFolder(self.winId(), self.sessionFolder, str(ImageNumber)+ ' - ' + self.Parameter['DeviceName'])
 
-            print('DV ID: '+ ImageNumber)
-            if self.livePlot:
-                lp_x_axis = self.comboBox_LivePlotIndep.currentText()
-                lp_y_axis = self.comboBox_LivePlotDep.currentText()
+                print('DV ID: '+ ImageNumber)
+                if self.livePlot:
+                    lp_x_axis = self.comboBox_LivePlotIndep.currentText()
+                    lp_y_axis = self.comboBox_LivePlotDep.currentText()
 
 
 
-            for instrument in self.instrumentBus:
-                for key in self.instrumentBus[instrument]:
-                    not_recorded_list = ['Name','DeviceObject','Device','DACADCDevice','DACADCDeviceObject','ReadFn','WriteFn','CustomFn']
-                    if (key not in not_recorded_list) and self.instrumentBus[instrument][key] is not None:
-                        datavault.add_parameter(str(str(instrument)+'_'+str(key)),self.instrumentBus[instrument][key])
-            self.totalpoints = 1
-            for row in Current_Loop:
-                self.totalpoints = self.totalpoints * (row[3]+1)
-                if True or self.livePlot:
-                    if True or row[0] == lp_x_axis.split('_')[0]:
-                        lp_min = min([float(row[1]),float(row[2])])
-                        lp_max = max([float(row[1]),float(row[2])])
-                        lp_steps = int(row[3]) + 1
-                datavault.add_parameter(str(row[4]) + str('Loop-Start'),row[1])
-                datavault.add_parameter(str(row[4]) + str('Loop-End'),row[2])
-                datavault.add_parameter(str(row[4]) + str('Loop-Steps'),row[3])
-                datavault.add_parameter(str(row[4]) + '_pnts', lp_steps)
-                datavault.add_parameter(str(row[4]) + '_rng',(lp_min,lp_max))
-            if self.livePlot:
-                #datavault.add_parameter(lp_x_axis + '_pnts', lp_steps)
-                #datavault.add_parameter(lp_x_axis + '_rng', (lp_min,lp_max))
-                datavault.add_parameter('live_plots', [(lp_x_axis,lp_y_axis)])
+                for instrument in self.instrumentBus:
+                    for key in self.instrumentBus[instrument]:
+                        not_recorded_list = ['Name','DeviceObject','Device','DACADCDevice','DACADCDeviceObject','ReadFn','WriteFn','CustomFn']
+                        if (key not in not_recorded_list) and self.instrumentBus[instrument][key] is not None:
+                            datavault.add_parameter(str(str(instrument)+'_'+str(key)),self.instrumentBus[instrument][key])
+                self.totalpoints = 1
+                for row in Current_Loop:
+                    self.totalpoints = self.totalpoints * (row[3]+1)
+                    if True or self.livePlot:
+                        if True or row[0] == lp_x_axis.split('_')[0]:
+                            lp_min = min([float(row[1]),float(row[2])])
+                            lp_max = max([float(row[1]),float(row[2])])
+                            lp_steps = int(row[3]) + 1
+                    datavault.add_parameter(str(row[4]) + str('Loop-Start'),row[1])
+                    datavault.add_parameter(str(row[4]) + str('Loop-End'),row[2])
+                    datavault.add_parameter(str(row[4]) + str('Loop-Steps'),row[3])
+                    datavault.add_parameter(str(row[4]) + '_pnts', lp_steps)
+                    datavault.add_parameter(str(row[4]) + '_rng',(lp_min,lp_max))
+                if self.livePlot:
+                    #datavault.add_parameter(lp_x_axis + '_pnts', lp_steps)
+                    #datavault.add_parameter(lp_x_axis + '_rng', (lp_min,lp_max))
+                    datavault.add_parameter('live_plots', [(lp_x_axis,lp_y_axis)])
 
-            AddParameterToDataVault(datavault, self.Parameter)
+                AddParameterToDataVault(datavault, self.Parameter)
 
-            self.progressBar_Loop.setRange(0,self.totalpoints)
-            self.progressBar_Loop.setValue(0)
+                self.progressBar_Loop.setRange(0,self.totalpoints)
+                self.progressBar_Loop.setValue(0)
 
-            self.currentpoints = 0 
-            all_variables = self.indep_vars + self.dep_vars + self.custom_vars
-            yield RecursiveLoop(self.instrumentBus,Current_Loop,self.queryFast,datavault,self,self.Parameter['WaitTime'],self.reactor,self.Parameter['BufferRamp'],all_variables,self.Parameter['Delta'],self.progressBar_Loop)
-            datavault.add_comment(str(self.textEdit_Comment.toPlainText()))
+                self.currentpoints = 0 
+                all_variables = self.indep_vars + self.dep_vars + self.custom_vars
+                self.sweepcounter += 1
+                yield RecursiveLoop(self.instrumentBus,Current_Loop,self.queryFast,datavault,self,self.Parameter['WaitTime'],self.reactor,self.Parameter['BufferRamp'],all_variables,self.Parameter['Delta'],self.progressBar_Loop,self.sweepcounter)
+                datavault.add_comment(str(self.textEdit_Comment.toPlainText()))
             print('Loop Complete')
             self.progressBar_Loop.setValue(self.totalpoints)
 

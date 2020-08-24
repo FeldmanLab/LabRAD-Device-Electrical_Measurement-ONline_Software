@@ -47,6 +47,8 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
         self.SingleAxisContsRead = False
         self.ContsLMflag = False
         self.dv_lm = None
+        self.LMdv_number = 0
+
         self.serversList = { #Dictionary including toplevel server received from labrad connect
             'Lakeshore': False,
             'AMI430_X': False,
@@ -486,10 +488,12 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
             except:
                 wait_time = 1800
             dv_number = yield create_file_LM(self.dv_lm,data_dir)
-            while self.ContsLMflag:
+            self.LMdv_number = dv_number
+            while self.ContsLMflag and self.LMdv_number == dv_number:
                 current_datetime = datetime.now()
                 if current_datetime.hour == 0:
                     dv_number = yield create_file_LM(self.dv_lm,data_dir)
+                    self.LMdv_number = dv_number
                 yield PingLM(self.DeviceList['Levelmeter']['DeviceObject'],self.LMLabels,self.reactor,dv = self.dv_lm, dvNumber = dv_number) 
                 yield SleepAsync(self.reactor, wait_time)        
         elif self.ContsLMflag == True:

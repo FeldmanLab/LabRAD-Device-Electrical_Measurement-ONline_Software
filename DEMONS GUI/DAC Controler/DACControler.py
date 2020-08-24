@@ -69,8 +69,8 @@ class Window(QtGui.QMainWindow, ControlerWindowUI):
         self.lineEdit_TargetNumber_1.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.targetnumber, 'Output1', self.lineEdit, [-10.0, 10.0]))
         self.lineEdit_TargetNumber_2.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.targetnumber, 'Output2', self.lineEdit, [-10.0, 10.0]))
 
-        self.pushButton_SET_1.clicked.connect(lambda: Set_DAC(self.DeviceList['DataAquisition_Device']['DeviceObject'], 0, self.targetnumber['Output1']))
-        self.pushButton_SET_2.clicked.connect(lambda: Set_DAC(self.DeviceList['DataAquisition_Device']['DeviceObject'], 1, self.targetnumber['Output2']))
+        self.pushButton_SET_1.clicked.connect(lambda: Set_DAC(self.DeviceList['DataAquisition_Device']['DeviceObject'], 0, self.targetnumber['Output1'],self.label_DAC0))
+        self.pushButton_SET_2.clicked.connect(lambda: Set_DAC(self.DeviceList['DataAquisition_Device']['DeviceObject'], 1, self.targetnumber['Output2'],self.label_DAC1))
 
         self.pushButton_Read_1.clicked.connect(lambda: Read_ADC_SetLabel(self.DeviceList['DataAquisition_Device']['DeviceObject'], 0, self.label_ADC_1))
         self.pushButton_Read_2.clicked.connect(lambda: Read_ADC_SetLabel(self.DeviceList['DataAquisition_Device']['DeviceObject'], 1, self.label_ADC_2))

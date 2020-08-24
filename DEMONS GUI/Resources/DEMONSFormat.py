@@ -782,9 +782,12 @@ def Ramp_SIM900_VoltageSource(SIM900Device, VoltageSourceSlot, StartingVoltage, 
 Set DAC Voltage
 '''
 @inlineCallbacks
-def Set_DAC(DACADC_Device, Port, Voltage):
+def Set_DAC(DACADC_Device, Port, Voltage,label):
     try:
-        yield DACADC_Device.set_voltage(Port, Voltage)
+        ans = yield DACADC_Device.set_voltage(Port, Voltage)
+        voltage = ans.lower().partition(' to ')[2][:-1]
+        label.setText(str(voltage))
+
     except Exception as inst:
         print('Error:', inst, ' on line: ', sys.exc_info()[2].tb_lineno)
 
@@ -1570,13 +1573,13 @@ def clearLayout(layout):
 #parameter BufferRamp, which is passed in as 0, 1, 2 - 0 if buffer ramp is not to be used;
 #1 if 1D buffer Ramp is to be used, 2 if 2D bufferramp is to be used.
 @inlineCallbacks
-def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,reactor,BufferRamp,variables,delta,progressbar):
-    if len(looplist) == 0 and sweeper.flag:
+def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,reactor,BufferRamp,variables,delta,progressbar,sweepcount):
+    if len(looplist) == 0 and sweeper.flag and sweeper.sweepcounter==sweepcount:
         yield SleepAsync(reactor, wait)
         indep_vals, dep_vals, custom_vals = yield queryfunction()
         yield datavault.add(indep_vals+dep_vals+custom_vals) 
         progressbar.setValue(progressbar.value()+1)
-    elif sweeper.flag:
+    elif sweeper.flag and sweeper.sweepcounter==sweepcount:
         steps = int(looplist[0][3])
         start = looplist[0][1]
         end = looplist[0][2]
@@ -1584,12 +1587,11 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
         instrument = looplist[0][0]
         if (BufferRamp != 1 and BufferRamp != 2) or (len(looplist) > 1 and BufferRamp == 1) or (len(looplist)>2 and BufferRamp == 2):
             for k in range(0,steps+1):
-                g = yield instrumentBus[instrument]['WriteFn'](instrumentBus[instrument], start + k*stepsize)
-
-                #add some if statement for a magnet or temperature loop here, have to wait for a given amount of time if so. 
-                #alternatively, could include this waittime in 'writefn' for these instruments
-                yield RecursiveLoop(instrumentBus,looplist[1:],queryfunction,datavault,sweeper,wait,reactor, BufferRamp,variables,delta,progressbar)
+                if sweeper.flag and sweeper.sweepcounter == sweepcount:
+                    g = yield instrumentBus[instrument]['WriteFn'](instrumentBus[instrument], start + k*stepsize)
+                    yield RecursiveLoop(instrumentBus,looplist[1:],queryfunction,datavault,sweeper,wait,reactor, BufferRamp,variables,delta,progressbar,sweepcount)
         if BufferRamp == 1 and len(looplist) == 1:
+            yield SleepAsync(reactor,3*wait) 
             yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar)
         if BufferRamp == 2 and len(looplist) == 2:
             yield BufferRamp2D(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,delta,progressbar)
