@@ -72,6 +72,9 @@ class Window(QtGui.QMainWindow, ControlerWindowUI):
         self.pushButton_SET_1.clicked.connect(lambda: Set_DAC(self.DeviceList['DataAquisition_Device']['DeviceObject'], 0, self.targetnumber['Output1'],self.label_DAC0))
         self.pushButton_SET_2.clicked.connect(lambda: Set_DAC(self.DeviceList['DataAquisition_Device']['DeviceObject'], 1, self.targetnumber['Output2'],self.label_DAC1))
 
+        self.pushButton_Ramp_1.clicked.connect(lambda: SafeRamp_DACADC(self.DeviceList['DataAquisition_Device']['DeviceObject'],0,self.targetnumber['Output1'],.1,.1,label=self.label_DAC0))
+        self.pushButton_Ramp_2.clicked.connect(lambda: SafeRamp_DACADC(self.DeviceList['DataAquisition_Device']['DeviceObject'],1,self.targetnumber['Output2'],.1,.1,label=self.label_DAC1))
+
         self.pushButton_Read_1.clicked.connect(lambda: Read_ADC_SetLabel(self.DeviceList['DataAquisition_Device']['DeviceObject'], 0, self.label_ADC_1))
         self.pushButton_Read_2.clicked.connect(lambda: Read_ADC_SetLabel(self.DeviceList['DataAquisition_Device']['DeviceObject'], 1, self.label_ADC_2))
         self.pushButton_Read_3.clicked.connect(lambda: Read_ADC_SetLabel(self.DeviceList['DataAquisition_Device']['DeviceObject'], 2, self.label_ADC_3))

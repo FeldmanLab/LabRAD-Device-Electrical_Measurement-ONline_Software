@@ -230,7 +230,10 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                 bus_dictionary[instrument] = removed_dict
         self.instrumentBus = bus_dictionary
         yield self.query()
-        self.clearLoops()
+
+        #commented so that the measurement doesn't erase itself on refresh of bus
+        #self.clearLoops()
+
         self.Refreshinterface()
 
     def clearLoops(self):
@@ -466,7 +469,11 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                 self.currentpoints = 0 
                 all_variables = self.indep_vars + self.dep_vars + self.custom_vars
                 self.sweepcounter += 1
-                yield RecursiveLoop(self.instrumentBus,Current_Loop,self.queryFast,datavault,self,self.Parameter['WaitTime'],self.reactor,self.Parameter['BufferRamp'],all_variables,self.Parameter['Delta'],self.progressBar_Loop,self.sweepcounter)
+                if self.instrumentBus[Current_Loop[-1][0]]['InstrumentType'] == 'DAC-ADC':
+                    br_param = self.Parameter['BufferRamp']
+                else:
+                    br_param = 0 
+                yield RecursiveLoop(self.instrumentBus,Current_Loop,self.queryFast,datavault,self,self.Parameter['WaitTime'],self.reactor,br_param,all_variables,self.Parameter['Delta'],self.progressBar_Loop,self.sweepcounter)
                 datavault.add_comment(str(self.textEdit_Comment.toPlainText()))
             print('Loop Complete')
             self.progressBar_Loop.setValue(self.totalpoints)

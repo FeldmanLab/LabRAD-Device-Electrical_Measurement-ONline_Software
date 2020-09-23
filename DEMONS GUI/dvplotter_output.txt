@@ -1,4 +1,215 @@
-Setting directory:  ['', 'BF_81']
-2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Rx', 'z index': 5}}
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+signal:  00031 - Gatesweep_8T_basetemp
+Missing info on plot:  ('Gate_0', 'Vxy_X')
+Missing plot info...
+signal:  00032 - Gatesweep_8T_basetemp
+Setting directory:  ['', 'Ben', 'TBG081220']
+2D Info:  {}
+1D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Vxx_X', 'y index': 3}}
+signal:  00033 - Gatesweep_8T_basetemp
+restarting plot.....................   00033 - Gatesweep_8T_basetemp
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'TBG081220']
+2D Info:  {}
+1D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Vxx_X', 'y index': 3}}
+signal:  00034 - Gatesweep_8T_basetemp
+restarting plot.....................   00034 - Gatesweep_8T_basetemp
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'TBG081220']
+2D Info:  {}
+1D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Vxy_X', 'y index': 5}}
+signal:  00035 - Gatesweep_8T_basetemp
+restarting plot.....................   00035 - Gatesweep_8T_basetemp
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'TBG081220']
+2D Info:  {}
+1D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Vxy_X', 'y index': 5}}
+signal:  00036 - Gatesweep_8T_basetemp
+restarting plot.....................   00036 - Gatesweep_8T_basetemp
+redefining plot parameters
+signal:  00037 - MagSweep_p6V
+restarting plot.....................   00037 - MagSweep_p6V
+redefining plot parameters
+signal:  00038 - sweepdown
+Missing info on plot:  ('Mag_0', 'Vxx_X')
+Missing plot info...
+signal:  00039 - sweepdown
+restarting plot.....................   00039 - sweepdown
+redefining plot parameters
+signal:  00036 - Gatesweep_Basetemp_0T
+signal:  00036 - Gatesweep_Basetemp_0T
+restarting plot.....................   00036 - Gatesweep_Basetemp_0T
+redefining plot parameters
+restarting plot.....................   00036 - Gatesweep_Basetemp_0T
+redefining plot parameters
+signal:  00037 - Gatesweep_Basetemp_2T
+signal:  00037 - Gatesweep_Basetemp_2T
+restarting plot.....................   00037 - Gatesweep_Basetemp_2T
+redefining plot parameters
+restarting plot.....................   00037 - Gatesweep_Basetemp_2T
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {}
+1D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Ix_X', 'y index': 5}, 'Plot 2': {'title': 'Plot 2', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Vxx_X', 'y index': 3}, 'Plot 3': {'title': 'Plot 3', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'R', 'y index': 7}}
+signal:  00038 - Gatesweep_Basetemp_4T
+signal:  00038 - Gatesweep_Basetemp_4T
+restarting plot.....................   00038 - Gatesweep_Basetemp_4T
+redefining plot parameters
+restarting plot.....................   00038 - Gatesweep_Basetemp_4T
+redefining plot parameters
+signal:  00039 - Gatesweep_Basetemp_4T
+signal:  00039 - Gatesweep_Basetemp_4T
+restarting plot.....................   00039 - Gatesweep_Basetemp_4T
+redefining plot parameters
+restarting plot.....................   00039 - Gatesweep_Basetemp_4T
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Mag_0', 'y index': 2, 'z axis': 'R', 'z index': 7}}
 1D Info:  {}
-signal:  00014 - GateSweep
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Mag_0', 'y index': 2, 'z axis': 'R', 'z index': 7}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Mag_0', 'y index': 2, 'z axis': 'R', 'z index': 7}}
+1D Info:  {}
+signal:  00040 - Gatesweep_Basetemp_8T
+signal:  00040 - Gatesweep_Basetemp_8T
+restarting plot.....................   00040 - Gatesweep_Basetemp_8T
+redefining plot parameters
+restarting plot.....................   00040 - Gatesweep_Basetemp_8T
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {}
+1D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Vxx_X', 'y index': 3}, 'Plot 2': {'title': 'Plot 2', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Ix_X', 'y index': 5}}
+signal:  00041 - Gatesweep_Basetemp_8T
+signal:  00041 - Gatesweep_Basetemp_8T
+restarting plot.....................   00041 - Gatesweep_Basetemp_8T
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Mag_0', 'y index': 2, 'z axis': 'Vxx_X', 'z index': 3}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Mag_0', 'y index': 2, 'z axis': 'Vxx_X', 'z index': 3}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Mag_0', 'y index': 2, 'z axis': 'Vxx_X', 'z index': 3}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Mag_0', 'y index': 2, 'z axis': 'Vxx_X', 'z index': 3}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Mag_0', 'y index': 2, 'z axis': 'R', 'z index': 7}}
+1D Info:  {}
+signal:  00042 - Gateseep_Basetemp_0T
+signal:  00042 - Gateseep_Basetemp_0T
+restarting plot.....................   00042 - Gateseep_Basetemp_0T
+redefining plot parameters
+restarting plot.....................   00042 - Gateseep_Basetemp_0T
+redefining plot parameters
+signal:  00043 - Gateseep_Basetemp_0T
+signal:  00043 - Gateseep_Basetemp_0T
+restarting plot.....................   00043 - Gateseep_Basetemp_0T
+redefining plot parameters
+restarting plot.....................   00043 - Gateseep_Basetemp_0T
+redefining plot parameters
+signal:  00044 - Gatesweep_Basetemp_0T
+signal:  00044 - Gatesweep_Basetemp_0T
+restarting plot.....................   00044 - Gatesweep_Basetemp_0T
+redefining plot parameters
+restarting plot.....................   00044 - Gatesweep_Basetemp_0T
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {}
+1D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Ix_X', 'y index': 5}}
+signal:  00045 - Gatesweep_Basetemp_4T
+signal:  00045 - Gatesweep_Basetemp_4T
+restarting plot.....................   00045 - Gatesweep_Basetemp_4T
+redefining plot parameters
+restarting plot.....................   00045 - Gatesweep_Basetemp_4T
+redefining plot parameters
+signal:  00046 - Gatesweep_Basetemp_4T
+signal:  00046 - Gatesweep_Basetemp_4T
+restarting plot.....................   00046 - Gatesweep_Basetemp_4T
+redefining plot parameters
+restarting plot.....................   00046 - Gatesweep_Basetemp_4T
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Mag_0', 'y index': 2, 'z axis': 'Vxx_X', 'z index': 3}}
+1D Info:  {}
+signal:  00047 - Gatesweep_1230mK_0T
+signal:  00047 - Gatesweep_1230mK_0T
+restarting plot.....................   00047 - Gatesweep_1230mK_0T
+redefining plot parameters
+restarting plot.....................   00047 - Gatesweep_1230mK_0T
+redefining plot parameters
+signal:  00048 - Gatesweep_1460mK_0T
+signal:  00048 - Gatesweep_1460mK_0T
+restarting plot.....................   00048 - Gatesweep_1460mK_0T
+redefining plot parameters
+restarting plot.....................   00048 - Gatesweep_1460mK_0T
+redefining plot parameters
+signal:  00049 - Gatesweep_1750mK_0T
+signal:  00049 - Gatesweep_1750mK_0T
+restarting plot.....................   00049 - Gatesweep_1750mK_0T
+redefining plot parameters
+restarting plot.....................   00049 - Gatesweep_1750mK_0T
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Mag_0', 'y index': 2, 'z axis': 'Vxx_X', 'z index': 3}}QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+
+1D Info:  {}
+signal:  00050 - Gatesweep_1750mK_0T
+signal:  00050 - Gatesweep_1750mK_0T
+restarting plot.....................   00050 - Gatesweep_1750mK_0T
+redefining plot parameters
+restarting plot.....................   00050 - Gatesweep_1750mK_0T
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Mag_0', 'y index': 2, 'z axis': 'Vxx_X', 'z index': 3}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {}
+1D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Gate_0', 'x index': 1, 'y axis': 'Vxy_X', 'y index': 5}}
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {}
+1D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Mag_0', 'x index': 1, 'y axis': 'Vx_X', 'y index': 3}}
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {}
+1D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Mag_0', 'x index': 1, 'y axis': 'Vxy_X', 'y index': 5}}
+Setting directory:  ['', 'Ben', 'TBG082720']
+2D Info:  {}
+1D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Mag_0', 'x index': 1, 'y axis': 'Vxy_X', 'y index': 5}}
+Reactor shut down.

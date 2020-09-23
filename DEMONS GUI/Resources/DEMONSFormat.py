@@ -839,6 +839,26 @@ def Ramp_DACADC(DACADC_Device, Port, StartingVoltage, EndVoltage, StepSize, Dela
         print('Error:', inst, ' on line: ', sys.exc_info()[2].tb_lineno)
 
 '''
+Ramp_DACADC but works without a starting voltage (good for ramping to zero)
+'''
+@inlineCallbacks
+def SafeRamp_DACADC(DACADC_Device,Port,EndVoltage,StepSize,Delay,label=None):
+    try:
+        StartingVoltage = yield DACADC_Device.read_dac(Port)
+        if StartingVoltage != EndVoltage:
+            Delay = int(Delay * 1000000) #Delay in DAC is in microsecond
+            Numberofsteps = int(abs(StartingVoltage - EndVoltage) / StepSize)
+            if Numberofsteps < 2:
+                Numberofsteps = 2
+            g = yield DACADC_Device.ramp1(Port, float(StartingVoltage), float(EndVoltage), Numberofsteps, Delay)
+            if label is not None:
+                voltage = yield DACADC_Device.read_dac(Port)
+                label.setText(formatNum(voltage, 6))
+            returnValue(g)
+    except Exception as inst:
+        print('Error:', inst, ' on line: ', sys.exc_info()[2].tb_lineno)
+
+'''
 Buffer_Ramp of DACADC, take the DACADC device object, list of channel output and input along with the min and max, all should be list and number of elements should match.
 buffer ramp function can be look up on DACADC server.
 '''
@@ -1323,7 +1343,10 @@ def customstringread(input_string,variable_list,op_list):
             try:
                 div_loc = plist.index('/')
                 result = evaluate(plist,div_loc,variable_list,row)
-                total = result[0]/result[1]
+                try:
+                    total = result[0]/result[1]
+                except:
+                    total = 0
                 plist.insert(div_loc+2,total)
                 plist.pop(div_loc-1)
                 plist.pop(div_loc-1)

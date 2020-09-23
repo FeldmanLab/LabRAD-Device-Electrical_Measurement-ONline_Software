@@ -1,0 +1,197 @@
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+Unhandled error in Deferred:
+
+Traceback (most recent call last):
+  File "c:\users\feldman lab\appdata\local\programs\python\python37-32\lib\site-packages\twisted\internet\defer.py", line 460, in callback
+    self._startRunCallbacks(result)
+  File "c:\users\feldman lab\appdata\local\programs\python\python37-32\lib\site-packages\twisted\internet\defer.py", line 568, in _startRunCallbacks
+    self._runCallbacks()
+  File "c:\users\feldman lab\appdata\local\programs\python\python37-32\lib\site-packages\twisted\internet\defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "c:\users\feldman lab\appdata\local\programs\python\python37-32\lib\site-packages\twisted\internet\defer.py", line 1475, in gotResult
+    _inlineCallbacks(r, g, status)
+--- <exception caught here> ---
+  File "c:\users\feldman lab\appdata\local\programs\python\python37-32\lib\site-packages\twisted\internet\defer.py", line 1418, in _inlineCallbacks
+    result = g.send(result)
+  File "C:\Users\Feldman Lab\code\github\feldmanlab\Data-Vault-Plotter\dataVaultLivePlotter.py", line 1886, in loadData
+    self.x0, self.y0 = self.extents[0], self.extents[2]
+builtins.AttributeError: 'plotSaved2DWindow' object has no attribute 'extents'
+
+Unhandled error in Deferred:
+
+Traceback (most recent call last):
+  File "c:\users\feldman lab\appdata\local\programs\python\python37-32\lib\site-packages\twisted\internet\defer.py", line 460, in callback
+    self._startRunCallbacks(result)
+  File "c:\users\feldman lab\appdata\local\programs\python\python37-32\lib\site-packages\twisted\internet\defer.py", line 568, in _startRunCallbacks
+    self._runCallbacks()
+  File "c:\users\feldman lab\appdata\local\programs\python\python37-32\lib\site-packages\twisted\internet\defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "c:\users\feldman lab\appdata\local\programs\python\python37-32\lib\site-packages\twisted\internet\defer.py", line 1475, in gotResult
+    _inlineCallbacks(r, g, status)
+--- <exception caught here> ---
+  File "c:\users\feldman lab\appdata\local\programs\python\python37-32\lib\site-packages\twisted\internet\defer.py", line 1418, in _inlineCallbacks
+    result = g.send(result)
+  File "C:\Users\Feldman Lab\code\github\feldmanlab\Data-Vault-Plotter\dataVaultLivePlotter.py", line 1886, in loadData
+    self.x0, self.y0 = self.extents[0], self.extents[2]
+builtins.AttributeError: 'plotSaved2DWindow' object has no attribute 'extents'
+
+Setting directory:  ['']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Ix_X', 'z index': 4}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+signal:  00009 - Gatesweep_Basetemp_1_5T
+signal:  00010 - Gatesweep_Basetemp_1_5T
+restarting plot.....................   00010 - Gatesweep_Basetemp_1_5T
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+signal:  00011 - Gatesweep_Basetemp_4T
+restarting plot.....................   00011 - Gatesweep_Basetemp_4T
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+signal:  00012 - Gatesweep_Basetemp_4T
+restarting plot.....................   00012 - Gatesweep_Basetemp_4T
+redefining plot parameters
+signal:  00013 - Gatesweep_Basetemp_8T
+Missing info on plot:  ('Bg_0', 'Vx_X')
+Missing plot info...
+signal:  00014 - Gatesweep_Basetemp_8T
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Mag_0', 'z index': 3}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+signal:  00015 - Gatesweep_Basetemp_Fan
+restarting plot.....................   00015 - Gatesweep_Basetemp_Fan
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+signal:  00016 - Gatesweep_0T_Basetemp
+restarting plot.....................   00016 - Gatesweep_0T_Basetemp
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+signal:  00017 - Gatesweep_0T_Basetemp
+restarting plot.....................   00017 - Gatesweep_0T_Basetemp
+redefining plot parameters
+signal:  00018 - Gatesweep_0T_Basetemp
+restarting plot.....................   00018 - Gatesweep_0T_Basetemp
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+signal:  00019 - Gatesweep_0T_Basetemp
+restarting plot.....................   00019 - Gatesweep_0T_Basetemp
+redefining plot parameters
+signal:  00020 - Gatesweep_0T_Basetemp
+restarting plot.....................   00020 - Gatesweep_0T_Basetemp
+redefining plot parameters
+signal:  00021 - Gatesweep_0T_Basetemp
+restarting plot.....................   00021 - Gatesweep_0T_Basetemp
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}, 'Plot 2': {'title': 'Plot 2', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Ix_X', 'z index': 4}}
+1D Info:  {}
+signal:  00022 - Gatesweep_0T_Basetemp
+restarting plot.....................   00022 - Gatesweep_0T_Basetemp
+redefining plot parameters
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+signal:  00023 - Gatesweep_0T_Basetemp
+restarting plot.....................   00023 - Gatesweep_0T_Basetemp
+redefining plot parameters
+signal:  00024 - Gatesweep_0T_Basetemp
+restarting plot.....................   00024 - Gatesweep_0T_Basetemp
+redefining plot parameters
+signal:  00025 - Gatesweep_0T_Basetemp
+Missing info on plot:  ('Bg_0', 'Vx_X')
+Missing plot info...
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}
+Setting directory:  ['', 'Ben', 'D072720']
+2D Info:  {'Plot 1': {'title': 'Plot 1', 'x axis': 'Bg_0', 'x index': 1, 'y axis': 'Tg_0', 'y index': 2, 'z axis': 'Vx_X', 'z index': 6}}
+1D Info:  {}QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+QLayout: Attempting to add QLayout "" to plot1DWindow "", which already has a layout
+
+signal:  00026 - Gatesweep_0T_Roomtemp
+restarting plot.....................   00026 - Gatesweep_0T_Roomtemp
+redefining plot parameters
+signal:  00027 - Gatesweep_0T_Roomtemp
+restarting plot.....................   00027 - Gatesweep_0T_Roomtemp
+redefining plot parameters
+Reactor shut down.
