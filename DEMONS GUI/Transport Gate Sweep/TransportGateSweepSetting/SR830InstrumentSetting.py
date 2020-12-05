@@ -136,7 +136,8 @@ class SR830Setting(QtGui.QMainWindow, Ui_SR830Setting):
     def selectServer(self,instr_dict, servername,devlist):
         if servername != '':
             devlist['ServerObject'] = self.Servers[servername]
-            devlist['Server'] = servername
+            if servername[0:2] == 'SR':
+                self.InstrumentDict['Server'] = servername
             #if servername == 'SR830':
             #    instr_dict['Server'] = self.Servers[servername]
             #elif servername == 'DACADC':
@@ -199,6 +200,7 @@ class SR830Setting(QtGui.QMainWindow, Ui_SR830Setting):
             self.InstrumentDict['DACADCDeviceObject'] = None
             self.InstrumentDict['DACADCChannelX'] = None
             self.InstrumentDict['DACADCChannelY'] = None
+        print(self.InstrumentDict)
         self.complete.emit()
         self.close()
 

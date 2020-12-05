@@ -103,7 +103,7 @@ class Setting(QtGui.QMainWindow, Ui_Setting):
         elif instrument_type == 'CVar':
             openEditInstrumentWindow(self.CustomVar_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
         del self.bus[instrument_name]
-        
+
     def printInfo(self,devicename, buslist):
         if devicename is not None:
             devicename = devicename.text()
