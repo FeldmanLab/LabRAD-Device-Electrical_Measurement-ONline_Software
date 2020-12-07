@@ -343,7 +343,8 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
             end_point = float(end_point)
             lst = dependent_var.split('_')
             instrument_desired = lst[0]
-            if instrument_desired in self.instrumentBus.keys():
+            #if instrument_desired in self.instrumentBus.keys():
+            if True:
                 self.Queue.append([[instrument_desired,start_point,end_point,steps,dependent_var]])
                 lbl, var,start,stop,ste = QtGui.QTableWidgetItem(),QtGui.QTableWidgetItem(),QtGui.QTableWidgetItem(),QtGui.QTableWidgetItem(),QtGui.QTableWidgetItem()
                 lbl.setText(str(len(self.Queue)))
@@ -375,7 +376,8 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                 end_point = float(end_point)
                 lst = dependent_var.split('_')
                 instrument_desired = lst[0]
-                if instrument_desired in self.instrumentBus.keys():
+                #if instrument_desired in self.instrumentBus.keys():
+                if True:
                     self.Queue[-1].append([instrument_desired,start_point,end_point,steps,dependent_var])
                     lbl, var,start,stop,ste = QtGui.QTableWidgetItem(),QtGui.QTableWidgetItem(),QtGui.QTableWidgetItem(),QtGui.QTableWidgetItem(),QtGui.QTableWidgetItem()
                     lbl.setText('')
@@ -459,6 +461,8 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                 if self.livePlot:
                     #datavault.add_parameter(lp_x_axis + '_pnts', lp_steps)
                     #datavault.add_parameter(lp_x_axis + '_rng', (lp_min,lp_max))
+                    datavault.add_parameter('timestamp_pnts',1)
+                    datavault.add_parameter('timestamp_rng',(0,1))
                     datavault.add_parameter('live_plots', [(lp_x_axis,lp_y_axis)])
 
                 AddParameterToDataVault(datavault, self.Parameter)
@@ -469,7 +473,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                 self.currentpoints = 0 
                 all_variables = self.indep_vars + self.dep_vars + self.custom_vars
                 self.sweepcounter += 1
-                if self.instrumentBus[Current_Loop[-1][0]]['InstrumentType'] == 'DAC-ADC':
+                if Current_Loop[-1][0] != 'timestamp' and self.instrumentBus[Current_Loop[-1][0]]['InstrumentType'] == 'DAC-ADC':
                     br_param = self.Parameter['BufferRamp']
                 else:
                     br_param = 0 
