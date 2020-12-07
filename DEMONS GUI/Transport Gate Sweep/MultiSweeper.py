@@ -461,6 +461,10 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                 self.indep_vars.append('p0')
             if 'n0' not in self.indep_vars:
                 self.indep_vars.append('n0')
+
+
+        yield self.ReReadLIParams()
+
         print('Queue Started')
         for Current_Loop in self.Queue:
             #[ImageNumber,ImageDir] = CreateDataVaultFile(datavault,self.Parameter['DeviceName'],self.indep_vars,self.dep_vars+self.custom_vars)
@@ -704,6 +708,24 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                             #item.setForeground(QBrush(QColor(0,0,0)))
         else:
             pass
+
+    #reads all SR830 parameters in case they've changed since bus was set up
+    @inlineCallbacks
+    def ReReadLIParams(self):
+        for instrument in self.instrumentBus:
+            if self.instrumentBus[instrument]['InstrumentType'] == 'SR830':
+                lock_in = self.instrumentBus[instrument]['DeviceObject']
+                self.instrumentBus[instrument]['Excitation'] = yield lock_in.sine_out_amplitude()['V']
+                self.instrumentBus[instrument]['Frequency'] = yield round(lock_in.frequency()['Hz'],4)
+                self.instrumentBus[instrument]['Time Constant'] = yield round(time_constant.time_constant()['s'],4)
+                mode = yield lock_in.input_mode()
+                if mode < 2:
+                    unit = 'V'
+                else:
+                    unit = 'A'
+                self.instrumentBus[instrument]['Sensitivity'] = yield round(lock_in.sensitivity()[unit],4)
+
+
 
 
 
