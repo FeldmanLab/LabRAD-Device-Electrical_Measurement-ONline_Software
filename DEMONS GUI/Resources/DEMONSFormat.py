@@ -1677,11 +1677,11 @@ def BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,flag,wait,re
                     print('sr hit')
                     hit = True
                     if 'X' or 'R' in variables[counter]:
-                        adc_port = int(instrumentBus[instrumentName]['DACADCChannelX'])
-                        array[:,counter] = d_tmp[adc_port]/10*instrumentBus[instrumentName]['Sensitivity']
+                        adc_portx = int(instrumentBus[instrumentName]['DACADCChannelX'])
+                        array[:,counter] = d_tmp[adc_portx]/10*instrumentBus[instrumentName]['Sensitivity']
                     elif 'Y' or 'T' in variables[counter]:
-                        adc_port = int(instrumentBus[instrumentName]['DACADCChannelY'])
-                        array[:,counter] = d_tmp[adc_port]/10*instrumentBus[instrumentName]['Sensitivity']
+                        adc_porty = int(instrumentBus[instrumentName]['DACADCChannelY'])
+                        array[:,counter] = d_tmp[adc_porty]/10*instrumentBus[instrumentName]['Sensitivity']
         if hit == False and counter < len(indep_vals) + len(dep_vals): # variable not measured over BufferRamp
             array[:,counter] = values[counter]
         elif counter >= len(indep_vals)+len(dep_vals):
@@ -1769,17 +1769,19 @@ def BufferRamp2D(instrumentBus,looplist,queryfunction,datavault,flag,wait,reacto
                         if instrumentBus[instrumentName]['Measurement'] == 'DACADC':
                             hit = True
                             if 'X' in variables[counter]:
-                                adc_port = int(instrumentBus[instrumentName]['DACADCChannelX'])
-                                array[:,counter] = d_tmp[adc_port]/10*instrumentBus[instrumentName]['Sensitivity']
+                                adc_portx = int(instrumentBus[instrumentName]['DACADCChannelX'])
+                                array[:,counter] = d_tmp[adc_portx]/10*instrumentBus[instrumentName]['Sensitivity']
                             elif 'Y' in variables[counter]:
-                                adc_port = int(instrumentBus[instrumentName]['DACADCChannelY'])
-                                array[:,counter] = d_tmp[adc_port]/10*instrumentBus[instrumentName]['Sensitivity']
+                                adc_porty = int(instrumentBus[instrumentName]['DACADCChannelY'])
+                                array[:,counter] = d_tmp[adc_porty]/10*instrumentBus[instrumentName]['Sensitivity']
+                #trying to fix the use case where mask limits the edges of the 1D cut, so that md and mn are are larger than num_points
+                #before was just array[:,counter] = md,mn.
                 if instrumentName == 'p0':
                     hit = True
-                    array[:,counter] = md
+                    array[:,counter] = md[np.where(mask==True)]
                 elif instrumentName == 'n0':
                     hit = True
-                    array[:,counter] = mn
+                    array[:,counter] = mn[np.where(mask==True)]
                 if hit == False and counter < len(indep_vals) + len(dep_vals): # variable not measured over BufferRamp
                     array[:,counter] = values[counter]
                 elif counter >= len(indep_vals) + len(dep_vals):
@@ -1787,7 +1789,7 @@ def BufferRamp2D(instrumentBus,looplist,queryfunction,datavault,flag,wait,reacto
                     array[:,counter] = custom_bus['CustomFn'](custom_bus,variables,array)
 
             progressbar.setValue(progressbar.value()+num_points)
-            yield datavault.add(array) #need to figure out a way to save md and mn as well
+            yield datavault.add(array)
             yield Ramp_DACADC(device_obj,dac_ch[0],vec_x[stop],0,.1,.1)
             yield Ramp_DACADC(device_obj,dac_ch[1],vec_y[stop],0,.1,.1)
 
