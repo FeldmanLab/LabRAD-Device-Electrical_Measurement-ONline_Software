@@ -714,6 +714,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
     def ReReadLIParams(self):
         for instrument in self.instrumentBus:
             if self.instrumentBus[instrument]['InstrumentType'] == 'SR830':
+                print(self.instrumentBus[instrument])
                 lock_in = self.instrumentBus[instrument]['DeviceObject']
                 self.instrumentBus[instrument]['Excitation'] = yield lock_in.sine_out_amplitude()['V']
                 self.instrumentBus[instrument]['Frequency'] = yield round(lock_in.frequency()['Hz'],4)
@@ -724,6 +725,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                 else:
                     unit = 'A'
                 self.instrumentBus[instrument]['Sensitivity'] = yield round(lock_in.sensitivity()[unit],4)
+                print(self.instrumentBus[instrument])
 
 
 
