@@ -1638,14 +1638,14 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
         instrument = looplist[0][0]
         if instrument == 'timestamp':
             for k in range(0,steps+1):
-                yield RecursiveLoop(instrumentBus,looplist[1:],queryfunction,datavault,sweeper,wait,reactor,BufferRamp,variables,delta,progressbar,sweepcount)
+                yield RecursiveLoop(instrumentBus,looplist[1:],queryfunction,datavault,sweeper,wait,reactor,BufferRamp,variables,delta,progressbar,sweepcount,reversescan)
         elif (BufferRamp != 1 and BufferRamp != 2) or (len(looplist) > 1 and BufferRamp == 1) or (len(looplist)>2 and BufferRamp == 2):
             for k in range(0,steps+1):
                 if sweeper.flag and sweeper.sweepcounter == sweepcount:
                     g = yield instrumentBus[instrument]['WriteFn'](instrumentBus[instrument], start + k*stepsize)
-                    yield RecursiveLoop(instrumentBus,looplist[1:],queryfunction,datavault,sweeper,wait,reactor, BufferRamp,variables,delta,progressbar,sweepcount)
+                    yield RecursiveLoop(instrumentBus,looplist[1:],queryfunction,datavault,sweeper,wait,reactor, BufferRamp,variables,delta,progressbar,sweepcount,reversescan)
         elif BufferRamp == 1 and len(looplist) == 1:
-            yield SleepAsync(reactor,3*wait) 
+            #yield SleepAsync(reactor,3*wait) 
             yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar,reversescan)
         elif BufferRamp == 2 and len(looplist) == 2:
             yield BufferRamp2D(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,delta,progressbar)
@@ -1661,17 +1661,24 @@ def BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,flag,wait,re
 
     vstart = [looplist[0][1]]
     vstop = [looplist[0][2]]
-
+    rflag = False
     #reverses direction of loop if DAC is currently closer to the stop than start
     if reversescan:
+
         if np.abs(current_voltage - vstop[0]) < np.abs(current_voltage - vstart[0]):
             vstop = [looplist[0][1]]
             vstart = [looplist[0][2]]
+            rflag = True
 
     steps = int(looplist[0][3])
     indep_vals, dep_vals, custom_vals = yield queryfunction()
     values = indep_vals + dep_vals + custom_vals
-    #print(values)
+
+    #ramps to initial value and waits a little bit, hopefully cleans up data at start of cuts of 2d sweep
+    yield Ramp_DACADC(instr_obj, instr_output, current_voltage, vstart[0], .25, .1)
+    if rflag:
+        yield SleepAsync(reactor, 3*wait)
+
     d_tmp = yield Buffer_Ramp_DACADC(instrumentBus[instrument]['DeviceObject'],[int(instrumentBus[instrument]['DAC Output'])],[0,1,2,3],vstart,vstop,steps+1,wait,mult=1)
     array = np.zeros(((steps+1),len(values)))
     for counter in range(0,len(variables)):
@@ -1690,7 +1697,7 @@ def BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,flag,wait,re
                         array[:,counter] = d_tmp[adc_port]
             elif instrumentBus[instrumentName]['InstrumentType'] == 'SR830':
                 if instrumentBus[instrumentName]['Measurement'] == 'DACADC':
-                    print('sr hit')
+                    #print('sr hit')
                     hit = True
                     if 'X' or 'R' in variables[counter]:
                         adc_portx = int(instrumentBus[instrumentName]['DACADCChannelX'])
@@ -1795,9 +1802,11 @@ def BufferRamp2D(instrumentBus,looplist,queryfunction,datavault,flag,wait,reacto
                 if instrumentName == 'p0':
                     hit = True
                     array[:,counter] = md[np.where(mask==True)]
+                    #array[:,counter] = md
                 elif instrumentName == 'n0':
                     hit = True
                     array[:,counter] = mn[np.where(mask==True)]
+                    #array[:,counter] = mn
                 if hit == False and counter < len(indep_vals) + len(dep_vals): # variable not measured over BufferRamp
                     array[:,counter] = values[counter]
                 elif counter >= len(indep_vals) + len(dep_vals):
