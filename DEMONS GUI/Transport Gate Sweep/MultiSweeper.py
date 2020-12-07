@@ -198,8 +198,8 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
         self.printInfo()
         RefreshButtonStatus(self.ButtonsCondition)
         ReconstructComboBox(self.comboBox_LoopVar,self.indep_vars)
-        ReconstructComboBox(self.comboBox_LivePlotIndep,self.indep_vars)
-        ReconstructComboBox(self.comboBox_LivePlotIndepY,['']+self.indep_vars)
+        ReconstructComboBoxCond(self.comboBox_LivePlotIndep,self.indep_vars+['n0','p0'],self.indep_vars,self.Parameter['BufferRamp']==2)
+        ReconstructComboBoxCond(self.comboBox_LivePlotIndepY,['']+self.indep_vars+['n0','p0'],['']+self.indep_vars,self.Parameter['BufferRamp'] == 2)
         ReconstructComboBox(self.comboBox_LivePlotDep,self.dep_vars+self.custom_vars)
 
         for key, DevicePropertyList in self.DeviceList.items():

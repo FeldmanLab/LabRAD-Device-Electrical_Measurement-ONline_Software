@@ -235,6 +235,34 @@ def ReconstructComboBox(combobox, lst):
             combobox.setCurrentIndex(text)
     except:
         combobox.setCurrentIndex(1)
+
+'''
+given two list of itme names, populate lst1 into combobox if cond is true, lst2 if cond is false
+'''
+def ReconstructComboBoxCond(combobox, lst1,lst2, cond):
+    text = combobox.currentIndex()
+    combobox.clear()
+    if cond:
+        for name in lst1:
+            combobox.addItem(name)
+        try:
+            if len(lst1) == 1:
+                combobox.setCurrentIndex(1)
+            else: 
+                combobox.setCurrentIndex(text)
+        except:
+            combobox.setCurrentIndex(1)
+    else:
+        for name in lst2:
+            combobox.addItem(name)
+        try:
+            if len(lst2) == 1:
+                combobox.setCurrentIndex(1)
+            else: 
+                combobox.setCurrentIndex(text)
+        except:
+            combobox.setCurrentIndex(1)
+
 '''
 Based on the buttons Condition which are a dictionary with format button: Boolean and enable/disable the button based on the boolean value
 '''
