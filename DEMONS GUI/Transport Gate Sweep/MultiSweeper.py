@@ -254,6 +254,9 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
         self.dep_vars = []
         self.custom_vars = []
         self.reference_time = time.time()
+
+        yield self.ReReadLIParams()
+        
         indep_vals = []
         dep_vals = []
         custom_vals = []
@@ -510,7 +513,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                     #datavault.add_parameter(lp_x_axis + '_rng', (lp_min,lp_max))
                     datavault.add_parameter('timestamp_pnts',1)
                     datavault.add_parameter('timestamp_rng',(0,1))
-                    datavault.add_parameter('live_plots', [(lp_x_axis,lp_y_axis)])
+                    #datavault.add_parameter('live_plots', [(lp_x_axis,lp_y_axis)])
 
                 AddParameterToDataVault(datavault, self.Parameter)
 
@@ -644,7 +647,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
     def deleteQueue(self):
         r = self.tableWidget_Queue.currentRow()
         totalrows = self.tableWidget_Queue.rowCount()
-        print(r)
+        #print(r)
         if r > -1:
             if self.tableWidget_Queue.item(r,0).text() != '': 
                 if r + 1 == totalrows or self.tableWidget_Queue.item(r+1, 0).text() != '':
@@ -664,9 +667,9 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                     current_step = int(self.tableWidget_Queue.item(r,0).text())
                     self.Queue[current_step-1].pop(0)
                     self.tableWidget_Queue.removeRow(r)
-                    print('test')
-                    print(r)
-                    print(current_step)
+                    #print('test')
+                    #print(r)
+                    #print(current_step)
                     self.tableWidget_Queue.item(r,0).setText(str(current_step))
                     # counter = r + 1
                     # while counter < totalrows - 1:
@@ -716,16 +719,23 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
             if self.instrumentBus[instrument]['InstrumentType'] == 'SR830':
                 print(self.instrumentBus[instrument])
                 lock_in = self.instrumentBus[instrument]['DeviceObject']
-                self.instrumentBus[instrument]['Excitation'] = yield lock_in.sine_out_amplitude()['V']
-                self.instrumentBus[instrument]['Frequency'] = yield round(lock_in.frequency()['Hz'],4)
-                self.instrumentBus[instrument]['Time Constant'] = yield round(time_constant.time_constant()['s'],4)
+
+                exc = yield lock_in.sine_out_amplitude()
+                self.instrumentBus[instrument]['Excitation'] = exc['V']
+
+                freq = yield lock_in.frequency()
+                self.instrumentBus[instrument]['Frequency'] =  freq['Hz']
+
+                tc = yield lock_in.time_constant()
+                self.instrumentBus[instrument]['Time Constant'] = tc['s']
+                
                 mode = yield lock_in.input_mode()
+                sens = yield lock_in.sensitivity()
                 if mode < 2:
                     unit = 'V'
                 else:
                     unit = 'A'
-                self.instrumentBus[instrument]['Sensitivity'] = yield round(lock_in.sensitivity()[unit],4)
-                print(self.instrumentBus[instrument])
+                self.instrumentBus[instrument]['Sensitivity'] = sens[unit]
 
 
 
