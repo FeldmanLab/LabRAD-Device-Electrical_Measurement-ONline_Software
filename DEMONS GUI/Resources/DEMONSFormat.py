@@ -1624,7 +1624,7 @@ def clearLayout(layout):
 #parameter BufferRamp, which is passed in as 0, 1, 2 - 0 if buffer ramp is not to be used;
 #1 if 1D buffer Ramp is to be used, 2 if 2D bufferramp is to be used.
 @inlineCallbacks
-def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,reactor,BufferRamp,variables,delta,progressbar,sweepcount):
+def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,reactor,BufferRamp,variables,delta,progressbar,sweepcount,reversescan):
     if len(looplist) == 0 and sweeper.flag and sweeper.sweepcounter==sweepcount:
         yield SleepAsync(reactor, wait)
         indep_vals, dep_vals, custom_vals = yield queryfunction()
@@ -1646,12 +1646,12 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
                     yield RecursiveLoop(instrumentBus,looplist[1:],queryfunction,datavault,sweeper,wait,reactor, BufferRamp,variables,delta,progressbar,sweepcount)
         elif BufferRamp == 1 and len(looplist) == 1:
             yield SleepAsync(reactor,3*wait) 
-            yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar)
+            yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar,reversescan)
         elif BufferRamp == 2 and len(looplist) == 2:
             yield BufferRamp2D(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,delta,progressbar)
 
 @inlineCallbacks
-def BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,flag,wait,reactor,variables,progressbar):
+def BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,flag,wait,reactor,variables,progressbar,reversescan):
     instrument = looplist[0][0]
 
 
@@ -1663,9 +1663,10 @@ def BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,flag,wait,re
     vstop = [looplist[0][2]]
 
     #reverses direction of loop if DAC is currently closer to the stop than start
-    if np.abs(current_voltage - vstop[0]) < np.abs(current_voltage - vstart[0]):
-        vstop = [looplist[0][1]]
-        vstart = [looplist[0][2]]
+    if reversescan:
+        if np.abs(current_voltage - vstop[0]) < np.abs(current_voltage - vstart[0]):
+            vstop = [looplist[0][1]]
+            vstart = [looplist[0][2]]
 
     steps = int(looplist[0][3])
     indep_vals, dep_vals, custom_vals = yield queryfunction()

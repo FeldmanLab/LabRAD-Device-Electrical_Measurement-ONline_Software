@@ -107,9 +107,12 @@ border:1px solid rgb(168,168,168)
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#9b9b9b;&quot;&gt;Instructions:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#9b9b9b;&quot;&gt;Setting Button (below) opens &amp;quot;Instrument Bus&amp;quot;&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#9b9b9b;&quot;&gt;Test button refreshes all read values, these are all recorded datapoints&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#9b9b9b;&quot;&gt;Set BufferRamp Parameter to 1 to use BufferRamp to ramp a single voltage. To ramp multiple voltages using BufferRamp, set to 2. This then integrates delta to ramp along constant displacement fields/carrier density. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#9b9b9b;&quot;&gt;Setting Button (below) opens &amp;quot;Instrument Bus&amp;quot;. Every instrument set up there should appear below, and then be subsequently measured for every point on sweep.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#9b9b9b;&quot;&gt;BufferRamp Parameter to 1 uses BufferRamp to ramp a DAC voltage more effiicently and measure on the ADC ports. Reverse scan checked means that the voltage will go back and forth between &amp;quot;Start&amp;quot; and &amp;quot;End&amp;quot; repeatedly if it's in a nested loop rather than ramping back to &amp;quot;Start&amp;quot; each time.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#9b9b9b;&quot;&gt;BufferRamp Parameter to 2 uses BufferRamp to ramp two DAC voltages in an n-p array with capacitive asymmetry Delta. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; color:#9b9b9b;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#9b9b9b;&quot;&gt;Any set of variables enterd into the Live Plot table should open live plots on sweep start.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
@@ -480,28 +483,25 @@ border:1px solid rgb(168,168,168)
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
            </property>
-           <layout class="QGridLayout" name="gridLayout_4" rowstretch="1,0,0,0,0,0,0,0,0" columnstretch="2,0,0,0">
-            <item row="3" column="2">
-             <widget class="QLineEdit" name="lineEdit_Delta">
+           <layout class="QGridLayout" name="gridLayout_4" rowstretch="1,0,0,0,0,0,0,0,0,0" columnstretch="2,0,0,0">
+            <item row="0" column="0" colspan="2">
+             <widget class="QLabel" name="label_11">
               <property name="text">
-               <string>0</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Wait Time (s)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="2">
-             <widget class="QLineEdit" name="lineEdit_WaitTime">
-              <property name="text">
-               <string>0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="2">
+            <item row="7" column="2">
              <widget class="QComboBox" name="comboBox_LivePlotDep"/>
             </item>
-            <item row="6" column="0">
-             <widget class="QComboBox" name="comboBox_LivePlotIndep"/>
+            <item row="2" column="0" colspan="2">
+             <widget class="QLabel" name="label_12">
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;BufferRamp&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
             </item>
-            <item row="7" column="0" colspan="4">
+            <item row="8" column="0" colspan="4">
              <widget class="QTableWidget" name="tableWidget_LivePlot">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
@@ -517,56 +517,23 @@ selection-color: black;
               </property>
              </widget>
             </item>
-            <item row="6" column="1">
+            <item row="7" column="1">
              <widget class="QComboBox" name="comboBox_LivePlotIndepY"/>
             </item>
-            <item row="6" column="3">
-             <widget class="QPushButton" name="pushButton_AddPlot">
-              <property name="styleSheet">
-               <string notr="true">#pushButton_AddPlot{image:url(:/Pictures/Pictures/addPlotIcon.png);background: black;}\n\nQPushButton:pressed#pushButton_Setting{
-image:url(:/Pictures/Pictures/addPlotIcon.png);background: black;
-border: 2px rgb(131,131,131);border-radius: 5px}</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="3">
-             <widget class="QPushButton" name="pushButton_DeletePlot">
-              <property name="styleSheet">
-               <string notr="true">#pushButton_DeletePlot{image:url(:/Pictures/Pictures/remove.png);background: black;}</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
             <item row="4" column="0" colspan="2">
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Live Plot:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0" colspan="2">
              <widget class="QLabel" name="label_4">
               <property name="text">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Delta (Gate Asym.)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="0" colspan="2">
-             <widget class="QLabel" name="label_12">
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;BufferRamp&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
+            <item row="7" column="0">
+             <widget class="QComboBox" name="comboBox_LivePlotIndep"/>
             </item>
-            <item row="0" column="0" colspan="2">
-             <widget class="QLabel" name="label_11">
+            <item row="4" column="2">
+             <widget class="QLineEdit" name="lineEdit_Delta">
               <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Wait Time (s)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>0</string>
               </property>
              </widget>
             </item>
@@ -587,6 +554,56 @@ border: 2px rgb(131,131,131);border-radius: 5px}</string>
                 <string>2</string>
                </property>
               </item>
+             </widget>
+            </item>
+            <item row="9" column="3">
+             <widget class="QPushButton" name="pushButton_DeletePlot">
+              <property name="styleSheet">
+               <string notr="true">#pushButton_DeletePlot{image:url(:/Pictures/Pictures/remove.png);background: black;}</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0" colspan="2">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Live Plot:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="3">
+             <widget class="QPushButton" name="pushButton_AddPlot">
+              <property name="styleSheet">
+               <string notr="true">#pushButton_AddPlot{image:url(:/Pictures/Pictures/addPlotIcon.png);background: black;}\n\nQPushButton:pressed#pushButton_Setting{
+image:url(:/Pictures/Pictures/addPlotIcon.png);background: black;
+border: 2px rgb(131,131,131);border-radius: 5px}</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLineEdit" name="lineEdit_WaitTime">
+              <property name="text">
+               <string>0</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QCheckBox" name="checkBox_Reverse">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Reverse scan&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
              </widget>
             </item>
            </layout>

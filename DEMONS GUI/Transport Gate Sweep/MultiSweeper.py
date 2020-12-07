@@ -159,6 +159,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
     def DetermineEnableConditions(self):
         self.ButtonsCondition = {
             self.lineEdit_Delta: self.Parameter['BufferRamp']==2,
+            self.checkBox_Reverse: self.Parameter['BufferRamp']==1,
             #self.comboBox_LivePlotDep: self.livePlot,
             #self.comboBox_LivePlotIndep: self.livePlot
         }
@@ -519,7 +520,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                     br_param = self.Parameter['BufferRamp']
                 else:
                     br_param = 0 
-                yield RecursiveLoop(self.instrumentBus,Current_Loop,self.queryFast,datavault,self,self.Parameter['WaitTime'],self.reactor,br_param,all_variables,self.Parameter['Delta'],self.progressBar_Loop,self.sweepcounter)
+                yield RecursiveLoop(self.instrumentBus,Current_Loop,self.queryFast,datavault,self,self.Parameter['WaitTime'],self.reactor,br_param,all_variables,self.Parameter['Delta'],self.progressBar_Loop,self.sweepcounter,self.checkBox_Reverse.isChecked())
                 datavault.add_comment(str(self.textEdit_Comment.toPlainText()))
             print('Loop Complete')
             self.progressBar_Loop.setValue(self.totalpoints)
