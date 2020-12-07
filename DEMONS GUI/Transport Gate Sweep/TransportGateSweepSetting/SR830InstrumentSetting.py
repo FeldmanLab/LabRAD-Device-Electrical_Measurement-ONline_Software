@@ -69,7 +69,9 @@ class SR830Setting(QtGui.QMainWindow, Ui_SR830Setting):
             'Name': 'Lockin Default',
             'InstrumentType': 'SR830',
             'DeviceObject': None,
+            'ServerObject': None,
             'Device': None,
+            'Server': None,
             'Excitation': None,
             'Frequency': None,
             'Time Constant': None,
@@ -134,6 +136,8 @@ class SR830Setting(QtGui.QMainWindow, Ui_SR830Setting):
     def selectServer(self,instr_dict, servername,devlist):
         if servername != '':
             devlist['ServerObject'] = self.Servers[servername]
+            if servername[0:2] == 'SR':
+                self.InstrumentDict['Server'] = servername
             #if servername == 'SR830':
             #    instr_dict['Server'] = self.Servers[servername]
             #elif servername == 'DACADC':
@@ -196,6 +200,7 @@ class SR830Setting(QtGui.QMainWindow, Ui_SR830Setting):
             self.InstrumentDict['DACADCDeviceObject'] = None
             self.InstrumentDict['DACADCChannelX'] = None
             self.InstrumentDict['DACADCChannelY'] = None
+        print(self.InstrumentDict)
         self.complete.emit()
         self.close()
 
@@ -209,6 +214,7 @@ class SR830Setting(QtGui.QMainWindow, Ui_SR830Setting):
         self.lineEdit_Sensitivity.setText(str(input_dictionary['Sensitivity']))
         self.lineEdit_Timeconstant.setText(str(input_dictionary['Time Constant']))
         self.comboBox_ChooseMeasurement.setCurrentText(input_dictionary['Measurement'])
+        self.comboBox_LI_SelectServer.setCurrentText(input_dictionary['Server'])
         self.comboBox_LI_SelectDevice.setCurrentText(input_dictionary['Device'])
         if input_dictionary['Measurement'] == 'DACADC':
             self.comboBox_ADC_ChY.setCurrentText(input_dictionary['DACADCChannelY'])
@@ -219,7 +225,9 @@ class SR830Setting(QtGui.QMainWindow, Ui_SR830Setting):
         self.InstrumentDict = {
             'Name': 'Lockin Default',
             'InstrumentType': 'SR830',
+            'ServerObject': None,
             'DeviceObject': None,
+            'Server': None,
             'Device': None,
             'Excitation': None,
             'Frequency': None,

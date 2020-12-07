@@ -116,7 +116,6 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
             'DeviceName': self.lineEdit_Device_Name,
             'WaitTime': self.lineEdit_WaitTime,
             'Delta': self.lineEdit_Delta,
-            'BufferRamp': self.lineEdit_BufferRamp,
 
         }
 
@@ -126,6 +125,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
         self.dep_vars = []
         self.custom_vars = []
         self.Queue = []
+        self.Plots = []
         self.flag = True
         self.sweepcounter = 0
         self.livePlot = False
@@ -141,22 +141,26 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
         self.pushButton_ClearLoops.clicked.connect(lambda: self.clearLoops())
         self.pushButton_DeleteQueue.clicked.connect(lambda: self.deleteQueue())
 
+        self.pushButton_AddPlot.clicked.connect(lambda: self.addPlot())
+        self.pushButton_DeletePlot.clicked.connect(lambda: self.deletePlot())
+
         self.lineEdit_Device_Name.editingFinished.connect(lambda: UpdateLineEdit_String(self.Parameter, 'DeviceName', self.lineEdit))
         self.lineEdit_WaitTime.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.Parameter, 'WaitTime', self.lineEdit,[0.0,5.0]))
+        self.comboBox_BufferRamp.currentIndexChanged.connect(lambda: self.editBufferRamp())
         self.lineEdit_Delta.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.Parameter, 'Delta', self.lineEdit,[-1.0,1.0]))
-        self.lineEdit_BufferRamp.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.Parameter, 'BufferRamp', self.lineEdit,[0,4]))
 
         self.pushButton_StartSweep.clicked.connect(lambda: self.StartSweep())
         self.pushButton_AbortSweep.clicked.connect(lambda: self.AbortSweep())
         
-        self.checkBox_LivePlot.stateChanged.connect(lambda: self.LivePlotChanged())
+        #self.checkBox_LivePlot.stateChanged.connect(lambda: self.LivePlotChanged())
         #self.SetupPlots()
         self.Refreshinterface()
 
     def DetermineEnableConditions(self):
         self.ButtonsCondition = {
-            self.comboBox_LivePlotDep: self.livePlot,
-            self.comboBox_LivePlotIndep: self.livePlot
+            self.lineEdit_Delta: self.Parameter['BufferRamp']==2,
+            #self.comboBox_LivePlotDep: self.livePlot,
+            #self.comboBox_LivePlotIndep: self.livePlot
         }
 
     @inlineCallbacks
@@ -195,6 +199,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
         RefreshButtonStatus(self.ButtonsCondition)
         ReconstructComboBox(self.comboBox_LoopVar,self.indep_vars)
         ReconstructComboBox(self.comboBox_LivePlotIndep,self.indep_vars)
+        ReconstructComboBox(self.comboBox_LivePlotIndepY,['']+self.indep_vars)
         ReconstructComboBox(self.comboBox_LivePlotDep,self.dep_vars+self.custom_vars)
 
         for key, DevicePropertyList in self.DeviceList.items():
@@ -410,12 +415,44 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
         
         #self.textBrowser_Loops.setText(totalstring)
 
+    def addPlot(self):
+        try:
+            x_var = self.comboBox_LivePlotIndep.currentText()
+            y_var = self.comboBox_LivePlotIndepY.currentText()
+            z_var = self.comboBox_LivePlotDep.currentText()
+
+            if y_var == '':
+                self.Plots.append((x_var,z_var))
+            else:
+                self.Plots.append((x_var,y_var,z_var))
+            xx,yy,zz = QtGui.QTableWidgetItem(),QtGui.QTableWidgetItem(),QtGui.QTableWidgetItem()
+            xx.setText(x_var)
+            xx.setForeground(QBrush(QColor(131,131,131)))
+            yy.setText(y_var)
+            yy.setForeground(QBrush(QColor(131,131,131)))
+            zz.setText(z_var)
+            zz.setForeground(QBrush(QColor(131,131,131)))
+            array = [xx,yy,zz]
+            self.tableWidget_LivePlot.insertRow(self.tableWidget_LivePlot.rowCount())
+            for i in range(0,3):
+                self.tableWidget_LivePlot.setItem(self.tableWidget_LivePlot.rowCount()-1,i,array[i])
+        except Exception as inst:
+            print('Error:',inst,' on line: ', sys.exc_info()[2].tb_lineno)
+
+    def deletePlot(self):
+        try:
+            r = self.tableWidget_LivePlot.currentRow()
+            total_rows = self.tableWidget_LivePlot.rowCount()
+            if r > 0:
+                self.Plots.pop(r-1)
+                self.tableWidget_LivePlot.removeRow(r)
+        except Exception as inst:
+            print('Error:', inst,'on line: ',sys.exc_info()[2].tb_lineno)
     @inlineCallbacks
     def StartSweep(self):
         #initialize all the datavault things - create file, write parameters/comment, etc.
         self.flag = True
         datavault = self.serversList['dv']
-
 
         #also need to figure out which direction delta is in and write it down - will matter if delta != 0
         if self.Parameter['BufferRamp'] == 2:
@@ -434,9 +471,9 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                 saveDataToSessionFolder(self.winId(), self.sessionFolder, str(ImageNumber)+ ' - ' + self.Parameter['DeviceName'])
 
                 print('DV ID: '+ ImageNumber)
-                if self.livePlot:
-                    lp_x_axis = self.comboBox_LivePlotIndep.currentText()
-                    lp_y_axis = self.comboBox_LivePlotDep.currentText()
+                # if self.livePlot:
+                #     lp_x_axis = self.comboBox_LivePlotIndep.currentText()
+                #     lp_y_axis = self.comboBox_LivePlotDep.currentText()
 
 
 
@@ -458,7 +495,12 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                     datavault.add_parameter(str(row[4]) + str('Loop-Steps'),row[3])
                     datavault.add_parameter(str(row[4]) + '_pnts', lp_steps)
                     datavault.add_parameter(str(row[4]) + '_rng',(lp_min,lp_max))
-                if self.livePlot:
+                if len(self.Plots) > 0:
+                    if len(self.Plots) == 1:
+                        datavault.add_parameter('live_plots',self.Plots)
+                    else:
+                        datavault.add_parameter('live_plots',tuple(self.Plots))
+
                     #datavault.add_parameter(lp_x_axis + '_pnts', lp_steps)
                     #datavault.add_parameter(lp_x_axis + '_rng', (lp_min,lp_max))
                     datavault.add_parameter('timestamp_pnts',1)
@@ -489,8 +531,8 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
         self.flag = False
         self.progressBar_Loop.setValue(0)
 
-    def LivePlotChanged(self):
-        self.livePlot = self.checkBox_LivePlot.isChecked()
+    def editBufferRamp(self):
+        self.Parameter['BufferRamp'] = int(self.comboBox_BufferRamp.currentText())
         self.Refreshinterface()
 
     def setupTable(self):
@@ -520,6 +562,27 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
             self.tableWidget_Queue.setItem(0,i,headers[i])
             self.tableWidget_Queue.item(0, i).setFont(QtGui.QFont("MS Shell Dlg 2",weight=QtGui.QFont.Bold))
             self.tableWidget_Queue.item(0, i).setFlags(QtCore.Qt.NoItemFlags)
+
+        self.tableWidget_LivePlot.horizontalHeader().hide()
+        self.tableWidget_LivePlot.verticalHeader().hide()
+
+        self.tableWidget_LivePlot.setColumnCount(3)
+        self.tableWidget_LivePlot.insertRow(0)
+        headers = []
+        for i in range(0,3):
+            headers.append(QtGui.QTableWidgetItem())
+
+        headers[0].setText('x-axis')
+        headers[0].setForeground(QBrush(QColor(131,131,131)))
+        headers[1].setText('y-axis')
+        headers[1].setForeground(QBrush(QColor(131,131,131)))
+        headers[2].setText('z-axis')
+        headers[2].setForeground(QBrush(QColor(131,131,131)))
+        for i in range(0,3):
+            self.tableWidget_LivePlot.setItem(0,i,headers[i])
+            self.tableWidget_LivePlot.item(0, i).setFont(QtGui.QFont("MS Shell Dlg 2",weight=QtGui.QFont.Bold))
+            self.tableWidget_LivePlot.item(0, i).setFlags(QtCore.Qt.NoItemFlags)
+
 
     # clears the double - clicked on cell of the table so it can be replaced
     def editQueuef(self,r,c): 

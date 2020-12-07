@@ -102,6 +102,7 @@ class Setting(QtGui.QMainWindow, Ui_Setting):
             openEditInstrumentWindow(self.Keithley2450_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
         elif instrument_type == 'CVar':
             openEditInstrumentWindow(self.CustomVar_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
+        del self.bus[instrument_name]
 
     def printInfo(self,devicename, buslist):
         if devicename is not None:
