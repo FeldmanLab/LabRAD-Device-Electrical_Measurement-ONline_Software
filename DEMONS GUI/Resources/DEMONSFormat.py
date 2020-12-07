@@ -1636,22 +1636,37 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
         end = looplist[0][2]
         stepsize = float(end-start)/steps
         instrument = looplist[0][0]
-        if (BufferRamp != 1 and BufferRamp != 2) or (len(looplist) > 1 and BufferRamp == 1) or (len(looplist)>2 and BufferRamp == 2):
+        if instrument == 'timestamp':
+            for k in range(0,steps+1):
+                yield RecursiveLoop(instrumentBus,looplist[1:],queryfunction,datavault,sweeper,wait,reactor,BufferRamp,variables,delta,progressbar,sweepcount)
+        elif (BufferRamp != 1 and BufferRamp != 2) or (len(looplist) > 1 and BufferRamp == 1) or (len(looplist)>2 and BufferRamp == 2):
             for k in range(0,steps+1):
                 if sweeper.flag and sweeper.sweepcounter == sweepcount:
                     g = yield instrumentBus[instrument]['WriteFn'](instrumentBus[instrument], start + k*stepsize)
                     yield RecursiveLoop(instrumentBus,looplist[1:],queryfunction,datavault,sweeper,wait,reactor, BufferRamp,variables,delta,progressbar,sweepcount)
-        if BufferRamp == 1 and len(looplist) == 1:
+        elif BufferRamp == 1 and len(looplist) == 1:
             yield SleepAsync(reactor,3*wait) 
             yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar)
-        if BufferRamp == 2 and len(looplist) == 2:
+        elif BufferRamp == 2 and len(looplist) == 2:
             yield BufferRamp2D(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,delta,progressbar)
 
 @inlineCallbacks
 def BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,flag,wait,reactor,variables,progressbar):
     instrument = looplist[0][0]
+
+
+    instr_obj = instrumentBus[instrument]['DeviceObject']
+    instr_output = int(instrumentBus[instrument]['DAC Output'])
+    current_voltage = yield instr_obj.read_dac(instr_output)
+
     vstart = [looplist[0][1]]
     vstop = [looplist[0][2]]
+
+    #reverses direction of loop if DAC is currently closer to the stop than start
+    if np.abs(current_voltage - vstop[0]) < np.abs(current_voltage - vstart[0]):
+        vstop = [looplist[0][1]]
+        vstart = [looplist[0][2]]
+
     steps = int(looplist[0][3])
     indep_vals, dep_vals, custom_vals = yield queryfunction()
     values = indep_vals + dep_vals + custom_vals
