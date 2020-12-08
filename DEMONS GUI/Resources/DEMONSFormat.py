@@ -1304,15 +1304,28 @@ def CreateImage(x_data,y_data,z_data,x_points,y_points,interp_type):
 
 
 '''The following set of functions deals with reading in a custom string variable'''
-def stringdivision(strlist, oplist):
+def stringdivision(strlist, oplist,unitlist):
+    prefix_dict = {'m': 1e-3,'u':1e-6,'n':1e-9,'p':1e-12}
     for element in oplist:
         newlist = []
         for substring in strlist:
             splitlist = substring.split(element)
             for i in range(0,len(splitlist)):
-                newlist.append(splitlist[i])
+                if splitlist[i] != '':
+                    newlist.append(splitlist[i])
                 if i < len(splitlist)-1:
                     newlist.append(element)
+        strlist = newlist
+    for unit in unitlist:
+        newlist = []
+        for substring in strlist:
+            splitlist = substring.split(unit)
+            for i in range(0,len(splitlist)):
+                if splitlist[i] != '':
+                    newlist.append(splitlist[i])
+                if i < len(splitlist)-1:
+                    newlist.append('*')
+                    newlist.append(str(prefix_dict[unit[0]]))
         strlist = newlist
     return strlist
 
@@ -1329,11 +1342,11 @@ def evaluate(delim, location, variable_list,row):
         b = float(b)
     return [a,b]
 
-def customstringread(input_string,variable_list,op_list):
+def customstringread(input_string,variable_list,op_list,unitlist):
     string = input_string
     string = string.replace(' ','')
     strlist = [string]
-    processed_list = stringdivision(strlist, op_list)
+    processed_list = stringdivision(strlist, op_list,unitlist)
     try:
         leftp_loc = processed_list.index('(')
         rightp_loc = processed_list.index(')')
@@ -1342,6 +1355,34 @@ def customstringread(input_string,variable_list,op_list):
         sublist = []
     
     def desired_function(row,plist):
+        #fix up issue with negative signs
+        neg_loc = -2
+        while neg_loc != -1:
+            try:
+                neg_loc = plist.index('-')
+                if neg_loc == 0:
+                    plist.insert(0,0)
+                    neg_loc += 1
+                    result = evaluate(plist,neg_loc,variable_list,row)
+                    total = result[0]-result[1]
+                    plist.insert(neg_loc+2,total)
+                    plist.pop(neg_loc-1)
+                    plist.pop(neg_loc-1)
+                    plist.pop(neg_loc-1)
+                elif plist[neg_loc-1] in op_list:
+                    plist.insert(neg_loc,0)
+                    neg_loc += 1
+                    result = evaluate(plist,neg_loc,variable_list,row)
+                    total = result[0]-result[1]
+                    plist.insert(neg_loc+2,total)
+                    plist.pop(neg_loc-1)
+                    plist.pop(neg_loc-1)
+                    plist.pop(neg_loc-1)
+                else:
+                    break
+            except:
+                neg_loc  = -1
+
         exp_loc = -2
         while exp_loc != -1:
             try:
@@ -1413,10 +1454,10 @@ def customstringread(input_string,variable_list,op_list):
     
     return desired_function,processed_list,sublist
     
-def loopCustom(variable_list,op_list,array,customstring):
+def loopCustom(variable_list,op_list,unit_list,array,customstring):
     result_list = []
     for row in array:
-        s, plist, slist = customstringread(customstring,variable_list,op_list)
+        s, plist, slist = customstringread(customstring,variable_list,op_list,unit_list)
         if slist == []:
             result = s(row,plist)
         else:
@@ -1424,12 +1465,10 @@ def loopCustom(variable_list,op_list,array,customstring):
             rightp_loc = plist.index(')')
             sub = (s(row,slist))
             plist[leftp_loc:rightp_loc+1] = [sub]
-            plist.remove('')
-            plist.remove('')
             result = s(row,plist)
         result_list.append(result)
     return result_list
-
+    
 def addROIPlot(Plotlist,ROIObj,combobox,hold_label):
     #Plotlist['2DPlot']['ROI'] = pg.ROI([0,0],pen='r')
     #Plotlist['2DPlot']['ROI'].addTranslateHandle((0,0),(0,0))

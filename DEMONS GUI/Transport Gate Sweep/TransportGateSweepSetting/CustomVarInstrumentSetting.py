@@ -104,4 +104,5 @@ class CustomVarSetting(QtGui.QMainWindow, Ui_CustomVarSetting):
 def ReadCustomInstrumentSetting(instrumentDict,variable_list,value_list):
     custom_variable = instrumentDict['DefString']
     operator_list = ['^','*','/','+','-','(',')']
-    return loopCustom(variable_list,operator_list, value_list,custom_variable)
+    unit_list = ['mV','uV','nV','pV','mA','uA','nA','pA']
+    return loopCustom(variable_list,operator_list,unit_list, value_list,custom_variable)
