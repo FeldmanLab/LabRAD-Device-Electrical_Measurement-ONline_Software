@@ -1738,10 +1738,10 @@ def BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,flag,wait,re
                 if instrumentBus[instrumentName]['Measurement'] == 'DACADC':
                     #print('sr hit')
                     hit = True
-                    if 'X' or 'R' in variables[counter]:
+                    if 'X' in variables[counter] or 'R' in variables[counter]:
                         adc_portx = int(instrumentBus[instrumentName]['DACADCChannelX'])
                         array[:,counter] = d_tmp[adc_portx]/10*instrumentBus[instrumentName]['Sensitivity']
-                    elif 'Y' or 'T' in variables[counter]:
+                    elif 'Y' in variables[counter] or 'T' in variables[counter]:
                         adc_porty = int(instrumentBus[instrumentName]['DACADCChannelY'])
                         array[:,counter] = d_tmp[adc_porty]/10*instrumentBus[instrumentName]['Sensitivity']
         if hit == False and counter < len(indep_vals) + len(dep_vals): # variable not measured over BufferRamp
