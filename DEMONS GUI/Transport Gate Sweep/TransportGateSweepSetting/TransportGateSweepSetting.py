@@ -56,53 +56,69 @@ class Setting(QtGui.QMainWindow, Ui_Setting):
         self.pushButton_Close.clicked.connect(lambda: self.closeBus())
     
     def AddInstrument(self,instrumentList):
-        instrument = instrumentList.currentItem()
-        instrument = instrument.text()
-        if instrument == 'SR830':
-            openWindowServers(self.SR830_InstrumentSetting,self.Servers,self.Devices)
-            self.SR830_InstrumentSetting.refreshServerIndicator()
-        if instrument == 'DAC-ADC':
-            openWindowServers(self.DACADC_InstrumentSetting,self.Servers,self.Devices)
-            self.DACADC_InstrumentSetting.refreshServerIndicator()
-            #self.SR830_InstrumentSetting.complete.connect(lambda: ReadInstrumentSetting(self.bus,self.SR830_InstrumentSetting.InstrumentDict['Name'], self.SR830_InstrumentSetting.InstrumentDict))
-        if instrument == 'Lakeshore':
-            openWindowServers(self.Lakeshore_InstrumentSetting,self.Servers,self.Devices)
-            self.Lakeshore_InstrumentSetting.refreshServerIndicator()
-        if instrument == 'AMI430':
-            openWindowServers(self.Magnet_InstrumentSetting,self.Servers,self.Devices)
-            self.Magnet_InstrumentSetting.refreshServerIndicator()
-        
-        if instrument == 'Keithley2450':
-            openWindowServers(self.Keithley2450_InstrumentSetting,self.Servers,self.Devices)
-            self.Keithley2450_InstrumentSetting.refreshServerIndicator()
-        if instrument == 'CustomVar':
-            openWindowServers(self.CustomVar_InstrumentSetting,self.Servers,self.Devices)
+        try:
+            instrument = instrumentList.currentItem()
+            instrument = instrument.text()
+            if instrument == 'SR830':
+                openWindowServers(self.SR830_InstrumentSetting,self.Servers,self.Devices)
+                self.SR830_InstrumentSetting.refreshServerIndicator()
+            if instrument == 'DAC-ADC':
+                openWindowServers(self.DACADC_InstrumentSetting,self.Servers,self.Devices)
+                self.DACADC_InstrumentSetting.refreshServerIndicator()
+                #self.SR830_InstrumentSetting.complete.connect(lambda: ReadInstrumentSetting(self.bus,self.SR830_InstrumentSetting.InstrumentDict['Name'], self.SR830_InstrumentSetting.InstrumentDict))
+            if instrument == 'Lakeshore':
+                openWindowServers(self.Lakeshore_InstrumentSetting,self.Servers,self.Devices)
+                self.Lakeshore_InstrumentSetting.refreshServerIndicator()
+            if instrument == 'AMI430':
+                openWindowServers(self.Magnet_InstrumentSetting,self.Servers,self.Devices)
+                self.Magnet_InstrumentSetting.refreshServerIndicator()
+            
+            if instrument == 'Keithley2450':
+                openWindowServers(self.Keithley2450_InstrumentSetting,self.Servers,self.Devices)
+                self.Keithley2450_InstrumentSetting.refreshServerIndicator()
+            if instrument == 'CustomVar':
+                openWindowServers(self.CustomVar_InstrumentSetting,self.Servers,self.Devices)
 
-        self.RefreshBus()
+            self.RefreshBus()
+        
+        except Exception as inst:
+            print('Error:', inst, ' on line: ', sys.exc_info()[2].tb_lineno)
+            print('Try selecting an instrument from the bus list')
 
     def DeleteInstrument(self, BusList):
-        instrument_name = BusList.currentItem()
-        instrument_name = instrument_name.text()
-        del self.bus[instrument_name]
+        try:
+            instrument_name = BusList.currentItem()
+            instrument_name = instrument_name.text()
+            del self.bus[instrument_name]
+
+        except Exception as inst:
+            print('Error:', inst, ' on line: ', sys.exc_info()[2].tb_lineno)
+            print('Try selecting an instrument from the bus list')
+
         self.RefreshBus()
 
     def EditInstrument(self,BusList):
-        instrument_name = BusList.currentItem()
-        instrument_name = instrument_name.text()
-        instrument_type = self.bus[instrument_name]['InstrumentType']
-        if instrument_type == 'SR830':
-            openEditInstrumentWindow(self.SR830_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
-        elif instrument_type == 'DAC-ADC':
-            openEditInstrumentWindow(self.DACADC_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
-        elif instrument_type == 'Lakeshore':
-            openEditInstrumentWindow(self.Lakeshore_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
-        elif instrument_type == 'AMI430':
-            openEditInstrumentWindow(self.Magnet_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
-        elif instrument_type == 'Keithley2450':
-            openEditInstrumentWindow(self.Keithley2450_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
-        elif instrument_type == 'CVar':
-            openEditInstrumentWindow(self.CustomVar_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
-        del self.bus[instrument_name]
+        try:
+            instrument_name = BusList.currentItem()
+            instrument_name = instrument_name.text()
+            instrument_type = self.bus[instrument_name]['InstrumentType']
+            if instrument_type == 'SR830':
+                openEditInstrumentWindow(self.SR830_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
+            elif instrument_type == 'DAC-ADC':
+                openEditInstrumentWindow(self.DACADC_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
+            elif instrument_type == 'Lakeshore':
+                openEditInstrumentWindow(self.Lakeshore_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
+            elif instrument_type == 'AMI430':
+                openEditInstrumentWindow(self.Magnet_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
+            elif instrument_type == 'Keithley2450':
+                openEditInstrumentWindow(self.Keithley2450_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
+            elif instrument_type == 'CVar':
+                openEditInstrumentWindow(self.CustomVar_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
+            del self.bus[instrument_name]
+
+        except Exception as inst:
+            print('Error:', inst, ' on line: ', sys.exc_info()[2].tb_lineno)
+            print('Try selecting an instrument from the bus list')
 
     def printInfo(self,devicename, buslist):
         if devicename is not None:
