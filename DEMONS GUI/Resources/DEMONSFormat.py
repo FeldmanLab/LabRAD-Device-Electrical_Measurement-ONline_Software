@@ -1329,6 +1329,7 @@ def stringdivision(strlist, oplist,unitlist):
         strlist = newlist
     return strlist
 
+
 def evaluate(delim, location, variable_list,row):
     a = delim[location-1]
     b = delim[location+1]
@@ -1341,6 +1342,15 @@ def evaluate(delim, location, variable_list,row):
     else:
         b = float(b)
     return [a,b]
+
+#equivalent of evaluate but for a singlevalued function i.e. arctan(x)
+def evaluate_fn(delim,location,variable_list,row):
+    a = delim[location+1]
+    if a in variable_list:
+        a = row[variable_list.index(a)]
+    else:
+        a = float(a)
+    return a
 
 def customstringread(input_string,variable_list,op_list,unitlist):
     string = input_string
@@ -1382,6 +1392,19 @@ def customstringread(input_string,variable_list,op_list,unitlist):
                     break
             except:
                 neg_loc  = -1
+
+        # add in support for special function ARCTAN, i.e. ARCTAN(Vx_Y/Vx_X)
+        arctan_loc = -2
+        while arctan_loc != -1:
+            try:
+                arctan_loc = plist.index('ARCTAN')
+                result = evaluate_fn(plist,arctan_loc,variable_list,row)
+                total = np.arctan(result) # in radians
+                plist.insert(arctan_loc+2,total)
+                plist.pop(arctan_loc)
+                plist.pop(arctan_loc)
+            except:
+                arctan_loc = -1
 
         exp_loc = -2
         while exp_loc != -1:
