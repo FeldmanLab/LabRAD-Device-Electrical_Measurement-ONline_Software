@@ -66,13 +66,18 @@ class AMI110Wrapper(DeviceWrapper):
         print(" CONNECTED ")
         yield p.send()
 
-        #self.slackChannel = "ami_cryostat_notifications"
-        ##self.slackServer = slackServer
-        #self.slack_ctx = slackServer.context()
-        #slack_p = self.slack_packet()
-        #slack_p.connect_bot(slackBotToken)
-        #print(" SLACK BOT CONNECTED ")
-        #yield slack_p.send()
+        try:
+            self.slackChannel = "ami_cryostat_notifications"
+            self.slackServer = slackServer
+            self.slack_ctx = slackServer.context()
+            slack_p = self.slack_packet()
+            slack_p.connect_bot(slackBotToken)
+            print(" SLACK BOT CONNECTED ")
+            yield slack_p.send()
+
+        except Exception as e:
+            print("%s not connected to slack server:" % (port))
+            print(e) 
 
         
     def packet(self):
