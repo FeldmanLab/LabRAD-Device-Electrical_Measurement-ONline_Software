@@ -153,12 +153,11 @@ class HeLevelMeterServer(DeviceServer):
     @inlineCallbacks
     def initServer(self):
         self.slackServerName = 'slack_server'
-        self.slack_server = self.client[self.slackServerName]
         print("loading config info...")
         self.reg = self.client.registry()
         yield self.loadConfigInfo()
         print("done.")
-        print(self.serialLinks)
+        #print(self.serialLinks)
         yield DeviceServer.initServer(self)
 
     @inlineCallbacks
@@ -185,6 +184,7 @@ class HeLevelMeterServer(DeviceServer):
             if serServer not in self.client.servers:
                 continue
             server = self.client[serServer]
+            slack_server = self.client[self.slackServerName]
             print(server)
             print(port)
             ports = yield server.list_serial_ports()
@@ -192,7 +192,7 @@ class HeLevelMeterServer(DeviceServer):
             if port not in ports:
                 continue
             devName = '%s (%s)' % (serServer, port)
-            devs += [(devName, (server, port, self.slack_server, slackBotToken))]
+            devs += [(devName, (server, port, slack_server, slackBotToken))]
 
        # devs += [(0,(3,4))]
         returnValue(devs)
