@@ -1671,8 +1671,8 @@ def WriteLakeshoreInstrumentSetting(instrumentDict,setpoint):
         temp = yield Lakeshore_Device.read_temp(feedback)
         tempset = np.zeros(20)
         flag = False
-        while flag == False: ## this is arbitrary
-            for k in range(0,len(tempset)):
+        while flag == False:## this is arbitrary
+            for k in range(00,len(tempset)):
                 tempset[k] = abs((yield Lakeshore_Device.read_temp(feedback)) - setpoint)
             if max(tempset) < .1:
                 flag = True

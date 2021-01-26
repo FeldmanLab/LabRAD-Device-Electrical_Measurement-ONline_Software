@@ -146,11 +146,10 @@ class Keithley2450Setting(QtGui.QMainWindow, Ui_Keithley2450Setting):
         if self.InstrumentDict['Measurement'] == 'Output':
             if self.InstrumentDict['Mode'] == 'Current':
                 self.InstrumentDict['DeviceObject'].source_current()
-                self.InstrumentDict['DeviceObject'].set_source_current(0)
             elif self.InstrumentDict['Mode'] == 'Voltage':
                 self.InstrumentDict['DeviceObject'].source_voltage()
-                self.InstrumentDict['DeviceObject'].set_source_voltage(0)
-            self.InstrumentDict['DeviceObject'].output_on()
+            # don't auto turn out output
+            ##self.InstrumentDict['DeviceObject'].output_on()
         self.complete.emit()
         self.close()
 
