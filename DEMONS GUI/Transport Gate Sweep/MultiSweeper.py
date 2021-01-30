@@ -651,7 +651,8 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
         r = self.tableWidget_Queue.currentRow()
         totalrows = self.tableWidget_Queue.rowCount()
         #print(r)
-        if r > -1:
+        #r > 0 b/c the first row is simply labels 
+        if r > 0:
             if self.tableWidget_Queue.item(r,0).text() != '': 
                 if r + 1 == totalrows or self.tableWidget_Queue.item(r+1, 0).text() != '':
                     #case where we want to delete a first step and there's no second step

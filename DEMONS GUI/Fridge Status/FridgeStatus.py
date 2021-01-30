@@ -12,6 +12,7 @@ import threading
 import copy
 from scipy.signal import detrend
 from datetime import datetime, date
+import socket_dict
 
 #importing a bunch of stuff
 WAIT_TIME = 1.5 # waittime in s
@@ -56,15 +57,8 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
             'AMI430_Z': False,
             'Levelmeter': False,
         }
+        self.SOCKET_DICT = socket_dict.SOCKET_DICT
 
-        self.SOCKET_DICT = {
-            'X':'he-3-cryostat GPIB Bus - TCPIP0::169.254.129.190::7180::SOCKET',
-            'Y':'he-3-cryostat GPIB Bus - TCPIP0::169.254.246.230::7180::SOCKET',
-            'Z': 'he-3-cryostat GPIB Bus - TCPIP0::169.254.193.6::7180::SOCKET'
-
-
-
-        }
         self.DeviceList = {}#self.DeviceList['Device Name'][Device Property]
 
         self.DeviceList['Lakeshore_Device'] = {
