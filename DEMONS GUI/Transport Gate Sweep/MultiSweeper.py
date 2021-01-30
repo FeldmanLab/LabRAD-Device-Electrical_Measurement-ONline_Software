@@ -13,7 +13,7 @@ import time
 import threading
 import copy
 from scipy.signal import detrend
-from datetime import date
+from datetime import date, timedelta
 #importing a bunch of stuff
 
 
@@ -257,6 +257,8 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
 
         yield self.ReReadLIParams()
         
+        self.estimateTime()
+
         indep_vals = []
         dep_vals = []
         custom_vals = []
@@ -452,6 +454,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                 self.tableWidget_LivePlot.removeRow(r)
         except Exception as inst:
             print('Error:', inst,'on line: ',sys.exc_info()[2].tb_lineno)
+
     @inlineCallbacks
     def StartSweep(self):
         #initialize all the datavault things - create file, write parameters/comment, etc.
@@ -737,7 +740,17 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                     unit = 'A'
                 self.instrumentBus[instrument]['Sensitivity'] = sens[unit]
 
-
+    def estimateTime(self):
+        step_no = 0
+        for loop in self.Queue:
+            sub_step_no = 1
+            for element in loop:
+                sub_step_no = sub_step_no * element[3]
+            step_no += sub_step_no
+        time_seconds = self.Parameter['WaitTime'] * step_no
+        total_time = str(timedelta(seconds = time_seconds))
+        self.label_TimeEst.setText(total_time)
+        self.label_TimeEst.setAlignment(QtCore.Qt.AlignCenter)
 
 
 

@@ -645,8 +645,47 @@ border:1px solid rgb(168,168,168)
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,0,0" columnstretch="2,0">
-          <item row="1" column="0">
+         <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,0,0,0" columnstretch="2,0">
+          <item row="0" column="0">
+           <widget class="QPushButton" name="pushButton_Query">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Query bus</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#pushButton_Query{
+image:url(:/Pictures/Pictures/refreshIcon.png);
+background: black;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QProgressBar" name="progressBar_Loop">
+            <property name="styleSheet">
+             <string notr="true">QProgressBar#progressBar_Loop{
+	background-color: rgb(255, 255, 255);
+	border: 1px;
+
+}</string>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
            <widget class="QPushButton" name="pushButton_StartSweep">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -692,24 +731,43 @@ border-radius: 5px
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QProgressBar" name="progressBar_Loop">
+          <item row="0" column="1">
+           <widget class="QPushButton" name="pushButton_Setting">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Edit Bus</string>
+            </property>
             <property name="styleSheet">
-             <string notr="true">QProgressBar#progressBar_Loop{
-	background-color: rgb(255, 255, 255);
-	border: 1px;
+             <string notr="true">#pushButton_Setting{
+image:url(:/Pictures/Pictures/Setting.png);
+background: black;
+}
 
+QPushButton:pressed#pushButton_Setting{
+image:url(:/Pictures/Pictures/Setting.png);
+background: black;
+border: 2px rgb(131,131,131);
+border-radius: 5px
 }</string>
             </property>
-            <property name="maximum">
-             <number>100</number>
-            </property>
-            <property name="value">
-             <number>0</number>
+            <property name="text">
+             <string/>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Sweep Progress:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
            <widget class="QPushButton" name="pushButton_AbortSweep">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -755,61 +813,29 @@ border-radius: 5px
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_8">
-            <property name="text">
-             <string>Sweep Progress:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QPushButton" name="pushButton_Query">
-            <property name="minimumSize">
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_15">
+            <property name="maximumSize">
              <size>
-              <width>75</width>
-              <height>25</height>
+              <width>16777215</width>
+              <height>45</height>
              </size>
             </property>
-            <property name="toolTip">
-             <string>Query bus</string>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">#pushButton_Query{
-image:url(:/Pictures/Pictures/refreshIcon.png);
-background: black;
-}</string>
-            </property>
             <property name="text">
-             <string/>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Est. Time:&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;h:m:s&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QPushButton" name="pushButton_Setting">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="toolTip">
-             <string>Edit Bus</string>
-            </property>
+          <item row="1" column="1">
+           <widget class="QLabel" name="label_TimeEst">
             <property name="styleSheet">
-             <string notr="true">#pushButton_Setting{
-image:url(:/Pictures/Pictures/Setting.png);
-background: black;
-}
-
-QPushButton:pressed#pushButton_Setting{
-image:url(:/Pictures/Pictures/Setting.png);
-background: black;
-border: 2px rgb(131,131,131);
-border-radius: 5px
-}</string>
+             <string notr="true">color: rgb(168,168,168);
+background-color:rgb(0,0,0);
+border: 2px solid  rgb(131,131,131);
+border-radius: 5px</string>
             </property>
             <property name="text">
-             <string/>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;none&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
