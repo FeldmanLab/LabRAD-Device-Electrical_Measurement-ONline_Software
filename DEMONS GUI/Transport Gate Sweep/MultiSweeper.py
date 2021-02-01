@@ -721,7 +721,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
     def ReReadLIParams(self):
         for instrument in self.instrumentBus:
             if self.instrumentBus[instrument]['InstrumentType'] == 'SR830':
-                print(self.instrumentBus[instrument])
+                #print(self.instrumentBus[instrument])
                 lock_in = self.instrumentBus[instrument]['DeviceObject']
 
                 exc = yield lock_in.sine_out_amplitude()

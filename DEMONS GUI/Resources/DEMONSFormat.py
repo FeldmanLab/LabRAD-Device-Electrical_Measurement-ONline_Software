@@ -1693,6 +1693,7 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
         yield datavault.add(indep_vals+dep_vals+custom_vals) 
         progressbar.setValue(progressbar.value()+1)
     elif sweeper.flag and sweeper.sweepcounter==sweepcount:
+        #print('looplist: '+str(looplist))
         steps = int(looplist[0][3])
         start = looplist[0][1]
         end = looplist[0][2]
@@ -1710,7 +1711,9 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
             #yield SleepAsync(reactor,3*wait) 
             yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar,reversescan)
         elif BufferRamp == 2 and len(looplist) == 2:
+            #print('br start')
             yield BufferRamp2D(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,delta,progressbar)
+            #print('br  end')
 
 @inlineCallbacks
 def BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,flag,wait,reactor,variables,progressbar,reversescan):
@@ -1793,13 +1796,14 @@ def BufferRamp2D(instrumentBus,looplist,queryfunction,datavault,flag,wait,reacto
     num_y = pxsize[1] # number of points for p0
 
     #set up plotting for p0,n0
-    try:
-        datavault.add_parameter('n0_pnts',num_x)
-        datavault.add_parameter('n0_rng',(extent[0],extent[1]))
-        datavault.add_parameter('p0_pnts',num_y)
-        datavault.add_parameter('p0_rng',(extent[2],extent[3]))
-    except Exception:
-        pass
+    params = yield datavault.parameters()
+    print(params)
+    if 'n0_pnts' not in params:
+        yield datavault.add_parameter('n0_pnts',num_x)
+        yield datavault.add_parameter('n0_rng',(extent[0],extent[1]))
+        yield datavault.add_parameter('p0_pnts',num_y)
+        yield datavault.add_parameter('p0_rng',(extent[2],extent[3]))
+
 
     DELAY_MEAS = wait
     m,mdn = mesh(0.0,offset = (0,0),drange = (extent[2],extent[3]),nrange=(extent[0],extent[1]),gates=2,pxsize=pxsize,delta=delta)
@@ -1879,6 +1883,7 @@ def BufferRamp2D(instrumentBus,looplist,queryfunction,datavault,flag,wait,reacto
             yield datavault.add(array)
             yield Ramp_DACADC(device_obj,dac_ch[0],vec_x[stop],0,.1,.1)
             yield Ramp_DACADC(device_obj,dac_ch[1],vec_y[stop],0,.1,.1)
+            ##could add some check here to see if has been ended manually
 
 #special version of above function that determines which units to use for SR830 lockin sens
 @inlineCallbacks
