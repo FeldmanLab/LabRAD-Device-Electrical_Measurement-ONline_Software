@@ -361,8 +361,8 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
     def startContsMeasurement(self,channelList,DV):
         self.scanningflag = True
         t0 = time.time()
-        #ClearPlots(self.Plotlist)
-        # self.Plotlist['TempPlot'] = {
+        ClearPlots(self.Plotlist)
+        #seself.Plotlist['TempPlot'] = {
         #     'PlotObject': pg.PlotWidget(parent = None),
         #     'PlotData': [[],[],[]], # can plot 2 temp lines against time
         #     'Layout': self.Layout_FridgeStatusPlot1,

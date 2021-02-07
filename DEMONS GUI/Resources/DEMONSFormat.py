@@ -1712,7 +1712,7 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
             yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar,reversescan)
         elif BufferRamp == 2 and len(looplist) == 2:
             #print('br start')
-            yield BufferRamp2D(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,delta,progressbar)
+            yield BufferRamp2D(sweeper,instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,delta,progressbar)
             #print('br  end')
 
 @inlineCallbacks
@@ -1784,7 +1784,7 @@ def BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,flag,wait,re
 
 
 @inlineCallbacks #in 'looplist', take outer loop (i.e. 0) to be bounds on p0, inner (i.e. 1) to be bounds on n0
-def BufferRamp2D(instrumentBus,looplist,queryfunction,datavault,flag,wait,reactor,variables,delta,progressbar):
+def BufferRamp2D(sweeper,instrumentBus,looplist,queryfunction,datavault,flag,wait,reactor,variables,delta,progressbar):
     X_MIN = -10
     X_MAX = 10
     Y_MIN = -10
@@ -1883,6 +1883,8 @@ def BufferRamp2D(instrumentBus,looplist,queryfunction,datavault,flag,wait,reacto
             yield datavault.add(array)
             yield Ramp_DACADC(device_obj,dac_ch[0],vec_x[stop],0,.1,.1)
             yield Ramp_DACADC(device_obj,dac_ch[1],vec_y[stop],0,.1,.1)
+            if sweeper.flag == False:
+                break
             ##could add some check here to see if has been ended manually
 
 #special version of above function that determines which units to use for SR830 lockin sens
