@@ -65,7 +65,7 @@ class MainWindow(QtGui.QMainWindow, MainWindowUI):
         # for homemade data plotter
         #self.pushButton_DataPlotter.clicked.connect(lambda: openWindow(self.MeasurementWindows['DVPlotterWindow']))
         # for afylab data plotter
-        self.pushButton_DataPlotter.clicked.connect(lambda: runDVPlotter())
+        self.pushButton_DataPlotter.clicked.connect(lambda: runDVPlotter(self.MeasurementWindows['LabRAD'].DVFolderList))
         self.MeasurementWindows['LabRAD'].cxnsignal.connect(self.connect)
         self.MeasurementWindows['LabRAD'].discxnsignal.connect(self.disconnect)
         self.MeasurementWindows['LabRAD'].newSessionFolder.connect(self.distributeSessionFolder)

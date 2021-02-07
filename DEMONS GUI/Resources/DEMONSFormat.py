@@ -1918,10 +1918,11 @@ def SetEdit_Parameter_LI_Sens(Function, Parameter, parametername, lineEdit,LI,un
     except Exception as inst:
         print('Error:', inst, ' on line: ', sys.exc_info()[2].tb_lineno)
 
-def runDVPlotter():
+def runDVPlotter(dvFolderList):
     try:
+        print(dvFolderList)
         dvplotter_file = open('.\\dvplotter_output.txt','w')
-        subprocess.Popen(['python',"..\\..\\Data-Vault-Plotter\\dataVaultLivePlotter.py"],stdout=dvplotter_file,stderr = subprocess.STDOUT)
+        subprocess.Popen(['python',"..\\..\\Data-Vault-Plotter\\dataVaultLivePlotter.py"] + dvFolderList,stdout=dvplotter_file,stderr = subprocess.STDOUT)
         print('DV Plotter Open')
     except Exception as inst:
         print('DV Plotter Failed to open, likely file not found')
