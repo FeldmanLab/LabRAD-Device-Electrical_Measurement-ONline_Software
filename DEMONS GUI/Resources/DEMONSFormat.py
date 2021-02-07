@@ -1918,7 +1918,7 @@ def SetEdit_Parameter_LI_Sens(Function, Parameter, parametername, lineEdit,LI,un
 
 def runDVPlotter(dvFolderList):
     try:
-        print(dvFolderList)
+        #print(dvFolderList)
         dvplotter_file = open('.\\dvplotter_output.txt','w')
         subprocess.Popen(['python',"..\\..\\Data-Vault-Plotter\\dataVaultLivePlotter.py"] + dvFolderList,stdout=dvplotter_file,stderr = subprocess.STDOUT)
         print('DV Plotter Open')

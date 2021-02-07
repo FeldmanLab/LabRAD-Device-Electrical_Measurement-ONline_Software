@@ -82,6 +82,7 @@ class Window(QtGui.QMainWindow, LabRADConnectUI):
         #Data vault session info
         self.lineEdit_DataVaultFolder.setReadOnly(True)
         self.DVFolder = ''
+        self.DVFolderList = []
         self.lineEdit_DataVaultFolder.setText(self.DVFolder)
         
         #Saving images of all data taken info
@@ -341,6 +342,7 @@ class Window(QtGui.QMainWindow, LabRADConnectUI):
                 DVList.append(i)
                 DVFolder = DVFolder + '\\' + i
                 osDVFolder = osDVFolder +'\\' + i + '.dir'
+            self.DVFolderList = DVList
             self.DVFolder =  self.osDVFolder + '\\' + DVFolder
             self.SessionFolder = self.osDVFolder + '\\' + osDVFolder + '\\Image' + '\\' + str(datetime.date.today())
             self.lineEdit_DataVaultFolder.setText(self.DVFolder)
