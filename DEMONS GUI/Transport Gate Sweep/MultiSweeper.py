@@ -473,8 +473,17 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
 
         print('Queue Started')
         for Current_Loop in self.Queue:
+            if Current_Loop[-1][0] != 'timestamp' and self.instrumentBus[Current_Loop[-1][0]]['InstrumentType'] == 'DAC-ADC':
+                br_param = self.Parameter['BufferRamp']
+            else:
+                br_param = 0 
+
             #[ImageNumber,ImageDir] = CreateDataVaultFile(datavault,self.Parameter['DeviceName'],self.indep_vars,self.dep_vars+self.custom_vars)
             if self.flag:
+                if self.Parameter['BufferRamp'] == 2 and len(Current_Loop) < 2:
+                    if 'p0' in self.indep_vars:
+                        self.indep_vars.remove('p0')
+                        self.indep_var.remove('n0')
                 file = yield datavault.new(self.Parameter['DeviceName'],self.indep_vars,self.dep_vars+self.custom_vars) 
                 ImageNumber = file[1][0:5]
                 print('Loop Started')
@@ -492,7 +501,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                     for key in self.instrumentBus[instrument]:
                         not_recorded_list = ['Name','DeviceObject','Device','DACADCDevice','DACADCDeviceObject','ReadFn','WriteFn','CustomFn']
                         if (key not in not_recorded_list) and self.instrumentBus[instrument][key] is not None:
-                            datavault.add_parameter(str(str(instrument)+'_'+str(key)),self.instrumentBus[instrument][key])
+                            yield datavault.add_parameter(str(str(instrument)+'_'+str(key)),self.instrumentBus[instrument][key])
                 self.totalpoints = 1
                 for row in Current_Loop:
                     self.totalpoints = self.totalpoints * (row[3]+1)
@@ -501,21 +510,21 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                             lp_min = min([float(row[1]),float(row[2])])
                             lp_max = max([float(row[1]),float(row[2])])
                             lp_steps = int(row[3]) + 1
-                    datavault.add_parameter(str(row[4]) + str('Loop-Start'),row[1])
-                    datavault.add_parameter(str(row[4]) + str('Loop-End'),row[2])
-                    datavault.add_parameter(str(row[4]) + str('Loop-Steps'),row[3])
-                    datavault.add_parameter(str(row[4]) + '_pnts', lp_steps)
-                    datavault.add_parameter(str(row[4]) + '_rng',(lp_min,lp_max))
+                    yield datavault.add_parameter(str(row[4]) + str('Loop-Start'),row[1])
+                    yield datavault.add_parameter(str(row[4]) + str('Loop-End'),row[2])
+                    yield datavault.add_parameter(str(row[4]) + str('Loop-Steps'),row[3])
+                    yield datavault.add_parameter(str(row[4]) + '_pnts', lp_steps)
+                    yield datavault.add_parameter(str(row[4]) + '_rng',(lp_min,lp_max))
                 if len(self.Plots) > 0:
                     if len(self.Plots) == 1:
-                        datavault.add_parameter('live_plots',self.Plots)
+                        yield datavault.add_parameter('live_plots',self.Plots)
                     else:
-                        datavault.add_parameter('live_plots',tuple(self.Plots))
+                        yield datavault.add_parameter('live_plots',tuple(self.Plots))
 
                     #datavault.add_parameter(lp_x_axis + '_pnts', lp_steps)
                     #datavault.add_parameter(lp_x_axis + '_rng', (lp_min,lp_max))
-                    datavault.add_parameter('timestamp_pnts',1)
-                    datavault.add_parameter('timestamp_rng',(0,1))
+                    yield datavault.add_parameter('timestamp_pnts',1)
+                    yield datavault.add_parameter('timestamp_rng',(0,1))
                     #datavault.add_parameter('live_plots', [(lp_x_axis,lp_y_axis)])
 
                 AddParameterToDataVault(datavault, self.Parameter)
@@ -526,10 +535,6 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                 self.currentpoints = 0 
                 all_variables = self.indep_vars + self.dep_vars + self.custom_vars
                 self.sweepcounter += 1
-                if Current_Loop[-1][0] != 'timestamp' and self.instrumentBus[Current_Loop[-1][0]]['InstrumentType'] == 'DAC-ADC':
-                    br_param = self.Parameter['BufferRamp']
-                else:
-                    br_param = 0 
                 yield RecursiveLoop(self.instrumentBus,Current_Loop,self.queryFast,datavault,self,self.Parameter['WaitTime'],self.reactor,br_param,all_variables,self.Parameter['Delta'],self.progressBar_Loop,self.sweepcounter,self.checkBox_Reverse.isChecked())
                 datavault.add_comment(str(self.textEdit_Comment.toPlainText()))
             print('Loop Complete')
