@@ -503,6 +503,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                         if (key not in not_recorded_list) and self.instrumentBus[instrument][key] is not None:
                             yield datavault.add_parameter(str(str(instrument)+'_'+str(key)),self.instrumentBus[instrument][key])
                 self.totalpoints = 1
+                timestamp_flag = False
                 for row in Current_Loop:
                     self.totalpoints = self.totalpoints * (row[3]+1)
                     if True or self.livePlot:
@@ -510,6 +511,8 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                             lp_min = min([float(row[1]),float(row[2])])
                             lp_max = max([float(row[1]),float(row[2])])
                             lp_steps = int(row[3]) + 1
+                    if str(row[4]) == 'timestamp':
+                        timestamp_flag = True
                     yield datavault.add_parameter(str(row[4]) + str('Loop-Start'),row[1])
                     yield datavault.add_parameter(str(row[4]) + str('Loop-End'),row[2])
                     yield datavault.add_parameter(str(row[4]) + str('Loop-Steps'),row[3])
@@ -523,8 +526,9 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
 
                     #datavault.add_parameter(lp_x_axis + '_pnts', lp_steps)
                     #datavault.add_parameter(lp_x_axis + '_rng', (lp_min,lp_max))
-                    yield datavault.add_parameter('timestamp_pnts',1)
-                    yield datavault.add_parameter('timestamp_rng',(0,1))
+                    if timestamp_flag == False:
+                        yield datavault.add_parameter('timestamp_pnts',1)
+                        yield datavault.add_parameter('timestamp_rng',(0,1))
                     #datavault.add_parameter('live_plots', [(lp_x_axis,lp_y_axis)])
 
                 AddParameterToDataVault(datavault, self.Parameter)
