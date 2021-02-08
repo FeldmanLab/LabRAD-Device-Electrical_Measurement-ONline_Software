@@ -1426,6 +1426,9 @@ border-radius: 5px</string>
          </layout>
         </widget>
        </item>
+       <item>
+        <layout class="QVBoxLayout" name="layout_LMPlot"/>
+       </item>
       </layout>
      </widget>
     </item>

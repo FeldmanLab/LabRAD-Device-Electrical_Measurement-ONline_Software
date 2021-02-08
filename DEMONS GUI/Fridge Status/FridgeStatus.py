@@ -120,7 +120,10 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
             
         }
 
+        self.Plotlist = {
 
+
+        }
          
         self.outputParams = {
 
@@ -364,7 +367,7 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
         self.scanningflag = True
         t0 = time.time()
         ClearPlots(self.Plotlist)
-        #seself.Plotlist['TempPlot'] = {
+        #self.Plotlist['TempPlot'] = {
         #     'PlotObject': pg.PlotWidget(parent = None),
         #     'PlotData': [[],[],[]], # can plot 2 temp lines against time
         #     'Layout': self.Layout_FridgeStatusPlot1,
@@ -484,13 +487,44 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
             except:
                 wait_time = 1800
             dv_number = yield create_file_LM(self.dv_lm,data_dir)
+            ClearPlots(self.Plotlist)
+            self.Plotlist['LMPlot'] = {
+                'PlotObject': pg.PlotWidget(parent = None),
+                'PlotData': [[],[],[]], # can plot 2 temp lines against time
+                'Layout': self.layout_LMPlot,
+                'Title': 'LHe Level',
+                'XAxisName': 'Time',
+                'XUnit': "h",
+                'YAxisName': 'Level',
+                'YUnit': "%",
+            }
+
+            self.SetupPlots()
+
             self.LMdv_number = dv_number
             while self.ContsLMflag and self.LMdv_number == dv_number:
                 current_datetime = datetime.now()
                 if current_datetime.hour == 0:
                     dv_number = yield create_file_LM(self.dv_lm,data_dir)
+
+                    ClearPlots(self.Plotlist)
+                    self.Plotlist['LMPlot'] = {
+                        'PlotObject': pg.PlotWidget(parent = None),
+                        'PlotData': [[],[],[]], # can plot 2 temp lines against time
+                        'Layout': self.layout_LMPlot,
+                        'Title': 'LHe Level',
+                        'XAxisName': 'Time',
+                        'XUnit': "h",
+                        'YAxisName': 'Level',
+                        'YUnit': "%",
+                    }
+
+                    self.SetupPlots()
+
                     self.LMdv_number = dv_number
-                yield PingLM(self.DeviceList['Levelmeter']['DeviceObject'],self.LMLabels,self.reactor,dv = self.dv_lm, dvNumber = dv_number) 
+                yield PingLM(self.DeviceList['Levelmeter']['DeviceObject'],self.LMLabels,self.reactor,dv = self.dv_lm, dvNumber = dv_number, plotList = self.Plotlist) 
+                Plot1DData(self.Plotlist['LMPlot']['PlotData'][0],self.Plotlist['LMPlot']['PlotData'][1], self.Plotlist['LMPlot']['PlotObject'])
+
                 yield SleepAsync(self.reactor, wait_time)        
         elif self.ContsLMflag == True:
             print('STOPPED')
@@ -548,6 +582,7 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
             RefreshIndicator(DevicePropertyList['DeviceIndicator'], DevicePropertyList['DeviceObject'])
     def SetupPlots(self):
         for PlotName in self.Plotlist:
+            self.Plotlist[PlotName]['PlotObject'].setMaximumHeight(195)
             Setup1DPlot(self.Plotlist[PlotName]['PlotObject'], self.Plotlist[PlotName]['Layout'], self.Plotlist[PlotName]['Title'], self.Plotlist[PlotName]['YAxisName'], self.Plotlist[PlotName]['YUnit'], self.Plotlist[PlotName]['XAxisName'], self.Plotlist[PlotName]['XUnit'])#Plot, Layout , Title , yaxis , yunit, xaxis ,xunit
         
     def moveDefault(self):

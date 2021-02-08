@@ -358,7 +358,7 @@ def ClearPlots(Plotlist):
 Input: PlotItem, Layout of Plot and Plot properties
 '''
 def Setup1DPlot(Plot, Layout, Title, yaxis, yunit, xaxis, xunit):
-    Plot.setGeometry(QtCore.QRect(0, 0, 5, 5))
+    Plot.setGeometry(QtCore.QRect(0, 0, 5, 2))
     if Title is not None:
         Plot.setTitle(Title)
     Plot.setLabel('left', yaxis, units = yunit)
@@ -367,7 +367,7 @@ def Setup1DPlot(Plot, Layout, Title, yaxis, yunit, xaxis, xunit):
     Plot.showAxis('top', show = True)
     Plot.setXRange(-1, 1) #Default Range
     Plot.setYRange(-1, 1) #Default Range
-    Plot.addLegend()
+    #Plot.addLegend()
     Plot.enableAutoRange(enable = True)
     Layout.addWidget(Plot)
 
@@ -388,9 +388,9 @@ Input: Data for Xaxis, Yaxis and plot object
 '''
 def Plot1DData(xaxis, yaxis, plot, color = 0.5, name = '',init = 1):
     if name == '' or init != 0:
-        plot.plot(x = xaxis, y = yaxis, pen = color,symbol='o')
+        plot.plot(x = xaxis, y = yaxis, pen = color,symbol='o',symbolSize = 6)
     else:
-        plot.plot(x = xaxis, y = yaxis, pen = color, name = name,symbol='o')
+        plot.plot(x = xaxis, y = yaxis, pen = color, name = name,symbol='o', symbolSize = 6)
 
 
 
@@ -993,10 +993,10 @@ def Read_Lakeshore_Status_SetLabel(Lakeshore_Device,labels):
 #set ramprates, heaterranges,setpoints
 @inlineCallbacks
 def Set_Lakeshore_Ramping(Lakeshore_Device,inputs):
-    for channel in range(1,3):
-        yield Lakeshore_Device.set_ramp(channel,True,inputs[0][channel-1])
-        yield Lakeshore_Device.set_heater_range(channel,int(inputs[1][channel-1]))
-        yield Lakeshore_Device.set_p(channel,inputs[2][channel-1])
+    #for channel in range(1,3):
+        #yield Lakeshore_Device.set_ramp(channel,True,inputs[0][channel-1])
+    yield Lakeshore_Device.set_heater_range(1,int(inputs['HeaterRng1']))
+    yield Lakeshore_Device.set_p(1,float(inputs['Setpoint1']))
 
 
 def trimReadValue(string):
@@ -1591,12 +1591,13 @@ def openEditInstrumentWindow(window,servers,devices,info_dict):
 def ReadLakeshoreInstrumentSetting(instrumentDict):
     Lakeshore_Device = instrumentDict['DeviceObject']
     if instrumentDict['Measurement'] == 'Input':
-        ch1 = yield Lakeshore_Device.read_temp(str(instrumentDict['TempCh1']))
-        ch2 = yield Lakeshore_Device.read_temp(str(instrumentDict['TempCh2']))
-        returnValue([float(trimReadValue(ch1)),float(trimReadValue(ch2))])
+        ch1 = yield Lakeshore_Device.read_temp(str(instrumentDict['TempCh']))
+        #ch2 = yield Lakeshore_Device.read_temp(str(instrumentDict['TempCh2']))
+        returnValue([float(trimReadValue(ch1))])
     elif instrumentDict['Measurement'] == 'Output':
-        returned_val = yield Lakeshore_Device.read_p(int(instrumentDict['OutputLoop']))
-        returnValue([float(trimReadValue(returned_val))])
+        ch1 = yield Lakeshore_Device.read_temp(str(instrumentDict['TempCh']))
+        heater_val = yield Lakeshore_Device.read_heater_output(int(instrumentDict['OutputLoop']))
+        returnValue([float(trimReadValue(ch1)),float(trimReadValue(heater_val))])
 
 @inlineCallbacks
 def ReadSR830InstrumentSetting(instrumentDict):
@@ -1664,8 +1665,8 @@ def WriteLakeshoreInstrumentSetting(instrumentDict,setpoint):
     if instrumentDict['Measurement'] == 'Output':
         loop =int(instrumentDict['OutputLoop'])
         htrrange = int(instrumentDict['HeaterRange'])
-        feedback = str(instrumentDict['FeedbackCh'])
-        yield Lakeshore_Device.set_ramp(loop,True,float(instrumentDict['RampRate']))
+        feedback = str(instrumentDict['TempCh'])
+        #yield Lakeshore_Device.set_ramp(loop,True,float(instrumentDict['RampRate']))
         yield Lakeshore_Device.set_heater_range(loop,htrange)
         yield Lakeshore_Device.set_p(loop,setpoint)
         temp = yield Lakeshore_Device.read_temp(feedback)
@@ -1929,7 +1930,7 @@ def runDVPlotter(dvFolderList):
         print('Error:', inst, ' on line: ', sys.exc_info()[2].tb_lineno)
 
 @inlineCallbacks
-def PingLM(LMDeviceObject,labelslist,reactor,dv = None,dvNumber = None):
+def PingLM(LMDeviceObject,labelslist,reactor,dv = None,dvNumber = None, plotList = None):
     yield LMDeviceObject.turn_on()
     yield SleepAsync(reactor, 10)
     he_level = yield LMDeviceObject.get_percent()
@@ -1939,13 +1940,16 @@ def PingLM(LMDeviceObject,labelslist,reactor,dv = None,dvNumber = None):
     labelslist[0].setText(str(he_level) + ' %')
     labelslist[1].setText(str(timestamp))
     if dv is not None:
-        os.system('taskkill /IM "gnuplot.exe" /F 1>nul 2>&1')
         yield dv.add_ex([(timestamp_secs, he_level)])
-        os.chdir(os.path.join(os.path.join(os.path.dirname(__file__), '..'),'Scripts'))
-        #os.chdir("C:\\Users\\Feldman Lab\\code\\github\\feldmanlab\\LabRAD-Device-Electrical_Measurement-ONline_Software\\DEMONS GUI\\Scripts")
-        #print('d')
-        print('LM Datavault: '+ str(dvNumber))
-        os.system('python he_level_plotter.py' + ' ' + str(dvNumber))
+        structtime = time.localtime(int(timestamp_secs))
+        time_in_hrs = structtime.tm_hour + float(structtime.tm_min)/60
+        if plotList is not None:
+            plotList['LMPlot']['PlotData'][0].append(time_in_hrs)
+            plotList['LMPlot']['PlotData'][1].append(float(he_level))
+        # os.system('taskkill /IM "gnuplot.exe" /F 1>nul 2>&1')
+        # os.chdir(os.path.join(os.path.join(os.path.dirname(__file__), '..'),'Scripts'))
+        # print('LM Datavault: '+ str(dvNumber))
+        # os.system('python he_level_plotter.py' + ' ' + str(dvNumber))
 
 @inlineCallbacks
 def create_file_LM(dv, data_dir, **kwargs): # try kwarging the vfixed
