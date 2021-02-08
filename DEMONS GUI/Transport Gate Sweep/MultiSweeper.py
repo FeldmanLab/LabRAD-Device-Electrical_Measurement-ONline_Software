@@ -301,20 +301,26 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                 self.custom_vars.append(self.instrumentBus[instrument]['Name'])
                 custom_vals.append(self.instrumentBus[instrument]['CustomFn'](self.instrumentBus[instrument],self.dep_vars,[dep_vals])[0])
         clearLayout(self.hLayout_Query)
-        for counter in range(0,len(self.indep_vars)):
-            label = QtWidgets.QLabel(str(self.indep_vars[counter] + '\n' + str(indep_vals[counter])))
-            label.setStyleSheet("color: rgb(168,168,168);background-color:rgb(0,0,0);border: 2px solid  rgb(131,131,131); border-radius: 5px")
-            self.hLayout_Query.addWidget(label)
-        for counter in range(0,len(self.dep_vars)):
-            label = QtWidgets.QLabel(str(self.dep_vars[counter] + '\n' + str(dep_vals[counter])))
-            label.setStyleSheet("color: rgb(168,168,168);background-color:rgb(0,0,0);border: 2px solid  rgb(131,131,131); border-radius: 5px")
+        #print(self.indep_vars)
+        #print(indep_vals)
+        try:
+            for counter in range(0,len(self.indep_vars)):
+                label = QtWidgets.QLabel(str(self.indep_vars[counter] + '\n' + str(indep_vals[counter])))
+                label.setStyleSheet("color: rgb(168,168,168);background-color:rgb(0,0,0);border: 2px solid  rgb(131,131,131); border-radius: 5px")
+                self.hLayout_Query.addWidget(label)
+            for counter in range(0,len(self.dep_vars)):
+                label = QtWidgets.QLabel(str(self.dep_vars[counter] + '\n' + str(dep_vals[counter])))
+                label.setStyleSheet("color: rgb(168,168,168);background-color:rgb(0,0,0);border: 2px solid  rgb(131,131,131); border-radius: 5px")
 
-            self.hLayout_Query.addWidget(label)
-        for counter in range(0,len(self.custom_vars)):
-            label = QtWidgets.QLabel(str(self.custom_vars[counter] + '\n' + str(custom_vals[counter])))
-            label.setStyleSheet("color: rgb(168,168,168);background-color:rgb(0,0,0);border: 2px solid  rgb(131,131,131); border-radius: 5px")
+                self.hLayout_Query.addWidget(label)
+            for counter in range(0,len(self.custom_vars)):
+                label = QtWidgets.QLabel(str(self.custom_vars[counter] + '\n' + str(custom_vals[counter])))
+                label.setStyleSheet("color: rgb(168,168,168);background-color:rgb(0,0,0);border: 2px solid  rgb(131,131,131); border-radius: 5px")
 
-            self.hLayout_Query.addWidget(label)
+                self.hLayout_Query.addWidget(label)
+        except Exception as inst:
+            print('Error:', inst, ' on line: ', sys.exc_info()[2].tb_lineno)
+            print('Probably query-ing too fast - slow down')
 
         return indep_vals, dep_vals, custom_vals
 
