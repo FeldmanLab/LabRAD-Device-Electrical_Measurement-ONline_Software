@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1068</width>
-    <height>864</height>
+    <width>1154</width>
+    <height>1011</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -640,7 +640,7 @@ border-radius: 5px</string>
              </size>
             </property>
             <property name="text">
-             <string>Input A</string>
+             <string>He3 Pot</string>
             </property>
            </widget>
           </item>
@@ -923,7 +923,7 @@ border-radius: 5px</string>
              </size>
             </property>
             <property name="text">
-             <string>Input D</string>
+             <string>1K Pot</string>
             </property>
            </widget>
           </item>
@@ -962,7 +962,7 @@ border-radius: 5px</string>
              </size>
             </property>
             <property name="text">
-             <string>Input B</string>
+             <string>Sample</string>
             </property>
            </widget>
           </item>
@@ -1041,7 +1041,7 @@ border-radius: 5px</string>
              </size>
             </property>
             <property name="text">
-             <string>Input C</string>
+             <string>Sorp</string>
             </property>
            </widget>
           </item>
@@ -1129,7 +1129,7 @@ border-radius: 5px
           <item row="1" column="3">
            <widget class="QLabel" name="label_19">
             <property name="text">
-             <string>Heater Loop 2</string>
+             <string>He3 pot heater</string>
             </property>
            </widget>
           </item>
@@ -1273,7 +1273,7 @@ border-radius: 5px
              </size>
             </property>
             <property name="text">
-             <string>Heater Loop 1</string>
+             <string>Sorp heater</string>
             </property>
            </widget>
           </item>
@@ -1542,9 +1542,6 @@ border-radius: 5px</string>
     </item>
     <item row="7" column="0" colspan="7">
      <layout class="QHBoxLayout" name="horizontalLayout_MagY">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetDefaultConstraint</enum>
-      </property>
       <item>
        <widget class="QFrame" name="frame_2">
         <property name="maximumSize">
@@ -1809,7 +1806,13 @@ border-radius: 5px</string>
      </layout>
     </item>
     <item row="6" column="0" colspan="7">
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMaximumSize</enum>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
       <item>
        <widget class="QFrame" name="frame">
         <property name="frameShape">
