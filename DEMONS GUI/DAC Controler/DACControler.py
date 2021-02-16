@@ -10,6 +10,7 @@ import time
 import threading
 import copy
 from scipy.signal import detrend
+import DACSetting
 #importing a bunch of stuff
 
 
@@ -58,6 +59,17 @@ class Window(QtGui.QMainWindow, ControlerWindowUI):
             'Output2': self.lineEdit_TargetNumber_2,
         }
 
+        self.DACBounds = {
+            'DAC0Min': -10.0,
+            'DAC0Max': 10.0,
+
+            'DAC1Min': -10.0,
+            'DAC1Max': 10.0,
+
+        }
+
+        self.DACSetting = DACSetting.DACSetting(self.reactor, self)
+
         for key in self.lineEdit:
             if not isinstance(self.targetnumber[key], str):
                 UpdateLineEdit_Bound(self.targetnumber, key, self.lineEdit)
@@ -66,8 +78,8 @@ class Window(QtGui.QMainWindow, ControlerWindowUI):
 
         self.comboBox_DAQ_SelectServer.currentIndexChanged.connect(lambda: SelectServer(self.DeviceList, 'DataAquisition_Device', self.serversList, str(self.DeviceList['DataAquisition_Device']['ComboBoxServer'].currentText())))
         self.comboBox_DAQ_SelectDevice.currentIndexChanged.connect(lambda: SelectDevice(self.DeviceList, 'DataAquisition_Device', str(self.DeviceList['DataAquisition_Device']['ComboBoxDevice'].currentText()), self.Refreshinterface))
-        self.lineEdit_TargetNumber_1.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.targetnumber, 'Output1', self.lineEdit, [-10.0, 10.0]))
-        self.lineEdit_TargetNumber_2.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.targetnumber, 'Output2', self.lineEdit, [-10.0, 10.0]))
+        self.lineEdit_TargetNumber_1.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.targetnumber, 'Output1', self.lineEdit, [self.DACBounds['DAC0Min'], self.DACBounds['DAC0Max']]))
+        self.lineEdit_TargetNumber_2.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.targetnumber, 'Output2', self.lineEdit, [self.DACBounds['DAC1Min'], self.DACBounds['DAC1Max']]))
 
         self.pushButton_SET_1.clicked.connect(lambda: Set_DAC(self.DeviceList['DataAquisition_Device']['DeviceObject'], 0, self.targetnumber['Output1'],self.label_DAC0))
         self.pushButton_SET_2.clicked.connect(lambda: Set_DAC(self.DeviceList['DataAquisition_Device']['DeviceObject'], 1, self.targetnumber['Output2'],self.label_DAC1))
@@ -80,6 +92,9 @@ class Window(QtGui.QMainWindow, ControlerWindowUI):
         self.pushButton_Read_3.clicked.connect(lambda: Read_ADC_SetLabel(self.DeviceList['DataAquisition_Device']['DeviceObject'], 2, self.label_ADC_3))
         self.pushButton_Read_4.clicked.connect(lambda: Read_ADC_SetLabel(self.DeviceList['DataAquisition_Device']['DeviceObject'], 3, self.label_ADC_4))
 
+        self.pushButton_SetExtents.clicked.connect(lambda: openEditInstrumentWindow(self.DACSetting,None,None,self.DACBounds))
+
+        self.DACSetting.complete.connect(lambda: self.updateDACBounds(self.DACSetting.targetnumber))
         self.pushButton_ReadAll.clicked.connect(lambda: self.ReadAll())
     def DetermineEnableConditions(self):
         self.ButtonsCondition={
@@ -154,6 +169,9 @@ class Window(QtGui.QMainWindow, ControlerWindowUI):
 
         Read_DAC_SetLabel(self.DeviceList['DataAquisition_Device']['DeviceObject'], 0, self.label_DAC0)
         Read_DAC_SetLabel(self.DeviceList['DataAquisition_Device']['DeviceObject'], 1, self.label_DAC1)
+
+    def updateDACBounds(self, dictionary):
+    	self.DACBounds = dictionary
 
 class serversList(QtGui.QDialog, Ui_ServerList):
     def __init__(self, reactor, parent = None):
