@@ -111,8 +111,8 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
         }
 
         self.targetnumber = {
-            'RampRate1': 0.0,
-            'RampRate2': 0.0,
+            #'RampRate1': 0.0,
+            #'RampRate2': 0.0,
             'HeaterRng1': 0,
             'HeaterRng2': 0,
             'Setpoint1': 0.0,
@@ -120,12 +120,15 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
             
         }
 
+        self.Plotlist = {
 
+
+        }
          
         self.outputParams = {
 
-            'RampRate1': self.lineEdit_RampRate_1,
-            'RampRate2': self.lineEdit_RampRate_2,
+            #'RampRate1': self.lineEdit_RampRate_1,
+            #'RampRate2': self.lineEdit_RampRate_2,
             'HeaterRng1': self.comboBox_HeaterRng1,
             'HeaterRng2': self.comboBox_HeaterRng2,
             'Setpoint1': self.lineEdit_Setpoint_1,
@@ -245,8 +248,8 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
         self.lineEdit_Setpoint_1.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.targetnumber, 'Setpoint1', self.outputParams, [0, 300.0]))
         self.lineEdit_Setpoint_2.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.targetnumber, 'Setpoint2', self.outputParams, [0, 300.0]))
 
-        self.lineEdit_RampRate_1.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.targetnumber, 'RampRate1', self.outputParams, [0, 1000]))
-        self.lineEdit_RampRate_2.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.targetnumber, 'RampRate2', self.outputParams, [0, 1000]))
+        #self.lineEdit_RampRate_1.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.targetnumber, 'RampRate1', self.outputParams, [0, 1000]))
+        #self.lineEdit_RampRate_2.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.targetnumber, 'RampRate2', self.outputParams, [0, 1000]))
 
         self.comboBox_HeaterRng1.currentIndexChanged.connect(lambda: UpdateComboBox(self.targetnumber,'HeaterRng1',self.outputParams))
         self.comboBox_HeaterRng2.currentIndexChanged.connect(lambda: UpdateComboBox(self.targetnumber,'HeaterRng2',self.outputParams))
@@ -254,7 +257,7 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
         self.pushButton_ConnectDV.clicked.connect(lambda: createDVClient(self, self.localcxn))
         self.checkBox_TempDV.stateChanged.connect(lambda: self.setDV(self.checkBox_TempDV.isChecked()))
 
-        self.pushButton_STARTRAMP.clicked.connect(lambda: Set_Lakeshore_Ramping(self.DeviceList['Lakeshore_Device']['DeviceObject'],np.reshape(list(self.targetnumber.values()),(3,2)) ))
+        self.pushButton_STARTRAMP.clicked.connect(lambda: Set_Lakeshore_Ramping(self.DeviceList['Lakeshore_Device']['DeviceObject'],self.targetnumber))#np.reshape(list(self.targetnumber.values()),(3,2)) ))
         self.pushButton_READALL.clicked.connect(lambda: Read_Lakeshore_Status_SetLabel(self.DeviceList['Lakeshore_Device']['DeviceObject'],self.Labels))
         self.pushButton_CONTS.clicked.connect(lambda: self.startContsMeasurement([1,3],self.tempDV))
         self.pushButton_STOP.clicked.connect(lambda: self.endContsMeasurement())
@@ -345,6 +348,8 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
             #self.pushButton_ReadMagContsY: not self.SingleAxisMagY == False,
             self.pushButton_EnableMagZ:(not self.DeviceList['MagnetZ_Device']['DeviceObject'] == False) and self.SingleAxisMagX == False and self.SingleAxisMagY ==False,
 
+            self.comboBox_HeaterRng2: False,
+            self.lineEdit_Setpoint_2: False,
 
 
             #self.pushButton_SET_1: not self.DeviceList['Lakeshore_Device']['DeviceObject'] == False,
@@ -362,7 +367,7 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
         self.scanningflag = True
         t0 = time.time()
         ClearPlots(self.Plotlist)
-        #seself.Plotlist['TempPlot'] = {
+        #self.Plotlist['TempPlot'] = {
         #     'PlotObject': pg.PlotWidget(parent = None),
         #     'PlotData': [[],[],[]], # can plot 2 temp lines against time
         #     'Layout': self.Layout_FridgeStatusPlot1,
@@ -482,13 +487,44 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
             except:
                 wait_time = 1800
             dv_number = yield create_file_LM(self.dv_lm,data_dir)
+            ClearPlots(self.Plotlist)
+            self.Plotlist['LMPlot'] = {
+                'PlotObject': pg.PlotWidget(parent = None),
+                'PlotData': [[],[],[]], # can plot 2 temp lines against time
+                'Layout': self.layout_LMPlot,
+                'Title': 'LHe Level',
+                'XAxisName': 'Time',
+                'XUnit': "h",
+                'YAxisName': 'Level',
+                'YUnit': "%",
+            }
+
+            self.SetupPlots()
+
             self.LMdv_number = dv_number
             while self.ContsLMflag and self.LMdv_number == dv_number:
                 current_datetime = datetime.now()
                 if current_datetime.hour == 0:
                     dv_number = yield create_file_LM(self.dv_lm,data_dir)
+
+                    ClearPlots(self.Plotlist)
+                    self.Plotlist['LMPlot'] = {
+                        'PlotObject': pg.PlotWidget(parent = None),
+                        'PlotData': [[],[],[]], # can plot 2 temp lines against time
+                        'Layout': self.layout_LMPlot,
+                        'Title': 'LHe Level',
+                        'XAxisName': 'Time',
+                        'XUnit': "h",
+                        'YAxisName': 'Level',
+                        'YUnit': "%",
+                    }
+
+                    self.SetupPlots()
+
                     self.LMdv_number = dv_number
-                yield PingLM(self.DeviceList['Levelmeter']['DeviceObject'],self.LMLabels,self.reactor,dv = self.dv_lm, dvNumber = dv_number) 
+                yield PingLM(self.DeviceList['Levelmeter']['DeviceObject'],self.LMLabels,self.reactor,dv = self.dv_lm, dvNumber = dv_number, plotList = self.Plotlist) 
+                Plot1DData(self.Plotlist['LMPlot']['PlotData'][0],self.Plotlist['LMPlot']['PlotData'][1], self.Plotlist['LMPlot']['PlotObject'])
+
                 yield SleepAsync(self.reactor, wait_time)        
         elif self.ContsLMflag == True:
             print('STOPPED')
@@ -546,6 +582,7 @@ class Window(QtGui.QMainWindow, FridgeStatusUI):
             RefreshIndicator(DevicePropertyList['DeviceIndicator'], DevicePropertyList['DeviceObject'])
     def SetupPlots(self):
         for PlotName in self.Plotlist:
+            self.Plotlist[PlotName]['PlotObject'].setMaximumHeight(195)
             Setup1DPlot(self.Plotlist[PlotName]['PlotObject'], self.Plotlist[PlotName]['Layout'], self.Plotlist[PlotName]['Title'], self.Plotlist[PlotName]['YAxisName'], self.Plotlist[PlotName]['YUnit'], self.Plotlist[PlotName]['XAxisName'], self.Plotlist[PlotName]['XUnit'])#Plot, Layout , Title , yaxis , yunit, xaxis ,xunit
         
     def moveDefault(self):

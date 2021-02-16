@@ -59,12 +59,12 @@ class LakeshoreSetting(QtGui.QMainWindow, Ui_LakeshoreSetting):
             'DeviceObject': None,
             'Device': None,
             'Measurement': None, # input or output
-            'TempCh1': None,
-            'TempCh2': None,
+            'TempCh': None,
+        #    'TempCh2': None,
             'OutputLoop': None,
-            'FeedbackCh': None,
+        #    'FeedbackCh': None,
             'HeaterRange': None,
-            'RampRate': None,
+        #    'RampRate': None,
             'ReadFn': ReadLakeshoreInstrumentSetting,
             'WriteFn': WriteLakeshoreInstrumentSetting
 
@@ -72,7 +72,7 @@ class LakeshoreSetting(QtGui.QMainWindow, Ui_LakeshoreSetting):
         self.lineEdit = {
 
             'Name': self.lineEdit_Name,
-            'RampRate': self.lineEdit_RampRate,
+        #    'RampRate': self.lineEdit_RampRate,
         }
         ##Input 
         self.DetermineEnableConditions()
@@ -85,13 +85,13 @@ class LakeshoreSetting(QtGui.QMainWindow, Ui_LakeshoreSetting):
 
         self.lineEdit_Name.editingFinished.connect(lambda: UpdateLineEdit_String(self.InstrumentDict,'Name',self.lineEdit))
         self.comboBox_Measurement.currentIndexChanged.connect(lambda: SetComboBox_Parameter(self.InstrumentDict,'Measurement',self.comboBox_Measurement.currentText(),refreshFunc=self.Refreshinterface))
-        self.comboBox_TempCh1.currentIndexChanged.connect(lambda: SetComboBox_Parameter(self.InstrumentDict,'TempCh1',self.comboBox_TempCh1.currentText()))
-        self.comboBox_TempCh2.currentIndexChanged.connect(lambda: SetComboBox_Parameter(self.InstrumentDict,'TempCh2',self.comboBox_TempCh2.currentText()))
+        self.comboBox_TempCh.currentIndexChanged.connect(lambda: SetComboBox_Parameter(self.InstrumentDict,'TempCh',self.comboBox_TempCh.currentText()))
+        #self.comboBox_TempCh2.currentIndexChanged.connect(lambda: SetComboBox_Parameter(self.InstrumentDict,'TempCh2',self.comboBox_TempCh2.currentText()))
         self.comboBox_OutputLoop.currentIndexChanged.connect(lambda: SetComboBox_Parameter(self.InstrumentDict,'OutputLoop', self.comboBox_OutputLoop.currentText()))
-        self.comboBox_FeedbackCh.currentIndexChanged.connect(lambda: SetComboBox_Parameter(self.InstrumentDict,'FeedbackCh', self.comboBox_FeedbackCh.currentText()))
+        #self.comboBox_FeedbackCh.currentIndexChanged.connect(lambda: SetComboBox_Parameter(self.InstrumentDict,'FeedbackCh', self.comboBox_FeedbackCh.currentText()))
 
         self.comboBox_HeaterRange.currentIndexChanged.connect(lambda: SetComboBox_Parameter(self.InstrumentDict,'Heater Range', self.comboBox_HeaterRange.currentText()))
-        self.lineEdit_RampRate.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.InstrumentDict,'RampRate',self.lineEdit,[0.0,30.0]))
+        #self.lineEdit_RampRate.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.InstrumentDict,'RampRate',self.lineEdit,[0.0,30.0]))
 
         self.pushButton_Done.clicked.connect(lambda: self.done())
         self.pushButton_Cancel.clicked.connect(lambda: self.closeWindow())
@@ -145,17 +145,17 @@ class LakeshoreSetting(QtGui.QMainWindow, Ui_LakeshoreSetting):
     def DetermineEnableConditions(self):
         self.ButtonsCondition = {
             self.comboBox_OutputLoop: (self.InstrumentDict['Measurement'] == 'Output'),
-            self.comboBox_FeedbackCh: (self.InstrumentDict['Measurement'] == 'Output'),
+            #self.comboBox_FeedbackCh: (self.InstrumentDict['Measurement'] == 'Output'),
             self.comboBox_HeaterRange: (self.InstrumentDict['Measurement'] == 'Output'),
-            self.lineEdit_RampRate: (self.InstrumentDict['Measurement'] == 'Output'),
+            #self.lineEdit_RampRate: (self.InstrumentDict['Measurement'] == 'Output'),
         }
 
     def done(self):
         if self.InstrumentDict['Measurement'] == 'Input':
             self.InstrumentDict['OutputLoop'] = None
-            self.InstrumentDict['FeedbackCh'] = None
+            #self.InstrumentDict['FeedbackCh'] = None
             self.InstrumentDict['HeaterRange'] = None
-            self.InstrumentDict['RampRate'] = None
+            #self.InstrumentDict['RampRate'] = None
         self.complete.emit()
         self.close()
 
@@ -166,10 +166,10 @@ class LakeshoreSetting(QtGui.QMainWindow, Ui_LakeshoreSetting):
         self.lineEdit_Name.setText(input_dictionary['Name'])
         self.comboBox_Measurement.setCurrentText(input_dictionary['Measurement'])
         self.comboBox_Lakeshore_SelectDevice.setCurrentText(input_dictionary['Device'])
-        self.comboBox_TempCh1.setCurrentText(input_dictionary['TempCh1'])
-        self.comboBox_TempCh2.setCurrentText(input_dictionary['TempCh2'])
+        self.comboBox_TempCh.setCurrentText(input_dictionary['TempCh'])
+        #self.comboBox_TempCh2.setCurrentText(input_dictionary['TempCh2'])
         if input_dictionary['Measurement'] == 'Output':
-            self.lineEdit_RampRate.setText(input_dictionary['RampRate'])
+            #self.lineEdit_RampRate.setText(input_dictionary['RampRate'])
             self.comboBox_HeaterRange.setCurrentText(input_dictionary['HeaterRange'])
             self.comboBox_OutputLoop.setCurrentText(input_dictionary['OuputLoop'])
 
@@ -180,20 +180,20 @@ class LakeshoreSetting(QtGui.QMainWindow, Ui_LakeshoreSetting):
             'DeviceObject': None,
             'Device': None,
             'Measurement': None, # input or output
-            'TempCh1': None,
-            'TempCh2': None,
+            'TempCh': None,
+            #'TempCh2': None,
             'OutputLoop': None,
-            'FeedbackCh': None,
+            #'FeedbackCh': None,
             'HeaterRange': None,
-            'RampRate': None,
+            #'RampRate': None,
             'ReadFn': ReadLakeshoreInstrumentSetting,
             'WriteFn': WriteLakeshoreInstrumentSetting
         }
         self.lineEdit_Name.setText('')
-        self.lineEdit_RampRate.setText('')
+        #self.lineEdit_RampRate.setText('')
         self.comboBox_Measurement.setCurrentText('')
-        self.comboBox_TempCh1.setCurrentText('')
-        self.comboBox_TempCh2.setCurrentText('')
+        self.comboBox_TempCh.setCurrentText('')
+        #self.comboBox_TempCh2.setCurrentText('')
         self.comboBox_OutputLoop.setCurrentText('')
         self.comboBox_HeaterRange.setCurrentText('')
         self.comboBox_Lakeshore_SelectDevice.setCurrentText('Offline')
