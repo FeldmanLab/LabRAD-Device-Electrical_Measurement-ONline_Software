@@ -1712,7 +1712,34 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
             #yield SleepAsync(reactor,3*wait) 
             yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar,reversescan)
         elif BufferRamp == 3 and len(looplist) == 1:
-            yield SleepAsync(reactor,3*600*wait) 
+            yield SleepAsync(reactor,3*600*wait) ## waits 3 minutes for .1 s waittime.
+
+            ## check temperature < 250 mK if 
+            lshorename = ''
+            for instrumentName in instrumentBus:
+                if instrumentBus[instrumentName][instrumentType] == 'Lakeshore':
+                    lshorename = instrumentName
+
+            if lshorename == '':
+                yield SleepAsync(reactor, 3*600*wait)
+            else:
+
+                threshold_temp = .25
+                counter = 0
+                current_temp = yield instrumentBus[lshorename]['ReadFn'](instrumentBus[lshorename])
+                print('current temp')
+                while current_temp[0] > threshold_temp and counter < 10:
+                    counter += 1
+                    # sleep for 10 seconds
+                    yield SleepAsync(reactor, 10)
+                    #measure temperature again
+                    current_temp = yield instrumentBus[lshorename]['ReadFn'](instrumentBus[lshorename])
+                if counter < 10:
+                    print('Current temp PASS:' + str(current_temp[0]))
+                elif counter == 10:
+                    print('Current temp FAIL:' + str(current_temp[0]))
+
+
             yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar,reversescan)
 
         elif BufferRamp == 2 and len(looplist) == 2:
