@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1068</width>
-    <height>864</height>
+    <width>1154</width>
+    <height>1011</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -635,7 +635,7 @@ border-radius: 5px
              </size>
             </property>
             <property name="text">
-             <string>1K Pot</string>
+             <string>He3 Pot</string>
             </property>
            </widget>
           </item>
@@ -941,8 +941,28 @@ border-radius: 5px</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="4">
-           <widget class="QLabel" name="label_Setpoint1">
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_17">
+            <property name="text">
+             <string>Htr Rng</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QLabel" name="label_13">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>13</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>1K Pot</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="6">
+           <widget class="QPushButton" name="pushButton_CONTS">
             <property name="minimumSize">
              <size>
               <width>60</width>
@@ -962,7 +982,7 @@ border: 2px solid  rgb(131,131,131);
 border-radius: 5px</string>
             </property>
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;default&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>Sample</string>
             </property>
            </widget>
           </item>
@@ -1006,7 +1026,7 @@ border: 2px solid  rgb(131,131,131);
 border-radius: 5px</string>
             </property>
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;default&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>Sorp</string>
             </property>
            </widget>
           </item>
@@ -1129,7 +1149,7 @@ border-radius: 5px
           <item row="4" column="0">
            <widget class="QLabel" name="label_21">
             <property name="text">
-             <string>Htr Rng</string>
+             <string>He3 pot heater</string>
             </property>
            </widget>
           </item>
@@ -1524,9 +1544,6 @@ border-radius: 5px</string>
     </item>
     <item row="7" column="0" colspan="7">
      <layout class="QHBoxLayout" name="horizontalLayout_MagY">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetDefaultConstraint</enum>
-      </property>
       <item>
        <widget class="QFrame" name="frame_2">
         <property name="maximumSize">
@@ -1791,7 +1808,13 @@ border-radius: 5px</string>
      </layout>
     </item>
     <item row="6" column="0" colspan="7">
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMaximumSize</enum>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
       <item>
        <widget class="QFrame" name="frame">
         <property name="frameShape">
