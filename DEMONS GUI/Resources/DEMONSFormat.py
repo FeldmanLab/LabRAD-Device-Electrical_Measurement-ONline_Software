@@ -1723,24 +1723,32 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
             if lshorename == '':
                 yield SleepAsync(reactor, 3*600*wait)
             else:
+                ### threshold at 230 mK
+                threshold_temp = .23
 
-                threshold_temp = .25
+                ##above threshold at 1.4 K (don't wait extra time if he3 has boiled off)
                 counter = 0
                 current_temp = yield instrumentBus[lshorename]['ReadFn'](instrumentBus[lshorename])
                 print('current temp')
-                while current_temp[0] > threshold_temp and counter < 10:
+                while current_temp[0] > threshold_temp and counter < 10 and current_temp < 1.4:
                     counter += 1
                     # sleep for 10 seconds
                     yield SleepAsync(reactor, 10)
                     #measure temperature again
                     current_temp = yield instrumentBus[lshorename]['ReadFn'](instrumentBus[lshorename])
-                if counter < 10:
+                if counter < 10 and current_temp < 1.4:
                     print('Current temp PASS:' + str(current_temp[0]))
-                elif counter == 10:
+                else:
                     print('Current temp FAIL:' + str(current_temp[0]))
 
+            if instrumentBus[looplist[0][0]][instrumentType] == 'DAC-ADC':
+                yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar,reversescan)
+            else:
+                for k in range(0,steps+1):
+                    if sweeper.flag and sweeper.sweepcounter == sweepcount:
+                        g = yield instrumentBus[instrument]['WriteFn'](instrumentBus[instrument], start + k*stepsize)
+                        yield RecursiveLoop(instrumentBus,looplist[1:],queryfunction,datavault,sweeper,wait,reactor, BufferRamp,variables,delta,progressbar,sweepcount,reversescan)
 
-            yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar,reversescan)
 
         elif BufferRamp == 2 and len(looplist) == 2:
             #print('br start')

@@ -481,7 +481,10 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
         for Current_Loop in self.Queue:
             if Current_Loop[-1][0] != 'timestamp' and self.instrumentBus[Current_Loop[-1][0]]['InstrumentType'] == 'DAC-ADC':
                 br_param = self.Parameter['BufferRamp']
+            elif self.Parameter['BufferRamp'] == 3:
+                br_param = 3
             else:
+                
                 br_param = 0 
 
             #[ImageNumber,ImageDir] = CreateDataVaultFile(datavault,self.Parameter['DeviceName'],self.indep_vars,self.dep_vars+self.custom_vars)
