@@ -197,7 +197,7 @@ class LakeShore350Server(GPIBManagedServer):
         returnValue(ans)
 
     @setting(105, channel='i',returns='s')
-    def read_heater_ouput(self,c,channel):
+    def read_heater_output(self,c,channel):
         dev=self.selectedDevice(c)
         yield dev.write("HTR? %s\n"%channel)
         ans = yield dev.read()

@@ -348,14 +348,14 @@ class SR830(GPIBManagedServer):
         resp = yield dev.query("SENS?")
         returnValue(getSensitivity(int(self.trimReadValue(resp))) * u)
 
-    @setting(41, 'Sensitivity Up',i='v', returns='v')
-    def sensitivity_up(self, c,i):
+    @setting(41, 'Sensitivity Up', returns='v')
+    def sensitivity_up(self, c):
         """Kicks the sensitivity up a notch."""
         dev = self.selectedDevice(c)
         returnValue((yield self.sensitivity(c, int( self.trimReadValue ((yield dev.query('SENS?')))) + 1)))
 
-    @setting(42, 'Sensitivity Down',i='v', returns='v')
-    def sensitivity_down(self, c,i):
+    @setting(42, 'Sensitivity Down', returns='v')
+    def sensitivity_down(self, c):
         """Turns the sensitivity down a notch."""
         dev = self.selectedDevice(c)
         returnValue((yield self.sensitivity(c, int( self.trimReadValue( (yield dev.query('SENS?')))) - 1)))
@@ -364,6 +364,7 @@ class SR830(GPIBManagedServer):
     def auto_sensitivity(self, c):
         """Automatically adjusts sensitivity until signal is between 35% and 95% of full range."""
         waittime = yield self.wait_time(c)
+        waittime = waittime['s']
         r = yield self.r(c)
         sens = yield self.sensitivity(c)
         while r/sens > 0.95:
@@ -378,13 +379,13 @@ class SR830(GPIBManagedServer):
             yield util.wakeupCall(waittime)
             r = yield self.r(c)
             sens = yield self.sensitivity(c)
-    @setting(44, 'Time Constant Up',i='v', returns='v')
-    def time_constant_up(self, c,i):
+    @setting(44, 'Time Constant Up', returns='v')
+    def time_constant_up(self, c):
         """Kicks the TC up a notch."""
         dev = self.selectedDevice(c)
         returnValue((yield self.time_constant(c, int( self.trimReadValue ((yield dev.query('OFLT?')))) + 1)))
-    @setting(45, 'Time Constant Down',i='v', returns='v')
-    def time_constant_down(self, c,i):
+    @setting(45, 'Time Constant Down', returns='v')
+    def time_constant_down(self, c):
         """Kicks the TC up a notch."""
         dev = self.selectedDevice(c)
         returnValue((yield self.time_constant(c, int( self.trimReadValue( (yield dev.query('OFLT?')))) - 1)))
@@ -416,9 +417,9 @@ class SR830(GPIBManagedServer):
         """Returns the recommended wait time given current time constant and low-pass filter slope."""
         dev = self.selectedDevice(c)
         tc = yield dev.query("OFLT?")
-        tc = getTC(int(tc))
+        tc = getTC(int(self.trimReadValue(tc)))
         slope = yield dev.query("OFSL?")
-        slope = int(slope)
+        slope = int(self.trimReadValue(slope))
         if slope == 0:
             returnValue(5*tc)
         elif slope == 1:
