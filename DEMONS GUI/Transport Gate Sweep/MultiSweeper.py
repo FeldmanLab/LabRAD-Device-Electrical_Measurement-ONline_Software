@@ -545,6 +545,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                 self.currentpoints = 0 
                 all_variables = self.indep_vars + self.dep_vars + self.custom_vars
                 self.sweepcounter += 1
+                print(br_param)
                 yield RecursiveLoop(self.instrumentBus,Current_Loop,self.queryFast,datavault,self,self.Parameter['WaitTime'],self.reactor,br_param,all_variables,self.Parameter['Delta'],self.progressBar_Loop,self.sweepcounter,self.checkBox_Reverse.isChecked())
                 datavault.add_comment(str(self.textEdit_Comment.toPlainText()))
             print('Loop Complete')

@@ -1703,7 +1703,7 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
         if instrument == 'timestamp':
             for k in range(0,steps+1):
                 yield RecursiveLoop(instrumentBus,looplist[1:],queryfunction,datavault,sweeper,wait,reactor,BufferRamp,variables,delta,progressbar,sweepcount,reversescan)
-        elif (BufferRamp != 1 and BufferRamp != 2) or (len(looplist) > 1 and BufferRamp == 1) or (len(looplist)>2 and BufferRamp == 2):
+        elif (BufferRamp != 1 and BufferRamp != 2 and BufferRamp != 3) or (len(looplist) > 1 and (BufferRamp == 1 or BufferRamp == 3)) or (len(looplist)>2 and BufferRamp == 2):
             for k in range(0,steps+1):
                 if sweeper.flag and sweeper.sweepcounter == sweepcount:
                     g = yield instrumentBus[instrument]['WriteFn'](instrumentBus[instrument], start + k*stepsize)
@@ -1711,6 +1711,10 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
         elif BufferRamp == 1 and len(looplist) == 1:
             #yield SleepAsync(reactor,3*wait) 
             yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar,reversescan)
+        elif BufferRamp == 3 and len(looplist) == 1:
+            yield SleepAsync(reactor,3*600*wait) 
+            yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar,reversescan)
+
         elif BufferRamp == 2 and len(looplist) == 2:
             #print('br start')
             yield BufferRamp2D(sweeper,instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,delta,progressbar)
@@ -1913,7 +1917,9 @@ def SetEdit_Parameter_LI_Sens(Function, Parameter, parametername, lineEdit,LI,un
             unit = unit1
         else:
             unit = unit2
-        value = yield Function(dummyval*unit)
+        #value = yield Function(dummyval*unit)
+        value = yield Function()#dummyval*unit)
+
         Parameter[parametername] = value[unit]
         lineEdit.setText(formatNum(Parameter[parametername], 6))
     except Exception as inst:
