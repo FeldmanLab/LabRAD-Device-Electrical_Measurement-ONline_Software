@@ -1712,15 +1712,17 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
             #yield SleepAsync(reactor,3*wait) 
             yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar,reversescan)
         elif BufferRamp == 3 and len(looplist) == 1:
-            yield SleepAsync(reactor,3*600*wait) ## waits 3 minutes for .1 s waittime.
+            #yield SleepAsync(reactor,3*600*wait) ## waits 3 minutes for .1 s waittime.
 
             ## check temperature < 250 mK if 
             lshorename = ''
             for instrumentName in instrumentBus:
-                if instrumentBus[instrumentName][instrumentType] == 'Lakeshore':
+                #print(instrumentBus[instrumentName]['InstrumentType'])
+                if instrumentBus[instrumentName]['InstrumentType'] == 'Lakeshore':
                     lshorename = instrumentName
-
+            #print(lshorename)
             if lshorename == '':
+                print('waiting....')
                 yield SleepAsync(reactor, 3*600*wait)
             else:
                 ### threshold at 230 mK
@@ -1729,19 +1731,23 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
                 ##above threshold at 1.4 K (don't wait extra time if he3 has boiled off)
                 counter = 0
                 current_temp = yield instrumentBus[lshorename]['ReadFn'](instrumentBus[lshorename])
-                print('current temp')
-                while current_temp[0] > threshold_temp and counter < 10 and current_temp < 1.4:
+                temp_value = float(current_temp[0])
+                print(current_temp)
+                print('current temp: ' + str(current_temp[0]))
+                while temp_value > threshold_temp and counter < 30 and temp_value < 1.4:
                     counter += 1
                     # sleep for 10 seconds
                     yield SleepAsync(reactor, 10)
                     #measure temperature again
                     current_temp = yield instrumentBus[lshorename]['ReadFn'](instrumentBus[lshorename])
-                if counter < 10 and current_temp < 1.4:
-                    print('Current temp PASS:' + str(current_temp[0]))
+                    temp_value =  float(current_temp[0])
+                    print(temp_value)
+                if counter < 30 and temp_value < 1.4:
+                    print('Current temp PASS:' + str(temp_value))
                 else:
-                    print('Current temp FAIL:' + str(current_temp[0]))
+                    print('Current temp FAIL:' + str(temp_value))
 
-            if instrumentBus[looplist[0][0]][instrumentType] == 'DAC-ADC':
+            if instrumentBus[looplist[0][0]]['InstrumentType'] == 'DAC-ADC':
                 yield BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,sweeper.flag,wait,reactor,variables,progressbar,reversescan)
             else:
                 for k in range(0,steps+1):
