@@ -1006,14 +1006,15 @@ def trimReadValue(string):
 #set target field and ramp rate for AMI 430
 @inlineCallbacks
 def Set_AMI(Magnet_Device,inputs):
-    yield Magnet_Device.conf_field_units(1) #Use tesla
-    yield Magnet_Device.conf_ramp_rate_seg(1) #one segment ramp
-    yield Magnet_Device.conf_ramp_rate_units(1)  #time in / min 
-    opc_resp = yield Magnet_Device.opcq()
+    #commenting out these lines because they're redundant / slow things down a lot and the magnet should already have these things set
+    #yield Magnet_Device.conf_field_units(1) #Use tesla
+    #yield Magnet_Device.conf_ramp_rate_seg(1) #one segment ramp
+    #yield Magnet_Device.conf_ramp_rate_units(1)  #time in / min 
+    #opc_resp = yield Magnet_Device.opcq()
     yield Magnet_Device.conf_field_targ(min(inputs['Target'],inputs['Max_Field']))
     yield Magnet_Device.conf_ramp_rate_field(1,min(inputs['FieldRate'],inputs['Max_Ramp_Rate']),inputs['Max_Field'])
     #opc_resp = yield Magnet_Device.opcq()
-    #returnValue(1)
+    returnValue(1)
 
 #Pauses the AMI
 @inlineCallbacks
@@ -1059,14 +1060,23 @@ def Read_AMI_Status(Magnet_Device):
     returnValue(data)
 
 #Checks PSwitch on (or turns it on, as long as not in persistent mode) and ramp
+##changed 2/27/21, only ramps if the persistent switch is 
 @inlineCallbacks
 def Ramp_AMI(Magnet_Device):
     ps_state = yield Magnet_Device.get_pswitch()
-    if ps_state == 0:
-        persistent_mode = yield Magnet_Device.get_persistent()
-        if persistent_mode == 0:
-            yield Magnet_Device.persistent_switch_on()
-    yield Magnet_Device.ramp()
+    persistent_mode = yield Magnet_Device.persistent()
+    # if ps_state == 0:
+    #     persistent_mode = yield Magnet_Device.get_persistent()
+    #     if persistent_mode == 0:
+    #         yield Magnet_Device.persistent_switch_on()
+    # yield Magnet_Device.ramp()
+    if ps_state == 1 and persistent_mode == 0:
+        yield Magnet_Device.ramp()
+    else:
+        print('Cannot ramp magnet with switch off or in persistent mode')
+        returnValue(-1)
+    returnValue(1)
+
 
 #Enters persistent mode
 @inlineCallbacks
@@ -1100,7 +1110,7 @@ def Exit_PMode_AMI(Magnet_Device):
         state = yield Magnet_Device.state()
         if state != 2 and state != 3:
             state = yield Magnet_Device.state()
-    elif persistent_mode == 0:
+    elif persistent_mode == 0: ## this is the case of not being in persistent mode, basically does nothing unless the switch is off, in which case flip it on.
         pswitch_state = yield Magnet_Device.get_pswitch()
         state = yield Magnet_Device.state()
         if pswitch_state == 0 and (state == 3 or state==8):
@@ -1591,7 +1601,12 @@ def openEditInstrumentWindow(window,servers,devices,info_dict):
 def ReadLakeshoreInstrumentSetting(instrumentDict):
     Lakeshore_Device = instrumentDict['DeviceObject']
     if instrumentDict['Measurement'] == 'Input':
-        ch1 = yield Lakeshore_Device.read_temp(str(instrumentDict['TempCh']))
+        try:
+            ch1 = yield Lakeshore_Device.read_temp(str(instrumentDict['TempCh']))
+        except Exception as inst:
+            print('Error:', inst, ' on line: ', sys.exc_info()[2].tb_lineno)
+            ch1 = 0
+
         #ch2 = yield Lakeshore_Device.read_temp(str(instrumentDict['TempCh2']))
         returnValue([float(trimReadValue(ch1))])
     elif instrumentDict['Measurement'] == 'Output':
@@ -1739,9 +1754,15 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
                     # sleep for 10 seconds
                     yield SleepAsync(reactor, 10)
                     #measure temperature again
-                    current_temp = yield instrumentBus[lshorename]['ReadFn'](instrumentBus[lshorename])
-                    temp_value =  float(current_temp[0])
-                    print(temp_value)
+                    try:
+                        current_temp = yield instrumentBus[lshorename]['ReadFn'](instrumentBus[lshorename])
+                        temp_value =  float(current_temp[0])
+                        print(temp_value)
+
+                    except Exception as inst:
+                        print('Error:', inst, ' on line: ', sys.exc_info()[2].tb_lineno)
+                        temp_value = 0
+
                 if counter < 30 and temp_value < 1.4:
                     print('Current temp PASS:' + str(temp_value))
                 else:
