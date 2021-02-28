@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1154</width>
+    <width>1230</width>
     <height>1011</height>
    </rect>
   </property>
@@ -635,7 +635,7 @@ border-radius: 5px
              </size>
             </property>
             <property name="text">
-             <string>He3 Pot</string>
+             <string>1K Pot</string>
             </property>
            </widget>
           </item>
@@ -957,32 +957,7 @@ border-radius: 5px</string>
              </size>
             </property>
             <property name="text">
-             <string>1K Pot</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="6">
-           <widget class="QPushButton" name="pushButton_CONTS">
-            <property name="minimumSize">
-             <size>
-              <width>60</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(168,168,168);
-background-color:rgb(0,0,0);
-border: 2px solid  rgb(131,131,131);
-border-radius: 5px</string>
-            </property>
-            <property name="text">
-             <string>Sample</string>
+             <string>Sorp</string>
             </property>
            </widget>
           </item>
@@ -1026,7 +1001,7 @@ border: 2px solid  rgb(131,131,131);
 border-radius: 5px</string>
             </property>
             <property name="text">
-             <string>Sorp</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;default&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -1113,6 +1088,19 @@ border-radius: 5px</string>
             </property>
             <property name="text">
              <string>Sample</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="4">
+           <widget class="QLabel" name="label_Setpoint1">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(168,168,168);
+background-color:rgb(0,0,0);
+border: 2px solid  rgb(131,131,131);
+border-radius: 5px</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;default&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
