@@ -477,6 +477,11 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
 
         yield self.ReReadLIParams()
 
+        ## Turn off READ Conts in Fridge Status.
+        status_obj = self.DEMONS.MeasurementWindows['FridgeStatus']
+        if status_obj.SingleAxisContsRead == True:
+            status_obj.startContsMagZMeasurement()
+        
         print('Queue Started')
         for Current_Loop in self.Queue:
             if Current_Loop[-1][0] != 'timestamp' and self.instrumentBus[Current_Loop[-1][0]]['InstrumentType'] == 'DAC-ADC':
