@@ -1620,6 +1620,7 @@ def ReadSR830InstrumentSetting(instrumentDict):
     quad = instrumentDict['LIReading']
     if meas_type == 'SR830':
         lock_in = instrumentDict['DeviceObject']
+        yield lock_in.select_device(instrument['Device'])
         mode = yield lock_in.input_mode()
         output = []
         if quad == 'X/Y':
@@ -1639,6 +1640,7 @@ def ReadSR830InstrumentSetting(instrumentDict):
         returnValue(output)
     elif meas_type == 'DACADC':
         dac = instrumentDict['DACADCDeviceObject']
+        yield dac.select_device('DACADCDevice')
         dac_chx = int(instrumentDict['DACADCChannelX'])
         dac_chy = int(instrumentDict['DACADCChannelY'])
         x_val = yield dac.read_voltage(dac_chx)
@@ -1654,6 +1656,7 @@ def ReadSR830fromAbs(voltage,instrumentDict):
 def ReadDACADCInstrumentSetting(instrumentDict):
     meas_type = instrumentDict['Measurement'] #this should be 'Input' or 'Output'
     dac = instrumentDict['DeviceObject']
+    yield dac.select_device(instrumentDict['Device'])
     if meas_type == 'Input':
         adc_ch = int(instrumentDict['ADC Input'])
         value = yield dac.read_voltage(adc_ch)
@@ -1666,6 +1669,7 @@ def ReadDACADCInstrumentSetting(instrumentDict):
 @inlineCallbacks
 def WriteDACADCInstrumentSetting(instrumentDict,voltage_set): #port should input "Top" or "Bottom"
     dac = instrumentDict['DeviceObject']
+    yield dac.select_device(instrumentDict['Device'])
     if instrumentDict['Measurement'] == 'Output':
         port = instrumentDict['DAC Output']
         port = int(port) # now should be 0,1
@@ -1788,7 +1792,10 @@ def BufferRampSingle(instrumentBus,looplist,queryfunction,datavault,flag,wait,re
 
 
     instr_obj = instrumentBus[instrument]['DeviceObject']
+    device_name = instrumentBus[instrument]['Device']
     instr_output = int(instrumentBus[instrument]['DAC Output'])
+    
+    yield instr_obj.select_device(device_name)
     current_voltage = yield instr_obj.read_dac(instr_output)
 
     vstart = [looplist[0][1]]
