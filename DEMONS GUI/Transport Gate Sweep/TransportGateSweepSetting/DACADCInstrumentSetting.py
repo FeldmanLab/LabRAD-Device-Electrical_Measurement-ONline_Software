@@ -62,6 +62,8 @@ class DACADCSetting(QtGui.QMainWindow, Ui_DACADCSetting):
             'Measurement': None,
             'DAC Output': None,
             'ADC Input': None,
+            'Max': 10,
+            'Min': -10,
             'ReadFn': ReadDACADCInstrumentSetting,
             'WriteFn': WriteDACADCInstrumentSetting
 
@@ -93,7 +95,7 @@ class DACADCSetting(QtGui.QMainWindow, Ui_DACADCSetting):
             #    instr_dict['Server'] = self.Servers[servername]
             #elif servername == 'DACADC':
             #    instr_dict['DACADCServer'] = self.Servers[servername]
-            RedefineComboBox(devlist['ComboBoxDevice'],self.Servers[servername])
+            RedefineComboBox(devlist['ComboBoxDevice'],self.Servers[servername],reconnect = False)
             self.Refreshinterface()
 
     @inlineCallbacks
@@ -174,6 +176,8 @@ class DACADCSetting(QtGui.QMainWindow, Ui_DACADCSetting):
             'Measurement': None,
             'DAC Output': None,
             'ADC Input': None,
+            'Max': 10,
+            'Min': -10,
             'ReadFn': ReadDACADCInstrumentSetting,
             'WriteFn': WriteDACADCInstrumentSetting
         }

@@ -133,6 +133,7 @@ class SR830Setting(QtGui.QMainWindow, Ui_SR830Setting):
 
         self.pushButton_Done.clicked.connect(lambda: self.done())
         self.pushButton_Cancel.clicked.connect(lambda: self.closeWindow())
+    
     def selectServer(self,instr_dict, servername,devlist):
         if servername != '':
             devlist['ServerObject'] = self.Servers[servername]
@@ -142,7 +143,7 @@ class SR830Setting(QtGui.QMainWindow, Ui_SR830Setting):
             #    instr_dict['Server'] = self.Servers[servername]
             #elif servername == 'DACADC':
             #    instr_dict['DACADCServer'] = self.Servers[servername]
-            RedefineComboBox(devlist['ComboBoxDevice'],self.Servers[servername])
+            RedefineComboBox(devlist['ComboBoxDevice'],self.Servers[servername],reconnect = False)
             self.Refreshinterface()
 
     @inlineCallbacks
