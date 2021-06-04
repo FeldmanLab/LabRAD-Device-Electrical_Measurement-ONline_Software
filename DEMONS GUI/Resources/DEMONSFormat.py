@@ -1082,6 +1082,8 @@ def Ramp_AMI(Magnet_Device):
 @inlineCallbacks
 def Enter_PMode_AMI(Magnet_Device):
     state = yield Magnet_Device.state()
+    for k in range(0, 10):
+        state = yield Magnet_Device.state()
     if state == 2 or state == 3: #must be holding or paused
         field = yield Magnet_Device.get_field_mag()
         yield Magnet_Device.persistent_switch_off()
@@ -1097,6 +1099,8 @@ def Enter_PMode_AMI(Magnet_Device):
 @inlineCallbacks
 def Exit_PMode_AMI(Magnet_Device):
     persistent_mode = yield Magnet_Device.persistent()
+    for k in range(0, 10):
+        persistent_mode = yield Magnet_Device.persistent()
     if persistent_mode == 1:
         field = yield Magnet_Device.get_field_mag() # because in persistent mode, will be the field we want
         yield Magnet_Device.conf_field_targ(field)
@@ -1107,14 +1111,21 @@ def Exit_PMode_AMI(Magnet_Device):
         if state == 2 or state == 3:
             yield Magnet_Device.persistent_switch_on()
 
-        state = yield Magnet_Device.state()
-        if state != 2 and state != 3:
-            state = yield Magnet_Device.state()
+        #state = yield Magnet_Device.state()
+        #if state != 2 and state != 3:
+        #    state = yield Magnet_Device.state()
     elif persistent_mode == 0: ## this is the case of not being in persistent mode, basically does nothing unless the switch is off, in which case flip it on.
         pswitch_state = yield Magnet_Device.get_pswitch()
+        field = yield Magnet_Device.get_field_mag()
+        yield Magnet_Device.conf_field_targ(field)
+        yield Magnet_Device.ramp()
         state = yield Magnet_Device.state()
-        if pswitch_state == 0 and (state == 3 or state==8):
+        if pswitch_state == 0:
+            while state != 2 and state != 3 and state != 8:
+                state = yield Magnet_Device.state()
             yield Magnet_Device.persistent_switch_on()
+        # if pswitch_state == 0 and (state == 2 or state == 3 or state==8):
+        #     yield Magnet_Device.persistent_switch_on()
     returnValue(1)
 
 

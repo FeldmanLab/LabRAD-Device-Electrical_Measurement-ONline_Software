@@ -143,16 +143,17 @@ class AMISetting(QtGui.QMainWindow, Ui_AMISetting):
 
     def setPM(self, boolean):
         if boolean:
-            self.InstrumentDict['UsePersistentMode'] = True
+            self.InstrumentDict['UsePersistentMode'] = False
         else:
             self.InstrumentDict['UsePersistentMode'] = False
 
     def done(self):
         if self.InstrumentDict['Measurement'] == 'Input':
-            self.InstrumentDict['OutputLoop'] = None
-            self.InstrumentDict['FeedbackCh'] = None
-            self.InstrumentDict['HeaterRange'] = None
-            self.InstrumentDict['RampRate'] = None
+            pass
+            #self.InstrumentDict['OutputLoop'] = None
+            #self.InstrumentDict['FeedbackCh'] = None
+            #self.InstrumentDict['HeaterRange'] = None
+            #self.InstrumentDict['RampRate'] = None
         self.complete.emit()
         self.close()
 
@@ -162,13 +163,11 @@ class AMISetting(QtGui.QMainWindow, Ui_AMISetting):
     def initialize(self,input_dictionary):
         self.lineEdit_Name.setText(input_dictionary['Name'])
         self.comboBox_Measurement.setCurrentText(input_dictionary['Measurement'])
-        self.comboBox_Lakeshore_SelectDevice.setCurrentText(input_dictionary['Device'])
-        self.comboBox_TempCh1.setCurrentText(input_dictionary['TempCh1'])
-        self.comboBox_TempCh2.setCurrentText(input_dictionary['TempCh2'])
+        self.comboBox_AMI_SelectDevice.setCurrentText(input_dictionary['Device'])
         if input_dictionary['Measurement'] == 'Output':
-            self.lineEdit_RampRate.setText(input_dictionary['RampRate'])
-            self.comboBox_HeaterRange.setCurrentText(input_dictionary['HeaterRange'])
-            self.comboBox_OutputLoop.setCurrentText(input_dictionary['OuputLoop'])
+            self.lineEdit_RampRate.setText(str(input_dictionary['RampRate']))
+            self.lineEdit_MaxField.setText(str(input_dictionary['MaxField']))
+            self.checkBox_PersistentMode.setChecked(self.InstrumentDict['UsePersistentMode'])
 
     def clearInfo(self):
         self.InstrumentDict = {
@@ -177,12 +176,8 @@ class AMISetting(QtGui.QMainWindow, Ui_AMISetting):
             'DeviceObject': None,
             'Device': None,
             'Measurement': None, # input or output
-            'TempCh1': None,
-            'TempCh2': None,
-            'OutputLoop': None,
-            'FeedbackCh': None,
-            'HeaterRange': None,
             'RampRate': None,
+            'MaxField': None,
             'UsePersistentMode': False,
             'ReadFn': ReadAMIInstrumentSetting,
             'WriteFn': WriteAMIInstrumentSetting
@@ -214,8 +209,9 @@ def WriteAMIInstrumentSetting(instrumentDict,magnet_setpt):
     inputs = {'Target': magnet_setpt,'Max_Field': maxfield,'FieldRate':ramprate,'Max_Ramp_Rate':ramprate}
     if instrumentDict['UsePersistentMode'] == True:
         #exits persistent mode, or turns on switch if at zero field
+        print('Exiting Persistent Mode...')
         yield Exit_PMode_AMI(magnet)
-    
+        print('Exited')
     # Sends input commands and begins ramping, Ramp_AMI checks that switch is off and not in persistent mode (otherwise does nothing)
     yield Set_AMI(magnet, inputs)
     ramp_output = yield Ramp_AMI(magnet)
@@ -231,10 +227,13 @@ def WriteAMIInstrumentSetting(instrumentDict,magnet_setpt):
     if state == 2 or state == 3 or state == 8:
         if instrumentDict['UsePersistentMode'] == True:
             # enter persistent mode at current field
+            #sleep for 5 seconds to stabilize field
+            print('Entering Persistent Mode...')
             yield Enter_PMode_AMI(magnet)
 
         field = yield magnet.get_field_mag()
-
+        if instrumentDict['UsePersistentMode']:
+            print('Entered Persistent Mode @ Field = '+ str(field))
 
         returnValue([field])
     else:
