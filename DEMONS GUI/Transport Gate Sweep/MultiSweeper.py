@@ -300,6 +300,10 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
             if self.instrumentBus[instrument]['InstrumentType'] == 'CVar':
                 self.custom_vars.append(self.instrumentBus[instrument]['Name'])
                 custom_vals.append(self.instrumentBus[instrument]['CustomFn'](self.instrumentBus[instrument],self.dep_vars,[dep_vals])[0])
+            elif self.instrumentBus[instrument]['InstrumentType'] == 'COut':
+                self.indep_vars.append(self.instrumentBus[instrument]['Name'])
+                indep_vals.append(self.instrumentBus[instrument]['CustomRead'](self.instrumentBus[instrument],self.indep_vars,[indep_vals])[0])
+
         clearLayout(self.hLayout_Query)
         #print(self.indep_vars)
         #print(indep_vals)
@@ -346,7 +350,8 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
                             indep_vals.append(output_value)
             if self.instrumentBus[instrument]['InstrumentType'] == 'CVar':
                 custom_vals.append(self.instrumentBus[instrument]['CustomFn'](self.instrumentBus[instrument],self.dep_vars,[dep_vals])[0])
-
+            elif self.instrumentBus[instrument]['InstrumentType'] == 'COut':
+                indep_vals.append(self.instrumentBus[instrument]['CustomRead'](self.instrumentBus[instrument],self.indep_vars,[indep_vals])[0])
         return indep_vals, dep_vals, custom_vals
     
     def addQueue(self):

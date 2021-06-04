@@ -14,6 +14,7 @@ import LakeshoreInstrumentSetting
 import MagnetInstrumentSetting
 import Keithley2450InstrumentSetting
 import CustomVarInstrumentSetting
+import CustomOutputInstrumentSetting
 from DEMONSFormat import *
 
 path = os.path.dirname(os.path.realpath(__file__))
@@ -39,7 +40,9 @@ class Setting(QtGui.QMainWindow, Ui_Setting):
         self.Keithley2450_InstrumentSetting = Keithley2450InstrumentSetting.Keithley2450Setting(self.reactor,self)
         self.CustomVar_InstrumentSetting = CustomVarInstrumentSetting.CustomVarSetting(self.reactor,self)
         self.Magnet_InstrumentSetting = MagnetInstrumentSetting.AMISetting(self.reactor,self)
-        self.inst_list = ['Lakeshore','SR830','DAC-ADC','AMI430','Keithley2450','CustomVar']
+        self.CustomOut_InstrumentSetting = CustomOutputInstrumentSetting.CustomOutputSetting(self.reactor, self)
+
+        self.inst_list = ['Lakeshore','SR830','DAC-ADC','AMI430','Keithley2450','CustomVar','CustomOutput']
 
         self.InstrumentList.addItems(self.inst_list)
 
@@ -53,6 +56,7 @@ class Setting(QtGui.QMainWindow, Ui_Setting):
         self.Magnet_InstrumentSetting.complete.connect(lambda: ReadInstrumentSetting(self.bus,self.Magnet_InstrumentSetting.InstrumentDict['Name'],self.Magnet_InstrumentSetting.InstrumentDict,self.RefreshBus))
         self.Keithley2450_InstrumentSetting.complete.connect(lambda: ReadInstrumentSetting(self.bus,self.Keithley2450_InstrumentSetting.InstrumentDict['Name'],self.Keithley2450_InstrumentSetting.InstrumentDict,self.RefreshBus))
         self.CustomVar_InstrumentSetting.complete.connect(lambda: ReadInstrumentSetting(self.bus,self.CustomVar_InstrumentSetting.InstrumentDict['Name'],self.CustomVar_InstrumentSetting.InstrumentDict,self.RefreshBus))
+        self.CustomOut_InstrumentSetting.complete.connect(lambda: ReadInstrumentSetting(self.bus,self.CustomOut_InstrumentSetting.InstrumentDict['Name'],self.CustomOut_InstrumentSetting.InstrumentDict,self.RefreshBus))
         self.pushButton_Close.clicked.connect(lambda: self.closeBus())
     
     def AddInstrument(self,instrumentList):
@@ -78,6 +82,8 @@ class Setting(QtGui.QMainWindow, Ui_Setting):
                 self.Keithley2450_InstrumentSetting.refreshServerIndicator()
             if instrument == 'CustomVar':
                 openWindowServers(self.CustomVar_InstrumentSetting,self.Servers,self.Devices)
+            if instrument == 'CustomOutput':
+                openWindowBusList(self.CustomOut_InstrumentSetting,self.bus.keys())
 
             self.RefreshBus()
         
@@ -114,6 +120,9 @@ class Setting(QtGui.QMainWindow, Ui_Setting):
                 openEditInstrumentWindow(self.Keithley2450_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
             elif instrument_type == 'CVar':
                 openEditInstrumentWindow(self.CustomVar_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
+            elif instrument_type == 'COut':
+                openEditInstrumentWindow(self.CustomOut_InstrumentSetting,self.Servers,self.Devices,self.bus[instrument_name])
+
             del self.bus[instrument_name]
 
         except Exception as inst:

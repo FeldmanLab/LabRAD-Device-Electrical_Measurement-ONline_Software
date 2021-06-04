@@ -1583,6 +1583,14 @@ def openWindowServers(window,servers,devices):
     window.moveDefault()
     window.raise_()
 
+def openWindowBusList(window,Buslist):
+    window.Buslist = Buslist
+    window.clearInfo()
+    window.show()
+    window.moveDefault()
+    window.raise_()
+
+
 def SetComboBox_Parameter(dictionary,key,text,refreshFunc = None):
     dictionary[key] = str(text)
     if refreshFunc is not None:

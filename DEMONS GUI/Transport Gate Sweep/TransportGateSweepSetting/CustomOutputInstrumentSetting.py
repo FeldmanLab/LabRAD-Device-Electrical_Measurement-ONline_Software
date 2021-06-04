@@ -30,7 +30,7 @@ class CustomOutputSetting(QtGui.QMainWindow, Ui_CustomOutputSetting):
         self.parent = parent
 
         self.DeviceList = {}
-
+        self.Buslist = []
 
 
         self.units = {
@@ -50,7 +50,9 @@ class CustomOutputSetting(QtGui.QMainWindow, Ui_CustomOutputSetting):
             'Name': 'Default',
             'InstrumentType': 'COut',
             'DefString': None,
-            'CustomFn': ReadCustomInstrumentSetting,
+            'DefInvString': None,
+            'WriteFn': WriteCustomOutputSetting,
+        	'CustomReadFn': ReadCustomOutputSetting,
             'ControlOutput': None,
             'Minimum': None,
             'Maximum': None
@@ -58,6 +60,7 @@ class CustomOutputSetting(QtGui.QMainWindow, Ui_CustomOutputSetting):
         self.lineEdit = {
             'Name': self.lineEdit_Name,
             'DefString': self.lineEdit_Defstring,
+            'DefInvString': self.lineEdit_DefInvstring,
             'Minimum': self.lineEdit_Min,
             'Maximum': self.lineEdit_Max,
         }
@@ -67,6 +70,8 @@ class CustomOutputSetting(QtGui.QMainWindow, Ui_CustomOutputSetting):
         self.lineEdit_Name.editingFinished.connect(lambda: UpdateLineEdit_String(self.InstrumentDict,'Name',self.lineEdit))
         self.lineEdit_Defstring.editingFinished.connect(lambda: UpdateLineEdit_String(self.InstrumentDict,'DefString',self.lineEdit))
         
+        self.lineEdit_DefInvstring.editingFinished.connect(lambda: UpdateLineEdit_String(self.InstrumentDict,'DefInvString',self.lineEdit))
+
         self.lineEdit_Min.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.InstrumentDict,'Minimum',self.lineEdit))
         self.lineEdit_Max.editingFinished.connect(lambda: UpdateLineEdit_Bound(self.InstrumentDict,'Maximum',self.lineEdit))
 
@@ -80,6 +85,7 @@ class CustomOutputSetting(QtGui.QMainWindow, Ui_CustomOutputSetting):
         for key, dlist in self.DeviceList.items():
             RefreshIndicator(dlist['ServerIndicator'],dlist['ServerObject'])
             RefreshIndicator(dlist['DeviceIndicator'],dlist['DeviceObject'])
+        ReconstructComboBox(self.comboBoxOutput,self.Buslist)
 
     def DetermineEnableConditions(self):
         self.ButtonsCondition = {
@@ -101,11 +107,18 @@ class CustomOutputSetting(QtGui.QMainWindow, Ui_CustomOutputSetting):
             'Name': 'Default',
             'InstrumentType': 'COut',
             'DefString': None,
-            'CustomFn': ReadCustomOutputSetting,
+            'DefInvString': None,
+            'CustomRead': ReadCustomOutputSetting,
+            'WriteFn': WriteCustomOutputSetting,
+            'ControlOutput': None,
+            'Minimum': None,
+            'Maximum': None
+
         }
 
         self.lineEdit_Name.setText('')
         self.lineEdit_Defstring.setText('')
+        #ReconstructComboBox(self.comboBoxOutput,self.Buslist)
 
     def moveDefault(self):
         self.move(400,100)
@@ -116,9 +129,14 @@ def ReadCustomOutputSetting(instrumentDict,variable_list,value_list):
     unit_list = ['mV','uV','nV','pV','mA','uA','nA','pA']
     return loopCustom(variable_list,operator_list,unit_list, value_list,custom_variable)
 
-
-def WriteCustomOutputInstrumentSetting(instrumentDict,variable_list,value_list):
-    custom_variable = instrumentDict['DefString']
+@inlineCallbacks
+def WriteCustomOutputSetting(instrumentDict,value,instrumentBus,queryfunction,variables):
+    custom_variable = instrumentDict['DefInvString'] #### YOU ARE HERE, NEED TO FIGURE THIS OUT.
     operator_list = ['^','*','/','+','-','(',')','ARCTAN']
     unit_list = ['mV','uV','nV','pV','mA','uA','nA','pA']
-    return loopCustom(variable_list,operator_list,unit_list, value_list,custom_variable)
+    values = queryfunction()
+    g = loopCustom(variables,operator_list,unit_list, values,custom_variable)
+    
+    desired_instr = instrumentDict['ControlOutput']
+    yield instrumentBus[desired_instr]['WriteFn'](instrumentBus[desired_instr],g)
+    returnValue(1)
