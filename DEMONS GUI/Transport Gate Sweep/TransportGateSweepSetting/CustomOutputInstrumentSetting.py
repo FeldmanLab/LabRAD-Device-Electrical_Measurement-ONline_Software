@@ -52,7 +52,7 @@ class CustomOutputSetting(QtGui.QMainWindow, Ui_CustomOutputSetting):
             'DefString': None,
             'DefInvString': None,
             'WriteFn': WriteCustomOutputSetting,
-        	'CustomReadFn': ReadCustomOutputSetting,
+        	'CustomRead': ReadCustomOutputSetting,
             'ControlOutput': None,
             'Minimum': None,
             'Maximum': None
@@ -78,6 +78,7 @@ class CustomOutputSetting(QtGui.QMainWindow, Ui_CustomOutputSetting):
         self.pushButton_Done.clicked.connect(lambda: self.done())
         self.pushButton_Cancel.clicked.connect(lambda: self.closeWindow())
 
+        self.comboBox_Output.currentIndexChanged.connect(lambda: SetComboBox_Parameter(self.InstrumentDict, 'ControlOutput',self.comboBox_Output.currentText()))
 
     def Refreshinterface(self):
         self.DetermineEnableConditions()
@@ -85,7 +86,7 @@ class CustomOutputSetting(QtGui.QMainWindow, Ui_CustomOutputSetting):
         for key, dlist in self.DeviceList.items():
             RefreshIndicator(dlist['ServerIndicator'],dlist['ServerObject'])
             RefreshIndicator(dlist['DeviceIndicator'],dlist['DeviceObject'])
-        ReconstructComboBox(self.comboBoxOutput,self.Buslist)
+        ReconstructComboBox(self.comboBox_Output,self.Buslist)
 
     def DetermineEnableConditions(self):
         self.ButtonsCondition = {
@@ -101,7 +102,11 @@ class CustomOutputSetting(QtGui.QMainWindow, Ui_CustomOutputSetting):
     def initialize(self,input_dictionary):
         self.lineEdit_Name.setText(input_dictionary['Name'])
         self.lineEdit_Defstring.setText(input_dictionary['DefString'])
-
+        self.lineEdit_DefInvstring.setText(input_dictionary['DefInvString'])
+        ReconstructComboBox(self.comboBox_Output,self.Buslist)
+        self.comboBox_Output.setCurrentText(input_dictionary['ControlOutput'])
+        self.lineEdit_Min.setText(input_dictionary['Minimum'])
+        self.lineEdit_Max.setText(input_dictionary['Maximum'])
     def clearInfo(self):
         self.InstrumentDict = {
             'Name': 'Default',
@@ -118,7 +123,11 @@ class CustomOutputSetting(QtGui.QMainWindow, Ui_CustomOutputSetting):
 
         self.lineEdit_Name.setText('')
         self.lineEdit_Defstring.setText('')
-        #ReconstructComboBox(self.comboBoxOutput,self.Buslist)
+        self.lineEdit_DefInvstring.setText('')
+        self.lineEdit_Max.setText('')
+        self.lineEdit_Min.setText('')
+
+        ReconstructComboBox(self.comboBox_Output,self.Buslist)
 
     def moveDefault(self):
         self.move(400,100)
@@ -131,12 +140,17 @@ def ReadCustomOutputSetting(instrumentDict,variable_list,value_list):
 
 @inlineCallbacks
 def WriteCustomOutputSetting(instrumentDict,value,instrumentBus,queryfunction,variables):
-    custom_variable = instrumentDict['DefInvString'] #### YOU ARE HERE, NEED TO FIGURE THIS OUT.
+    custom_variable = instrumentDict['DefInvString']
     operator_list = ['^','*','/','+','-','(',')','ARCTAN']
     unit_list = ['mV','uV','nV','pV','mA','uA','nA','pA']
-    values = queryfunction()
-    g = loopCustom(variables,operator_list,unit_list, values,custom_variable)
+
+    # could adjust this to some simpler query that only pings the output variables
+    indep_vals, dep_vals, custom_vals = yield queryfunction()
+    values = list(indep_vals + dep_vals + custom_vals)
+    cvar_location = variables.index(instrumentDict['Name'])
+    values[cvar_location] = value
     
+    g = loopCustom(variables,operator_list,unit_list, [values],custom_variable)
     desired_instr = instrumentDict['ControlOutput']
-    yield instrumentBus[desired_instr]['WriteFn'](instrumentBus[desired_instr],g)
+    yield instrumentBus[desired_instr]['WriteFn'](instrumentBus[desired_instr],g[0])
     returnValue(1)

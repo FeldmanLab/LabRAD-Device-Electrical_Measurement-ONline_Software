@@ -518,7 +518,7 @@ class Window(QtGui.QMainWindow, MultiSweeperWindowUI):
 
                 for instrument in self.instrumentBus:
                     for key in self.instrumentBus[instrument]:
-                        not_recorded_list = ['Name','DeviceObject','Device','DACADCDevice','DACADCDeviceObject','ReadFn','WriteFn','CustomFn']
+                        not_recorded_list = ['Name','DeviceObject','Device','DACADCDevice','DACADCDeviceObject','ReadFn','WriteFn','CustomFn','CustomRead']
                         if (key not in not_recorded_list) and self.instrumentBus[instrument][key] is not None:
                             yield datavault.add_parameter(str(str(instrument)+'_'+str(key)),self.instrumentBus[instrument][key])
                 self.totalpoints = 1

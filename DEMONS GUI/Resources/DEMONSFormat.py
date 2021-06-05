@@ -1744,7 +1744,10 @@ def RecursiveLoop(instrumentBus,looplist,queryfunction,datavault,sweeper,wait,re
         elif (BufferRamp != 1 and BufferRamp != 2 and BufferRamp != 3) or (len(looplist) > 1 and (BufferRamp == 1 or BufferRamp == 3)) or (len(looplist)>2 and BufferRamp == 2):
             for k in range(0,steps+1):
                 if sweeper.flag and sweeper.sweepcounter == sweepcount:
-                    g = yield instrumentBus[instrument]['WriteFn'](instrumentBus[instrument], start + k*stepsize)
+                    if instrumentBus[instrument]['InstrumentType'] == 'COut':
+                        g = yield instrumentBus[instrument]['WriteFn'](instrumentBus[instrument], start + k*stepsize,instrumentBus,queryfunction,variables)
+                    else:
+                        g = yield instrumentBus[instrument]['WriteFn'](instrumentBus[instrument], start + k*stepsize)
                     yield RecursiveLoop(instrumentBus,looplist[1:],queryfunction,datavault,sweeper,wait,reactor, BufferRamp,variables,delta,progressbar,sweepcount,reversescan)
         elif BufferRamp == 1 and len(looplist) == 1:
             #yield SleepAsync(reactor,3*wait) 
